@@ -28,7 +28,7 @@ const Header = () => {
 
   return (
     <>
-      {curLocation !== '/mode' && curLocation !== '/login' &&(
+      {curLocation !== '/mode' && curLocation !== '/' &&(
         <div className='flex bg-white justify-between'>
           <div className='flex flex-col p-3'>
             <div className="text-black font-bold text-md">

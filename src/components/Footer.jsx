@@ -9,7 +9,7 @@ const Footer = () => {
   const style = ' text-black'
   return (
     <>
-    {curLocation !== '/mode' &&(
+    {curLocation !== '/mode' && curLocation !== '/login' && (
     <div className='flex  w-full text-gray-500 justify-around  font-semibold py-2 text-center '>
       <div className={curLocation === '/home' ? style:''}>
       <button onClick={()=>{nav('/home')}}> <HomeIcon sx={{ fontSize: 30 }}/>

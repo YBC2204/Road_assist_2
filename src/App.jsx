@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import Login from "./pages/Login";
 import Mode from "./pages/Mode";
 import Test from "./pages/Test";
+import Records from "./pages/Records";
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
           <Route path="/mode" element={<Mode />} />
           <Route path='/home' element={<Home />} />
           <Route path='/home_test' element={<Test />} />
+          <Route path='/records' element={<Records />} />
         </Routes>
         
        <Footer/>

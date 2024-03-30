@@ -16,7 +16,7 @@ const Login = () => {
    const nav = useNavigate();
 
     supabase.auth.onAuthStateChange(async (event) =>{
-console.log(event);
+
         if(event !== "SIGNED_IN")
         {
            nav("/")
@@ -27,14 +27,18 @@ console.log(event);
     })
 
   return (
-    <div className="p-5 border-2 border-black m-5 rounded-lg bg-gray-800">
+    
+    <div className="p-5   bg-gray-800 h-screen flex flex-col justify-center">
+        <div>
         <Auth
             supabaseClient={supabase}
             appearance={{theme: ThemeSupa}}
             theme="dark"
-            providers={[""]}
+            providers={["google"]}
         />
+        </div>
     </div>
+    
   )
 }
 

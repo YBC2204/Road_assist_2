@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import { ArrowBack } from '@mui/icons-material';
 import Header from '../components/Header.jsx'
 import Footer from '../components/Footer.jsx'
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -78,7 +79,7 @@ const Home = () => {
         setmorecolorModal(true); 
     };
     
-
+const nav= useNavigate();
 
     return (
         
@@ -139,13 +140,13 @@ const Home = () => {
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
                     <div className="w-[80%] h-64  bg-white rounded-[22px] flex flex-col gap-5">
                        
-                    <div className='flex gap-7 mt-4'> 
-                       <button className=" text-black pl-3 " onClick={() => {setShowModal(true);setShowColorModal(false);}}>
+                    <div className='flex  mt-4'> 
+                       <button className=" text-black pl-3 w-min" onClick={() => {setShowModal(true);setShowColorModal(false);}}>
                             <ArrowBack />
                         </button>
-                        <div className="  text-black text-lg font-bold uppercase">Select Colour</div>
+                        <div className="flex justify-center w-full pr-4  text-black text-lg font-bold uppercase ">Select Colour</div>
                        </div> 
-                       <div className='flex mt-8 px-3 flex-wrap gap-x-3 gap-y-5'>
+                       <div className='grid mt-8 px-5  grid-cols-4 gap-x-4 gap-y-4'>
                           <button onClick={handleColor} className='bg-black p-6 rounded-xl'></button>
                           <button onClick={handleColor} className='bg-zinc-500 p-6 rounded-xl'></button>
                           <button onClick={handleColor} className='bg-slate-300 p-6 rounded-xl'></button>
@@ -161,12 +162,12 @@ const Home = () => {
             )}
             {showPlateModal && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-                <div className="w-3/4 h-[266px]  bg-white rounded-[20px] flex flex-col ">
-                <div className='flex mt-5 mb-2 px-2 gap-6 '>
-                    <button className=" text-gray-600" onClick={() => { {setPlateModal(false);setShowColorModal(true);} }}>
+                <div className="w-3/4 h-[266px]  bg-white rounded-[20px] flex flex-col items-center">
+                <div className='flex mt-5 mb-2 px-2  w-full'>
+                    <button className=" text-gray-600 " onClick={() => { {setPlateModal(false);setShowColorModal(true);} }}>
                         <ArrowBack />
                     </button>
-                    <div className="w-[291px] h-8  text-black text-lg font-bold uppercase pt-1">Plate Number:</div>
+                    <div className=" h-8  text-black text-lg font-bold uppercase pt-1 w-full text-center pr-4">Plate Number:</div>
                 </div> 
                   <div className='mt-10 px-3'>  <input
                         className=" bg-white rounded-lg border border-black border-opacity-50 p-4"
@@ -176,7 +177,7 @@ const Home = () => {
                     />
                     </div>
                     <div className='mt-8 flex justify-center'>
-                    <button className=' bg-black text-white rounded-lg p-3 w-28' onClick={()=>{setPlateModal(false)}}>Confirm</button>
+                    <button className=' bg-black text-white rounded-lg p-3 w-28' onClick={()=>{setPlateModal(false);nav('/nearpumps')}}>Confirm</button>
                     </div>
                     </div>
             </div>
@@ -207,3 +208,23 @@ const Home = () => {
 };
 
 export default Home;
+// const[user,setUser]= useState({});
+// const supabase = createClient(
+//     "https://hxlkvldqxjraxxyrxbld.supabase.co",
+//     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh4bGt2bGRxeGpyYXh4eXJ4YmxkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDkzNTY5MzEsImV4cCI6MjAyNDkzMjkzMX0.ZNCPfCUQj_Vqv-WCX2tj6GEuE7ZDGwMgFc69zLZKhgM"  
+//     );
+
+// useEffect(() =>{
+//     async function getuserData()
+//     {
+//         await supabase.auth.getUser().then((value) =>{
+            
+//             if(value.data?.user)
+//             {
+//                console.log(value.data.user);
+//                 setUser(value.data.user);
+//             }
+//         })
+//     }
+//     getuserData();
+// },[]);

@@ -1,35 +1,18 @@
 import logo from '../assets/logoroadassist.png'
 import { createClient } from "@supabase/supabase-js"
-import { Auth} from "@supabase/auth-ui-react"
-import { ThemeSupa } from "@supabase/auth-ui-shared";
+
+
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from 'react';
 
 
-const supabase = createClient(
-    "https://hxlkvldqxjraxxyrxbld.supabase.co",
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh4bGt2bGRxeGpyYXh4eXJ4YmxkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDkzNTY5MzEsImV4cCI6MjAyNDkzMjkzMX0.ZNCPfCUQj_Vqv-WCX2tj6GEuE7ZDGwMgFc69zLZKhgM"  
-    );
+
 
 const Mode = () => {
 
-    const[user,setUser]= useState({});
+    
     const nav = useNavigate();
 
-    useEffect(() =>{
-        async function getuserData()
-        {
-            await supabase.auth.getUser().then((value) =>{
-                
-                if(value.data?.user)
-                {
-                   console.log(value.data.user);
-                    setUser(value.data.user);
-                }
-            })
-        }
-        getuserData();
-    },[]);
 
 
     return (

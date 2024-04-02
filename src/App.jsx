@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import Mode from "./pages/Mode";
 import Test from "./pages/Test";
 import Records from "./pages/Records";
+import Nearby from "./pages/Nearby";
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
           <Route path='/home' element={<Home />} />
           <Route path='/home_test' element={<Test />} />
           <Route path='/records' element={<Records />} />
+          <Route path='/nearpumps' element={<Nearby />} />
         </Routes>
         
        <Footer/>

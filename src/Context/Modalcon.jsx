@@ -11,28 +11,26 @@ export const useModalContext = () => {
 };
 
 export const ModalProvider = ({ children }) => {
+
+  const [showModal, setShowModal] = useState(false);
+  const [selectedCar, setSelectedCar] = useState('');
   const [showColorModal, setShowColorModal] = useState(false);
   const [showPlateModal, setShowPlateModal] = useState(false);
-  const [moreColorModal, setMoreColorModal] = useState(false);
   const [plateNumber, setPlateNumber] = useState('');
-  const [otherColor, setOtherColor] = useState('');
-
-  const contextValue = {
-    showColorModal,
-    setShowColorModal,
-    showPlateModal,
-    setShowPlateModal,
-    moreColorModal,
-    setMoreColorModal,
-    plateNumber,
-    setPlateNumber,
-    otherColor,
-    setOtherColor,
-  };
-
   return (
-    <ModalContext.Provider value={contextValue}>
+    <ModalContext.Provider value={
+      {
+        showmod:[showModal, setShowModal],
+        selcar:[selectedCar,setSelectedCar],
+        selcol:[showColorModal,setShowColorModal],
+        plate:[showPlateModal, setShowPlateModal],
+        setplate:[plateNumber, setPlateNumber]
+      }
+    }>
       {children}
     </ModalContext.Provider>
   );
 };
+
+
+  

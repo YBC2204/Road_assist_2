@@ -3,10 +3,6 @@ import { createClient } from '@supabase/supabase-js';
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-const supabase = createClient(
-  "https://hxlkvldqxjraxxyrxbld.supabase.co",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh4bGt2bGRxeGpyYXh4eXJ4YmxkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDkzNTY5MzEsImV4cCI6MjAyNDkzMjkzMX0.ZNCPfCUQj_Vqv-WCX2tj6GEuE7ZDGwMgFc69zLZKhgM"  
-);
 
 const Header = () => {
   const [status, setStatus] = useState('');
@@ -14,12 +10,13 @@ const Header = () => {
 
   useEffect(() => {
     const fetchAuthStatus = async () => {
-      const user = supabase.auth.user();
-      if (user) {
-        setStatus('Logout');
-      } else {
-        setStatus('Login');
-      }
+      // const user = supabase.auth.user();
+      // //console.log(user);
+      // if (user) {
+      //   setStatus('Logout');
+      // } else {
+      //   setStatus('Login');
+      // }
     };
     fetchAuthStatus();
   }, []);

@@ -1,31 +1,41 @@
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { createClient } from '@supabase/supabase-js';
 import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useStatusContext } from '../Context/StatusContext';
+import { Login } from '@mui/icons-material';
+import supabase from '../helper/SupaClient';
 
 const Header = () => {
-  const [status, setStatus] = useState('');
+  
   const curLocation = useLocation().pathname;
+ const {stat} = useStatusContext();
+ const [status,setStatus] = stat;
+  const nav= useNavigate();
+console.log(status);
+  const isLoggedIn = status === 'SIGNED_IN';
 
-  useEffect(() => {
-    const fetchAuthStatus = async () => {
-      // const user = supabase.auth.user();
-      // //console.log(user);
-      // if (user) {
-      //   setStatus('Logout');
-      // } else {
-      //   setStatus('Login');
-      // }
-    };
-    fetchAuthStatus();
-  }, []);
-
-  const isLoggedIn = status === 'Logout';
+  async function signOut()
+  {
+    const { error } = await supabase.auth.signOut();
+    nav("/login");
+  }
+  const handlelog = ()=>
+  {
+    
+   if(isLoggedIn )
+   {
+     signOut(); 
+  }
+   else{
+   
+     nav('/login')
+   }
+  }
 
   return (
     <>
-      {curLocation !== '/mode' && curLocation !== '/' &&(
+      {curLocation !== '/' && curLocation !== '/login' &&(
         <div className='flex bg-white justify-between'>
           <div className='flex flex-col p-3'>
             <div className="text-black font-bold text-md">
@@ -38,7 +48,7 @@ const Header = () => {
           <div className="flex items-center">
             <div className='text-black '><AccountCircleIcon fontSize='large'/></div>
             <div className='p-2'>
-              <button className='text-white bg-black px-3 py-2 rounded-xl font-semibold'>
+              <button className='text-white bg-black px-3 py-2 rounded-xl font-semibold' onClick={handlelog}>
                 {isLoggedIn ? 'Logout' : 'Login'}
               </button>
             </div>

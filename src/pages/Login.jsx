@@ -1,27 +1,33 @@
-import { createClient } from "@supabase/supabase-js";
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import supabase from "../helper/SupaClient";
-
+import { useStatusContext } from "../Context/StatusContext"
 
 
 const Login = () => {
-  const nav = useNavigate();
+  
+ // useEffect(()=>{
+    const nav = useNavigate();
+ // }) 
+   
+  const {stat} = useStatusContext();
 
-  useEffect(()=>{
+  const [status,setStatus] = stat;
+  
     supabase.auth.onAuthStateChange(async (event) =>{
-      console.log(event);
+     
+      setStatus(event);
             if(event !== "SIGNED_IN")
             {
-               nav("/")
+               nav("/login")
             }
             else{
-                nav("/mode")
+                nav("/home")
             }
         })
-  },[nav])
+ 
 
 
   return (

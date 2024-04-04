@@ -20,37 +20,37 @@ const[showPlateModal, setShowPlateModal] = plate;
   
    
 const handleLocationClick = () => {
-        if (navigator.geolocation) {
-             navigator.geolocation.getCurrentPosition(
-                 async (position) => {
-                     const latitude = position.coords.latitude;
-                     const longitude = position.coords.longitude;
- 
-                     try {
-                         const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`);
-                         if (!response.ok) {
-                             throw new Error('Failed to fetch location data');
-                         }
-                         const data = await response.json();
-                         console.log('Location data:', data);
-                         const locationName = data.address.town;
-                         setCurrentLocation(locationName);
-                     } catch (error) {
-                         console.error('Error fetching location:', error);
-                         setCurrentLocation('Location data not available');
+    if (navigator.geolocation) {
+         navigator.geolocation.getCurrentPosition(
+             async (position) => {
+                 const latitude = position.coords.latitude;
+                 const longitude = position.coords.longitude;
+
+                 try {
+                     const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`);
+                     if (!response.ok) {
+                         throw new Error('Failed to fetch location data');
                      }
-                 },
-                 (error) => {
-                     console.error('Error getting location:', error);
-                     setCurrentLocation('Location access denied');
+                     const data = await response.json();
+                     console.log( data);
+                     const locationName = data.address.suburb;
+                     setCurrentLocation(locationName);
+                 } catch (error) {
+                     console.error('Error fetching location:', error);
+                     setCurrentLocation('Location data not available');
                  }
-             );
-         } else {
-             console.error('Geolocation is not supported by your browser');
-             setCurrentLocation('Geolocation not supported');
-         }
-         return loca===locationName;
-     };
+             },
+             (error) => {
+                 console.error('Error getting location:', error);
+                 setCurrentLocation('Location access denied');
+             }
+         );
+     } else {
+         console.error('Geolocation is not supported by your browser');
+         setCurrentLocation('Geolocation not supported');
+     }
+     return loca===locationName;
+ };
 
     
      return (

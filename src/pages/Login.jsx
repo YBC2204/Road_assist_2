@@ -1,23 +1,38 @@
-import { createClient } from "@supabase/supabase-js";
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import supabase from "../helper/SupaClient";
 
-const Login = () => {
-  const nav = useNavigate();
+import { useStatusContext } from "../Context/StatusContext"
 
-  useEffect(() => {
-    supabase.auth.onAuthStateChange(async (event) => {
-      console.log(event);
-      if (event !== "SIGNED_IN") {
-        nav("/");
-      } else {
-        nav("/mode");
-      }
-    });
-  }, [nav]);
+
+
+const Login = () => {
+  
+ // useEffect(()=>{
+    const nav = useNavigate();
+ // }) 
+   
+  const {stat} = useStatusContext();
+
+
+  const [status,setStatus] = stat;
+  
+    supabase.auth.onAuthStateChange(async (event) =>{
+     
+      setStatus(event);
+            if(event !== "SIGNED_IN")
+            {
+               nav("/login")
+            }
+            else{
+                nav("/home")
+            }
+        })
+ 
+
+
 
   return (
     <div className="p-5 bg-white-gradient h-screen flex flex-col justify-center">

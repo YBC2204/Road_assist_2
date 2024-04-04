@@ -3,7 +3,9 @@ import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import supabase from "../helper/SupaClient";
+
 import { useStatusContext } from "../Context/StatusContext"
+
 
 
 const Login = () => {
@@ -13,6 +15,7 @@ const Login = () => {
  // }) 
    
   const {stat} = useStatusContext();
+
 
   const [status,setStatus] = stat;
   
@@ -30,13 +33,14 @@ const Login = () => {
  
 
 
+
   return (
-    <div className="p-5   bg-gray-800 h-screen flex flex-col justify-center">
+    <div className="p-5 bg-white-gradient h-screen flex flex-col justify-center">
       <div>
         <Auth
           supabaseClient={supabase}
           appearance={{ theme: ThemeSupa }}
-          theme="dark"
+          theme="light"
           providers={["google"]}
         />
       </div>

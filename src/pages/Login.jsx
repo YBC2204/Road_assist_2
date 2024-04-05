@@ -4,12 +4,12 @@ import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import supabase from "../helper/SupaClient";
-
+import { useState } from "react";
 
 
 const Login = () => {
   const nav = useNavigate();
-
+  // const [userid,setId]=useState('');
   useEffect(()=>{
     supabase.auth.onAuthStateChange(async (event) =>{
       console.log(event);
@@ -18,6 +18,7 @@ const Login = () => {
                nav("/")
             }
             else{
+
                 nav("/mode")
             }
         })

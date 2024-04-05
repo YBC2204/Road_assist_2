@@ -8,6 +8,7 @@ import Mode from "./pages/Mode";
 
 import Records from "./pages/Records";
 import Nearby from "./pages/Nearby";
+import FuelAmount from "./components/Modals/FuelAmount";
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
           <Route path='/home' element={<Home />} />
           <Route path='/records' element={<Records />} />
           <Route path='/nearpumps' element={<Nearby />} />
+        
         </Routes>
         
        <Footer/>

@@ -6,18 +6,22 @@ import homepic from '../assets/homepic.png';
 import {  useModalContext } from '../Context/Modalcon.jsx';
 import CarType from '../components/Modals/Cartype.jsx';
 import SelColors from '../components/Modals/SelColors.jsx';
-import { Plate } from '../components/Modals/Plate.jsx';
+import  Plate  from '../components/Modals/Plate.jsx';
+import { v4 as uuidv4 } from 'uuid';
+import supabase from "../helper/SupaClient";
+import FuelAmount from '../components/Modals/FuelAmount.jsx';
 
 
 const Test = () => {
     
 const [currentLocation, setCurrentLocation] = useState("Choose Location");
     
-const { showmod,selcar ,selcol ,plate} = useModalContext();
+const {showmod,selcar,selcol, plate,setplate,setcol,showamt} = useModalContext();
+
 const [showModal, setShowModal] = showmod;
 const [showColorModal, setShowColorModal] = selcol;
 const[showPlateModal, setShowPlateModal] = plate;
-  
+const [showAmtModal, setAmtModal] = showamt;  
    
 const handleLocationClick = () => {
         if (navigator.geolocation) {
@@ -33,7 +37,7 @@ const handleLocationClick = () => {
                          }
                          const data = await response.json();
                          console.log('Location data:', data);
-                         const locationName = data.address.town;
+                         const locationName = data.address.suburb;
                          setCurrentLocation(locationName);
                      } catch (error) {
                          console.error('Error fetching location:', error);
@@ -89,7 +93,9 @@ const handleLocationClick = () => {
                 {showModal && <CarType/>}
                 {showColorModal && <SelColors/>}
                 {showPlateModal && <Plate/>}
-
+                {showAmtModal && <FuelAmount/>}
+                
+    
     </div> 
 
         );

@@ -1,125 +1,118 @@
-import  {  useState } from 'react';
+import React, { useState } from 'react';
 import PlaceIcon from '@mui/icons-material/Place';
 import LocalGasStationIcon from '@mui/icons-material/LocalGasStation';
 import BuildIcon from '@mui/icons-material/Build';
-import homepic from '../assets/homepic.png';
-import {  useModalContext } from '../Context/Modalcon.jsx';
+import homepic from '../assets/home.png';
+import { useModalContext } from '../Context/Modalcon.jsx';
 import CarType from '../components/Modals/Cartype.jsx';
 import SelColors from '../components/Modals/SelColors.jsx';
-import  Plate  from '../components/Modals/Plate.jsx';
+import Plate from '../components/Modals/Plate.jsx';
 import { v4 as uuidv4 } from 'uuid';
 import supabase from "../helper/SupaClient";
 import FuelAmount from '../components/Modals/FuelAmount.jsx';
-
+import FuelType from '../components/Modals/FuelType.jsx';
 
 const Test = () => {
-    
-const [currentLocation, setCurrentLocation] = useState("Choose Location");
-    
-const {showmod,selcar,selcol, plate,setplate,setcol,showamt} = useModalContext();
+  const [currentLocation, setCurrentLocation] = useState("Current Location");
+  const { showmod, selcol, plate, showamt, showfuel,setmode, setmail } = useModalContext();
+  const [showModal, setShowModal] = showmod;
+  const [showColorModal, setShowColorModal] = selcol;
+  const [showPlateModal, setShowPlateModal] = plate;
+  const [showAmtModal, setAmtModal] = showamt;
+  const [showFuelType, setFuelTypeModal] = showfuel;
+  const [mailid, setMailId] = setmail;
+  const[selectedmode,setselectedmode]=setmode;
+  const handleLocationClick = async () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          const latitude = position.coords.latitude;
+          const longitude = position.coords.longitude;
 
-const [showModal, setShowModal] = showmod;
-const [showColorModal, setShowColorModal] = selcol;
-const[showPlateModal, setShowPlateModal] = plate;
-const [showAmtModal, setAmtModal] = showamt;  
-   
-const handleLocationClick = () => {
-        if (navigator.geolocation) {
-             navigator.geolocation.getCurrentPosition(
-                 async (position) => {
-                     const latitude = position.coords.latitude;
-                     const longitude = position.coords.longitude;
- 
-                     try {
-                         const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`);
-                         if (!response.ok) {
-                             throw new Error('Failed to fetch location data');
-                         }
-                         const data = await response.json();
-                         console.log('Location data:', data);
-                         const locationName = data.address.suburb;
-                         setCurrentLocation(locationName);
-                     } catch (error) {
-                         console.error('Error fetching location:', error);
-                         setCurrentLocation('Location data not available');
-                     }
-                 },
-                 (error) => {
-                     console.error('Error getting location:', error);
-                     setCurrentLocation('Location access denied');
-                 }
-             );
-         } else {
-             console.error('Geolocation is not supported by your browser');
-             setCurrentLocation('Geolocation not supported');
-         }
-         return loca===locationName;
-     };
+          try {
+            const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`);
+            if (!response.ok) {
+              throw new Error('Failed to fetch location data');
+            }
+            const data = await response.json();
+            const locationName = data.address.suburb;
+            setCurrentLocation(locationName);
+          } catch (error) {
+            console.error('Error fetching location:', error);
+            setCurrentLocation('Location data not available');
+          }
+        },
+        (error) => {
+          console.error('Error getting location:', error);
+          setCurrentLocation('Location access denied');
+        }
+      );
+    } else {
+      console.error('Geolocation is not supported by your browser');
+      setCurrentLocation('Geolocation not supported');
+    }
+  };
 
-    
-     return (
-       
+  // Function to add mailid to loginusertrial table
+  const addMailIdToSupabase = async () => {
+    try {
+      const { data, error } = await supabase.from('logintrial').insert([{ email_id: mailid ,mode:selectedmode}]);
+      if (error) {
+        console.error('Error adding mailid to Supabase:', error.message);
         
-        <div className='w-full pb-5 bg-neutral-300 flex flex-col items-center '>
-        
-            <div className="flex justify-center pt-12">
-                <button className="flex items-center bg-white px-6 py-4 rounded-xl font-['IBM Plex Sans Thai Looped'] text-black text-sm font-bold" onClick={handleLocationClick}>
-                    <PlaceIcon sx={{ fontSize: 25 }} />
-                    <p > {currentLocation}</p>
-                </button>
-            </div>
-            <div className='flex flex-col mt-8 w-full px-4 relative items-center'>
-                <div className="relative w-[99%] rounded-[20px] overflow-hidden">
-                    <img className="w-full" src={homepic} alt="Home" />
-                    {true && <div className="absolute top-0 left-0 w-full h-full bg-black opacity-30 rounded-[20px]"></div>}
-                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-2xl font-black font-['Roboto'] text-center ">
-                        <p className='min-w-96 size-4  '>
-                            Ran out of fuel on roadside?<br /> We can refuel in 20 minutes
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div className='flex flex-col items-center text-black font-bold mt-8 gap-6 pb-5'>
-                <button onClick={() => setShowModal(true)} className='flex bg-white p-4 rounded-2xl w-52 justify-evenly'>
-                    <LocalGasStationIcon />
-                    <p>Fuel Delivery</p>
-                </button>
-                <button onClick={() => setShowModal(true)} className='flex bg-white p-4 rounded-2xl w-52 justify-evenly'>
-                    <BuildIcon />
-                    <p>Workshop Service</p>
-                </button>
-            </div>
-           
-                {showModal && <CarType/>}
-                {showColorModal && <SelColors/>}
-                {showPlateModal && <Plate/>}
-                {showAmtModal && <FuelAmount/>}
-                
-    
-    </div> 
+      } else {
+        console.log('Mailid added to Supabase:', data);
+        console.log(selectedmode);
+      }
+    } catch (error) {
+      console.error('Error adding mailid to Supabase:', error.message);
+    }
+  };
 
-        );
+  // Call the function to add mailid when the component mounts
+  React.useEffect(() => {
+    addMailIdToSupabase();
+  }, []);
+
+  return (
+    <div className='w-full pb-5 bg-gradient-to-br from-gray-800 to-gray-300flex flex-col items-center '>
+      <div className="flex justify-center pt-12">
+        <button className="flex items-center bg-slate-300 px-6 py-4 rounded-xl font-['IBM Plex Sans Thai Looped'] text-black text-sm font-bold" onClick={handleLocationClick}>
+          <PlaceIcon sx={{ fontSize: 25 }} />
+          <p> {currentLocation}</p>
+        </button>
+      </div>
+      <div className='flex flex-col mt-8 w-full px-4 relative items-center'>
+        <div className="relative w-[99%] rounded-[20px] overflow-hidden">
+          <img className="w-full" src={homepic} alt="Home" />
+          {true && <div className="absolute top-0 left-0 w-full h-full bg-black opacity-30 rounded-[20px]"></div>}
+          <div className="absolute top-3/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-gray-300 text-xl font-black font-['Roboto'] text-center ">
+            <p className='min-w-80 size-4  '>
+              Ran out of fuel on roadside?<br /> We can refuel in 20 minutes
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className='flex flex-col items-center  text-black text-lg font-bold mt-8 gap-6 pb-5'>
+  <button onClick={() => setShowModal(true)} className='flex bg-slate-300 p-4 rounded-2xl w-64 text-center'>
+    <LocalGasStationIcon />
+    <p className='px-8'>Fuel Delivery</p>
+  </button>
+  <button onClick={() => setShowModal(true)} className='flex bg-slate-300 p-4 rounded-2xl w-64 text-center'>
+    <BuildIcon />
+    <p className='px-5'>Workshop Service</p>
+  </button>
+</div>
+
+
+      {showModal && <CarType />}
+      {showColorModal && <SelColors />}
+      {showPlateModal && <Plate />}
+      {showAmtModal && <FuelAmount />}
+      {showFuelType && <FuelType />}
+
+    </div>
+  );
 };
 
 export default Test;
-
-// const[user,setUser]= useState({});
-// const supabase = createClient(
-//     "https://hxlkvldqxjraxxyrxbld.supabase.co",
-//     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh4bGt2bGRxeGpyYXh4eXJ4YmxkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDkzNTY5MzEsImV4cCI6MjAyNDkzMjkzMX0.ZNCPfCUQj_Vqv-WCX2tj6GEuE7ZDGwMgFc69zLZKhgM"  
-//     );
-
-// useEffect(() =>{
-//     async function getuserData()
-//     {
-//         await supabase.auth.getUser().then((value) =>{
-            
-//             if(value.data?.user)
-//             {
-//                console.log(value.data.user);
-//                 setUser(value.data.user);
-//             }
-//         })
-//     }
-//     getuserData();
-// },[]);

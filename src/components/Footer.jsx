@@ -6,10 +6,11 @@ const Footer = () => {
 
   const curLocation = useLocation().pathname;
   const nav = useNavigate();
-  const style = ' text-black'
+  const style = ' text-gray-300'
   return (
     <>
-    {curLocation !== '/mode' && curLocation !== '/' && (
+    {curLocation !== '/' && curLocation !== '/login' && (
+      <div className='bg-black'>
     <div className='flex  w-full text-gray-500 justify-around  font-semibold py-2 text-center '>
       <div className={curLocation === '/home' ? style:''}>
       <button onClick={()=>{nav('/home')}}> <HomeIcon sx={{ fontSize: 30 }}/>
@@ -23,6 +24,7 @@ const Footer = () => {
         <button onClick={()=>{nav('/records')}}><DescriptionIcon sx={{ fontSize: 30 }}/>
         <p>Records</p></button>
       </div>
+    </div>
     </div>)
     }
     </>

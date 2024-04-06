@@ -22,6 +22,9 @@ export const ModalProvider = ({ children }) => {
   const [showAmtModal, setAmtModal] = useState(false);
   const [showFuelType, setFuelTypeModal] = useState(false);
   const [selectedamt,setselectedamt]=useState('');
+  const [selectedtype,setselectedtype]=useState('');
+  const[selectedmode,setselectedmode]=useState('');
+  const[mailid,setmailid]=useState('');
   return (
     <ModalContext.Provider value={
       {
@@ -33,8 +36,10 @@ export const ModalProvider = ({ children }) => {
         setcol:[selectedColor,setselectedcolor],
         showamt:[showAmtModal, setAmtModal],
         showfuel:[showFuelType, setFuelTypeModal],
-        setamt:[selectedamt,setselectedamt]
-
+        setamt:[selectedamt,setselectedamt],
+        settype:[selectedtype,setselectedtype],
+        setmode:[selectedmode,setselectedmode],
+        setmail:[mailid,setmailid]
       }
     }>
       {children}

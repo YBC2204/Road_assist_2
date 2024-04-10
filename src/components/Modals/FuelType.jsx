@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ArrowBack } from '@mui/icons-material';
 import supabase from '../../helper/SupaClient';
 import { useModalContext } from '../../Context/Modalcon';
 import { v4 as uuidv4 } from 'uuid';
 
 const FuelType = () => {
-    const { showmod, selcar, selcol, plate, setplate, setcol, showamt, showfuel, setamt, settype } = useModalContext();
+    const { showmod, selcar, selcol, plate, setplate, setcol, showamt, showfuel, setamt, settype,setmode,setmail } = useModalContext();
 
     const [showPlateModal, setShowPlateModal] = plate;
     const [showAmtModal, setAmtModal] = showamt;
@@ -15,31 +15,77 @@ const FuelType = () => {
     const [selectedColor, setselectedcolor] = setcol;
     const [selectedCar, setSelectedCar] = selcar;
     const [plateNumber, setPlateNumber] = setplate;
+    const [mailid, setMailId] = setmail;
+
+    // Function to fetch the ID from logintrial table based on mailid
+    const fetchIdFromLoginTrial = async () => {
+        try {
+            // Fetch the ID from the logintrial table based on the mailid
+            const { data, error } = await supabase
+                .from('logintrial')
+                .select('id')
+                .eq('email_id', mailid)
+                .single();
+
+            if (error) {
+                console.error('Error fetching data from logintrial:', error.message);
+                return null;
+            }
+
+            if (!data) {
+                console.error('No data found in logintrial for the provided mailid.');
+                return null;
+            }
+
+            return data.id;
+        } catch (error) {
+            console.error('Error fetching data from logintrial:', error.message);
+            return null;
+        }
+    };
 
     const handleConfirmType = async (fuelType) => {
-        // Generate a UUID for User_id
-        const userId = uuidv4();
+        setselectedtype(fuelType);
+        try {
+            // Fetch the ID from logintrial table based on mailid
+            const loginTrialId = await fetchIdFromLoginTrial();
+           
+            if (!loginTrialId) {
+                console.error('Unable to fetch login trial ID.');
+                return;
+            }
 
-        // Insert data into the 'trialvehicle' table
-        const { data, error } = await supabase
-            .from('trialvehicle')
-            .insert([{ Vehicle_name:selectedCar, Plate_num: plateNumber, car_color: selectedColor, Fuel_type:selectedtype }]);
+            // Insert data into the 'trialvehicle' table
+            const { data, error } = await supabase
+                .from('vehicle')
+                .insert([
+                    {
+                        Vehicle_name: selectedCar,
+                        Plate_num: plateNumber,
+                        car_color: selectedColor,
+                        Fuel_type: fuelType,
+                        user_id: loginTrialId,
+                        Fuel_amt:selectedamt
+                    }
+                ]);
 
-        if (error) {
-            console.error('Error inserting data:', error);
-            // Handle error (e.g., display error message)
-            return;
+            if (error) {
+                console.error('Error inserting data into trialvehicle:', error.message);
+                return;
+            }
+
+            // Close the fuel type modal
+            setFuelTypeModal(false);
+
+            // Log the selected values
+            console.log(selectedCar);
+            console.log(selectedColor);
+            console.log(plateNumber);
+            console.log(selectedamt);
+            console.log(fuelType);
+        } catch (error) {
+            console.error('Error handling fuel type confirmation:', error.message);
         }
-
-        // Close the fuel type modal
-        setFuelTypeModal(false);
-
-        // Log the selected values
-        console.log(selectedCar);
-        console.log(selectedColor);
-        console.log(plateNumber);
-        console.log(selectedamt);
-        console.log(fuelType);
     };
 
     return (

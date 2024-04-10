@@ -29,7 +29,7 @@ const CarType = () => {
                   <button className="text-gray-600" onClick={() => { setShowModal(false); }}>
                       <ArrowBack />
                   </button>
-                  <div className="h-8 text-black text-md font-bold uppercase pt-1 w-full text-center pr-4">Enter Car Type:</div>
+                  <div className="h-8 text-black text-md font-bold uppercase pt-1 w-full text-center pr-4">Enter Car Make:</div>
               </div>
               <div className='mt-10 px-3'>
                   <input

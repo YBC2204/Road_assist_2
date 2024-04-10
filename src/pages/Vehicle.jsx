@@ -10,10 +10,11 @@ const Vehicle = () => {
     const[detail,setDetails]=setdet
     
   return (
-    <div className='flex flex-col h-[85vh] gap-2 items-center bg-neutral-300'>
+    <div className='bg-gradient-to-br from-gray-800 to-gray-700'>
+    <div className='flex flex-col h-[85vh] gap-2 items-center  bg-neutral-300'>
         <button className='mt-4  font-semibold text-xl border-2 border-black rounded-xl px-3 py-2 active:bg-gray-500 active:text-white bg-white' onClick={()=>setDetails(true)}>ADD A VEHICLE +</button>
        {detail && <DetailModal/>}
-    </div>
+    </div></div>
   )
 }
 

@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Mode from "./pages/Mode";
 import Records from "./pages/Records";
 import Nearby from "./pages/Nearby";
+import FuelAmount from "./components/Modals/FuelAmount";
 
 import Vehicle from "./pages/Vehicle";
 
@@ -14,7 +15,7 @@ import Enterdetails from "./pages/Enterdetails";
 
 function App() {
   return (
-    <div className="min-h-screen w-fullflex flex-col bg-white text-black font-source">
+    <div className="min-h-screen w-fullflex flex-col bg-black text-white font-source">
       <BrowserRouter>
         <Header/>
         <Routes>

@@ -18,7 +18,7 @@ console.log(status);
   async function signOut()
   {
     const { error } = await supabase.auth.signOut();
-    nav("/login");
+    nav("/");
   }
   const handlelog = ()=>
   {
@@ -36,9 +36,9 @@ console.log(status);
   return (
     <>
       {curLocation !== '/' && curLocation !== '/login' &&(
-        <div className='flex bg-white justify-between'>
+        <div className='flex bg-black justify-between'>
           <div className='flex flex-col p-3'>
-            <div className="text-black font-bold text-md">
+            <div className="text-gray-300 font-bold text-md">
               <p>Hello&nbsp;<span>Kamal</span></p>
             </div>
             <div className="text-gray-500 text-sm font-semibold">
@@ -48,7 +48,7 @@ console.log(status);
           <div className="flex items-center">
             <div className='text-black ' onClick={()=>nav('/profile')}><AccountCircleIcon fontSize='large'/></div>
             <div className='p-2'>
-              <button className='text-white bg-black px-3 py-2 rounded-xl font-semibold' onClick={handlelog}>
+              <button className='text-gray-300 bg-black px-3 py-2 rounded-xl font-semibold' onClick={handlelog}>
                 {isLoggedIn ? 'Logout' : 'Login'}
               </button>
             </div>

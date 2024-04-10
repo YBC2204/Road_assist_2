@@ -13,10 +13,18 @@ export const useModalContext = () => {
 export const ModalProvider = ({ children }) => {
 
   const [showModal, setShowModal] = useState(false);
+  // const [showConfirm, setConfirmModal] = useState(false);
   const [selectedCar, setSelectedCar] = useState('');
   const [showColorModal, setShowColorModal] = useState(false);
   const [showPlateModal, setShowPlateModal] = useState(false);
   const [plateNumber, setPlateNumber] = useState('');
+  const [selectedColor,setselectedcolor]=useState('');
+  const [showAmtModal, setAmtModal] = useState(false);
+  const [showFuelType, setFuelTypeModal] = useState(false);
+  const [selectedamt,setselectedamt]=useState('');
+  const [selectedtype,setselectedtype]=useState('');
+  const[selectedmode,setselectedmode]=useState('');
+  const[mailid,setmailid]=useState('');
   const [detail,setDetails] = useState(false);
   return (
     <ModalContext.Provider value={
@@ -26,7 +34,14 @@ export const ModalProvider = ({ children }) => {
         selcol:[showColorModal,setShowColorModal],
         plate:[showPlateModal, setShowPlateModal],
         setplate:[plateNumber, setPlateNumber],
-        setdet:[detail,setDetails]
+        setdet:[detail,setDetails],
+        setcol:[selectedColor,setselectedcolor],
+        showamt:[showAmtModal, setAmtModal],
+        showfuel:[showFuelType, setFuelTypeModal],
+        setamt:[selectedamt,setselectedamt],
+        settype:[selectedtype,setselectedtype],
+        setmode:[selectedmode,setselectedmode],
+        setmail:[mailid,setmailid]
       }
     }>
       {children}

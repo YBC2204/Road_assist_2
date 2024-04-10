@@ -27,9 +27,9 @@ const DetailModal = () => {
       });
   return (
     <div className="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center">
-    <div className='pt-5 bg-neutral-100 w-[85%] rounded-lg relative px-4'>
-<div className='absolute top-2 left-1' onClick={()=>setDetails(false)}><CloseIcon/></div>
-    <div className='flex flex-col px-3 py-5 gap-4 mt-2'>
+    <div className='pt-5 bg-neutral-300 w-[85%] rounded-lg relative px-4'>
+<div className='absolute top-2 left-1 text-black' onClick={()=>setDetails(false)}><CloseIcon/></div>
+    <div className='flex flex-col px-3 py-5 gap-4 mt-2 '>
 <TextField id="outlined-basic" label="Car-Type" variant="outlined" />
 <TextField id="outlined-basic" label="Plate Number" variant="outlined" />
 <TextField id="outlined-basic" label="Fuel Type" variant="outlined" />
@@ -45,7 +45,7 @@ const DetailModal = () => {
       <VisuallyHiddenInput type="file" />
     </Button>
     <div className='flex justify-center w-full mt-2'>
-    <button className='bg-neutral-300 flex items-center px-3 py-2 text-lg rounded-xl active:border border-black active:bg-white font-semibold '
+    <button className='text-black flex items-center px-3 py-2 text-lg rounded-xl border border-black active:bg-white font-semibold '
      onClick={handledone}>
         DONE
         <ThumbUpIcon className='ml-2'

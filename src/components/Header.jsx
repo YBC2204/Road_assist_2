@@ -46,7 +46,7 @@ console.log(status);
             </div>
           </div>
           <div className="flex items-center">
-            <div className='text-black '><AccountCircleIcon fontSize='large'/></div>
+            <div className='text-black ' onClick={()=>nav('/profile')}><AccountCircleIcon fontSize='large'/></div>
             <div className='p-2'>
               <button className='text-white bg-black px-3 py-2 rounded-xl font-semibold' onClick={handlelog}>
                 {isLoggedIn ? 'Logout' : 'Login'}

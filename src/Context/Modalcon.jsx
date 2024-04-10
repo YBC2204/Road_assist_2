@@ -17,6 +17,7 @@ export const ModalProvider = ({ children }) => {
   const [showColorModal, setShowColorModal] = useState(false);
   const [showPlateModal, setShowPlateModal] = useState(false);
   const [plateNumber, setPlateNumber] = useState('');
+  const [detail,setDetails] = useState(false);
   return (
     <ModalContext.Provider value={
       {
@@ -24,7 +25,8 @@ export const ModalProvider = ({ children }) => {
         selcar:[selectedCar,setSelectedCar],
         selcol:[showColorModal,setShowColorModal],
         plate:[showPlateModal, setShowPlateModal],
-        setplate:[plateNumber, setPlateNumber]
+        setplate:[plateNumber, setPlateNumber],
+        setdet:[detail,setDetails]
       }
     }>
       {children}

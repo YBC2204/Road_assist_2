@@ -14,6 +14,7 @@ const CarType = () => {
   const handleConfirmCar = () => {
    setShowModal(false);
   setShowColorModal(true);
+  setSelectedCar(selectedCar);
 };
   return (
     <div className="fixed inset-0 bg-black bg-opacity-0 flex justify-center items-center">

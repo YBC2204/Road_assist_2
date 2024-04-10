@@ -15,7 +15,7 @@ import Enterdetails from "./pages/Enterdetails";
 
 function App() {
   return (
-    <div className="min-h-screen w-fullflex flex-col bg-black text-white font-source">
+    <div className="min-h-screen w-fullflex flex-col bg-black font-source">
       <BrowserRouter>
         <Header/>
         <Routes>

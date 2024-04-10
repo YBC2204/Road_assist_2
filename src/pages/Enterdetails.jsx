@@ -22,7 +22,7 @@ const EnterDetails = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const { data, error } = await supabase.from('user').insert([
+            const { data, error } = await supabase.from('user1').insert([
                 {
                     username: ownerDetails.name,
                     email: ownerDetails.email,
@@ -41,10 +41,13 @@ const EnterDetails = () => {
     };
 
     return (
-        <div className="w-full max-w-lg h-[80vh] mx-auto">
-            <form className="bg-neutral-300 shadow-md rounded px-8 pt-6 pb-8 mb-4 h-full" onSubmit={handleSubmit}>
+
+        <div className="w-full max-w-lg mx-auto">
+            <form className=" shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
+
+
             <div className="mb-4">
-                    <label htmlFor="name" className="block text-sm font-bold mb-2 text-gray-700">
+                    <label htmlFor="name" className="block text-sm font-bold mb-2 text-slate-300">
                         User Name
                     </label>
                     <input
@@ -55,11 +58,11 @@ const EnterDetails = () => {
                         onChange={handleInputChange}
                         required
                         placeholder="Enter your user name"
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-slate-300 leading-tight focus:outline-none focus:shadow-outline"
                     />
                 </div>
                 <div className="mb-4">
-                    <label htmlFor="phoneNumber" className="block text-sm font-bold mb-2 text-gray-700">
+                    <label htmlFor="phoneNumber" className="block text-sm font-bold mb-2 text-slate-300">
                         Mobile Number
                     </label>
                     <input
@@ -70,11 +73,11 @@ const EnterDetails = () => {
                         value={ownerDetails.phoneNumber}
                         onChange={handleInputChange}
                         placeholder="Enter your mobile number"
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-slate-300 leading-tight focus:outline-none focus:shadow-outline"
                     />
                 </div>
                 <div className="mb-4">
-                    <label htmlFor="email" className="block text-sm font-bold mb-2 text-gray-700">
+                    <label htmlFor="email" className="block text-sm font-bold mb-2 text-slate-300">
                         Email
                     </label>
                     <input
@@ -85,11 +88,11 @@ const EnterDetails = () => {
                         value={ownerDetails.email}
                         onChange={handleInputChange}
                         placeholder="Enter your email"
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-slate-300 leading-tight focus:outline-none focus:shadow-outline"
                     />
                 </div>
                 <div className="mb-4">
-    <label htmlFor="usertype" className="block text-sm font-bold mb-2 text-gray-700">
+    <label htmlFor="usertype" className="block text-sm font-bold mb-2 text-slate-300">
         User Type
     </label>
     <div className="relative">
@@ -100,7 +103,7 @@ const EnterDetails = () => {
             value={ownerDetails.usertype}
             onChange={handleInputChange}
             placeholder="Enter User Type"
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-slate-300 leading-tight focus:outline-none focus:shadow-outline"
         >
             <option value="" disabled hidden>
                 Enter User Type
@@ -109,7 +112,7 @@ const EnterDetails = () => {
             <option value="pumpOwner">Pump Owner</option>
             <option value="workshopOwner">Workshop Owner</option>
         </select>
-        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-slate-300">
             <svg
                 className="fill-current h-4 w-4"
                 xmlns="http://www.w3.org/2000/svg"
@@ -126,7 +129,7 @@ const EnterDetails = () => {
                 <div className="flex items-center justify-between">
                     <button
                         type="submit"
-                        className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                        className="bg-slate-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                     >
                         Save
                     </button>

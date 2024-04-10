@@ -4,16 +4,19 @@ import { useModalContext } from '../../Context/Modalcon';
 
 const SelColors = () => {
 
-    const { showmod ,selcar ,selcol,plate} = useModalContext();
-  
+    const { showmod,selcar,selcol, plate,setplate,setcol} = useModalContext();
+    const [selectedCar,setSelectedCar] = selcar;
    
   const [showModal, setShowModal] = showmod;
   const [showColorModal, setShowColorModal] = selcol;
   const [showPlateModal, setShowPlateModal] = plate;
-
+  const[selectedColor,setselectedcolor]=setcol;
     const handleColor=()=>{
         setShowColorModal(false);
         setShowPlateModal(true); 
+        console.log(selectedColor);
+        console.log(selectedCar);
+       
     };
 
 
@@ -28,14 +31,14 @@ const SelColors = () => {
                         <div className="flex justify-center w-full pr-4  text-black text-lg font-bold uppercase ">Select Colour</div>
                        </div> 
                        <div className='grid mt-8 px-5  grid-cols-4 gap-x-4 gap-y-4'>
-                          <button onClick={handleColor} className='bg-black p-6 rounded-xl'></button>
-                          <button onClick={handleColor} className='bg-zinc-500 p-6 rounded-xl'></button>
-                          <button onClick={handleColor} className='bg-slate-300 p-6 rounded-xl'></button>
-                          <button onClick={handleColor} className='bg-neutral-200 p-6 rounded-xl'></button>
-                          <button onClick={handleColor} className='bg-red-800 p-6 rounded-xl'></button>
-                          <button onClick={handleColor} className='bg-blue-700 p-6 rounded-xl'></button>
-                          <button onClick={handleColor} className='bg-yellow-300 p-6 rounded-xl'></button>
-                          <button onClick={handleColor} className='bg-green-500 p-6 rounded-xl'></button>
+                          <button onClick={handleColor} onChange={setselectedcolor("black")}className='bg-black p-6 rounded-xl'></button>
+                          <button onClick={handleColor} onChange={setselectedcolor("silver")} className='bg-zinc-500 p-6 rounded-xl'></button>
+                          <button onClick={handleColor} onChange={setselectedcolor("white")} className='bg-slate-300 p-6 rounded-xl'></button>
+                          <button onClick={handleColor} onChange={setselectedcolor("green")} className='bg-green-800 p-6 rounded-xl'></button>
+                          <button onClick={handleColor} onChange={setselectedcolor("red")} className='bg-red-800 p-6 rounded-xl'></button>
+                          <button onClick={handleColor} onChange={setselectedcolor("brown")} className='bg-amber-900 p-6 rounded-xl'></button>
+                          <button onClick={handleColor}onChange={setselectedcolor("blue")} className='bg-blue-800 p-6 rounded-xl'></button>
+                          <button onClick={handleColor} onChange={setselectedcolor("orange")}className='bg-orange-500 p-6 rounded-xl'></button>
                        </div>
                     </div>
                 </div>

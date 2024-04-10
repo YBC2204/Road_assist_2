@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import supabase from '../helper/SupaClient';
 
 const EnterDetails = () => {
     const [ownerDetails, setOwnerDetails] = useState({
@@ -17,15 +18,31 @@ const EnterDetails = () => {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log('Submitted Owner Details:', ownerDetails);
+        try {
+            const { data, error } = await supabase.from('user').insert([
+                {
+                    username: ownerDetails.name,
+                    email: ownerDetails.email,
+                    user_type: ownerDetails.usertype,
+                    mobile_number: ownerDetails.phoneNumber,
+                },
+            ]);
+            if (error) {
+                console.error('Error adding ownerDetails to Supabase:', error.message);
+            } else {
+                console.log('OwnerDetails added to Supabase:', data);
+            }
+        } catch (error) {
+            console.error('Error adding ownerDetails to Supabase:', error.message);
+        }
     };
 
     return (
         <div className="w-full max-w-lg mx-auto">
             <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
-                <div className="mb-4">
+            <div className="mb-4">
                     <label htmlFor="name" className="block text-sm font-bold mb-2 text-gray-700">
                         User Name
                     </label>
@@ -35,6 +52,7 @@ const EnterDetails = () => {
                         name="name"
                         value={ownerDetails.name}
                         onChange={handleInputChange}
+                        required
                         placeholder="Enter your user name"
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     />
@@ -46,6 +64,7 @@ const EnterDetails = () => {
                     <input
                         type="text"
                         id="phoneNumber"
+                        required
                         name="phoneNumber"
                         value={ownerDetails.phoneNumber}
                         onChange={handleInputChange}
@@ -61,6 +80,7 @@ const EnterDetails = () => {
                         type="email"
                         id="email"
                         name="email"
+                        required
                         value={ownerDetails.email}
                         onChange={handleInputChange}
                         placeholder="Enter your email"
@@ -75,6 +95,7 @@ const EnterDetails = () => {
         <select
             id="usertype"
             name="usertype"
+            required
             value={ownerDetails.usertype}
             onChange={handleInputChange}
             placeholder="Enter User Type"
@@ -101,12 +122,11 @@ const EnterDetails = () => {
         </div>
     </div>
 </div>
-
-
                 <div className="flex items-center justify-between">
                     <button
                         type="submit"
-                        className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" >
+                        className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                    >
                         Save
                     </button>
                 </div>
@@ -116,4 +136,3 @@ const EnterDetails = () => {
 };
 
 export default EnterDetails;
-

@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import supabase from "../helper/SupaClient";
 import { useStatusContext } from "../Context/StatusContext";
 import { useModalContext } from "../Context/Modalcon";
+import logo from '../assets/logo.png'
 
 const Login = () => {
   const nav = useNavigate();
@@ -29,10 +30,11 @@ const Login = () => {
         nav("/login");
       }
     });
-  }, []);
+  }, [mailid,nav,setmailid,setStatus]);
 
   return (
-    <div className="p-5 bg-white-gradient h-screen flex flex-col justify-center">
+    <div className="p-5 bg-gray-800 h-screen flex flex-col justify-center">
+    <div className="flex w-full justify-center"><img src={logo}/></div>
       <div>
         <Auth
           supabaseClient={supabase}

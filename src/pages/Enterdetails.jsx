@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+
 import supabase from '../helper/SupaClient';
+import  { useState } from 'react';
 
 const EnterDetails = () => {
     const [ownerDetails, setOwnerDetails] = useState({
@@ -40,8 +41,8 @@ const EnterDetails = () => {
     };
 
     return (
-        <div className="w-full max-w-lg mx-auto">
-            <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
+        <div className="w-full max-w-lg h-[80vh] mx-auto">
+            <form className="bg-neutral-300 shadow-md rounded px-8 pt-6 pb-8 mb-4 h-full" onSubmit={handleSubmit}>
             <div className="mb-4">
                     <label htmlFor="name" className="block text-sm font-bold mb-2 text-gray-700">
                         User Name

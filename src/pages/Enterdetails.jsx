@@ -1,6 +1,5 @@
-
+import React, { useState } from 'react';
 import supabase from '../helper/SupaClient';
-import  { useState } from 'react';
 
 const EnterDetails = () => {
     const [ownerDetails, setOwnerDetails] = useState({
@@ -9,6 +8,7 @@ const EnterDetails = () => {
         email: '',
         address: '',
         usertype: '',
+        id:''
     });
 
     const handleInputChange = (e) => {
@@ -22,30 +22,51 @@ const EnterDetails = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const { data, error } = await supabase.from('user1').insert([
-                {
-                    username: ownerDetails.name,
-                    email: ownerDetails.email,
-                    user_type: ownerDetails.usertype,
-                    mobile_number: ownerDetails.phoneNumber,
-                },
-            ]);
-            if (error) {
-                console.error('Error adding ownerDetails to Supabase:', error.message);
+            // Fetch the ID from the logintrial table based on the email_id
+            const { data: loginTrialData, error: loginTrialError } = await supabase
+                .from('logintrial')
+                .select('id')
+                .eq('email_id', ownerDetails.email)
+                .single();
+    
+            if (loginTrialError) {
+                console.error('Error fetching login trial data:', loginTrialError.message);
+                return;
+            }
+    
+            if (!loginTrialData) {
+                console.error('No login trial data found for the provided email.');
+                return;
+            }
+    
+            const loginTrialId = loginTrialData.id;
+    
+            // Insert data into the user1 table along with the retrieved logintrial_id
+            const { data: userData, error: userError } = await supabase
+                .from('user')
+                .insert([
+                    {
+                        username: ownerDetails.name,
+                        email: ownerDetails.email,
+                        user_type: ownerDetails.usertype,
+                        mobile_number: ownerDetails.phoneNumber,
+                        logintrial_id: loginTrialId,
+                    },
+                ]);
+    
+            if (userError) {
+                console.error('Error adding ownerDetails to Supabase:', userError.message);
             } else {
-                console.log('OwnerDetails added to Supabase:', data);
+                console.log('OwnerDetails added to Supabase:', userData);
             }
         } catch (error) {
             console.error('Error adding ownerDetails to Supabase:', error.message);
         }
     };
-
+    
     return (
-
         <div className="w-full max-w-lg mx-auto">
             <form className=" shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
-
-
             <div className="mb-4">
                     <label htmlFor="name" className="block text-sm font-bold mb-2 text-slate-300">
                         User Name
@@ -126,7 +147,7 @@ const EnterDetails = () => {
         </div>
     </div>
 </div>
-                <div className="flex items-center justify-between">
+                <div className="m-4flex items-center justify-between">
                     <button
                         type="submit"
                         className="bg-slate-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"

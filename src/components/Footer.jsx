@@ -10,8 +10,8 @@ const Footer = () => {
   return (
     <>
     {curLocation !== '/' && curLocation !== '/login' && (
-      <div className='bg-black'>
-    <div className='flex  w-full text-gray-500 justify-around  font-semibold py-2 text-center '>
+      <div className='bg-black '>
+    <div className='flex   w-full text-gray-500 justify-around  font-semibold py-2 text-center '>
       <div className={curLocation === '/home' ? style:''}>
       <button onClick={()=>{nav('/home')}}> <HomeIcon sx={{ fontSize: 30 }}/>
         <p>Home</p></button>

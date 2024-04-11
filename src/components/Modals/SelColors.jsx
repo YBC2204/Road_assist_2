@@ -1,48 +1,45 @@
 import { ArrowBack } from '@mui/icons-material';
-import React from 'react'
+import React from 'react';
 import { useModalContext } from '../../Context/Modalcon';
 
 const SelColors = () => {
+    const { showmod, selcar, selcol, plate, setplate, setcol } = useModalContext();
+    const [selectedCar, setSelectedCar] = selcar;
+    const [showModal, setShowModal] = showmod;
+    const [showColorModal, setShowColorModal] = selcol;
+    const [showPlateModal, setShowPlateModal] = plate;
+    const [selectedColor, setSelectedColor] = setcol;
 
-    const { showmod,selcar,selcol, plate,setplate,setcol} = useModalContext();
-    const [selectedCar,setSelectedCar] = selcar;
-   
-  const [showModal, setShowModal] = showmod;
-  const [showColorModal, setShowColorModal] = selcol;
-  const [showPlateModal, setShowPlateModal] = plate;
-  const[selectedColor,setselectedcolor]=setcol;
-    const handleColor=()=>{
+    const handleColor = (color) => {
+        setSelectedColor(color); // Set the selected color
         setShowColorModal(false);
         setShowPlateModal(true); 
         console.log(selectedColor);
         console.log(selectedCar);
-       
     };
 
-
-  return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-                    <div className="w-[80%] h-64  bg-white rounded-[22px] flex flex-col gap-5">
-                       
-                    <div className='flex  mt-4'> 
-                       <button className=" text-black pl-3 w-min" onClick={() => {setShowModal(true);setShowColorModal(false);}}>
-                            <ArrowBack />
-                        </button>
-                        <div className="flex justify-center w-full pr-4  text-black text-lg font-bold uppercase ">Select Colour</div>
-                       </div> 
-                       <div className='grid mt-8 px-5  grid-cols-4 gap-x-4 gap-y-4'>
-                          <button onClick={handleColor} onChange={setselectedcolor("black")}className='bg-black p-6 rounded-xl'></button>
-                          <button onClick={handleColor} onChange={setselectedcolor("silver")} className='bg-zinc-500 p-6 rounded-xl'></button>
-                          <button onClick={handleColor} onChange={setselectedcolor("white")} className='bg-slate-300 p-6 rounded-xl'></button>
-                          <button onClick={handleColor} onChange={setselectedcolor("green")} className='bg-green-800 p-6 rounded-xl'></button>
-                          <button onClick={handleColor} onChange={setselectedcolor("red")} className='bg-red-800 p-6 rounded-xl'></button>
-                          <button onClick={handleColor} onChange={setselectedcolor("brown")} className='bg-amber-900 p-6 rounded-xl'></button>
-                          <button onClick={handleColor}onChange={setselectedcolor("blue")} className='bg-blue-800 p-6 rounded-xl'></button>
-                          <button onClick={handleColor} onChange={setselectedcolor("orange")}className='bg-orange-500 p-6 rounded-xl'></button>
-                       </div>
-                    </div>
+    return (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+            <div className="w-[80%] h-64 bg-white rounded-[22px] flex flex-col gap-5">
+                <div className='flex mt-4'> 
+                    <button className="text-black pl-3 w-min" onClick={() => { setShowModal(true); setShowColorModal(false); }}>
+                        <ArrowBack />
+                    </button>
+                    <div className="flex justify-center w-full pr-4 text-black text-lg font-bold uppercase">Select Colour</div>
+                </div> 
+                <div className='grid mt-8 px-5 grid-cols-4 gap-x-4 gap-y-4'>
+                    <button onClick={() => handleColor("black")} className='bg-black p-6 rounded-xl'></button>
+                    <button onClick={() => handleColor("silver")} className='bg-zinc-500 p-6 rounded-xl'></button>
+                    <button onClick={() => handleColor("white")} className='bg-slate-300 p-6 rounded-xl'></button>
+                    <button onClick={() => handleColor("green")} className='bg-green-800 p-6 rounded-xl'></button>
+                    <button onClick={() => handleColor("red")} className='bg-red-800 p-6 rounded-xl'></button>
+                    <button onClick={() => handleColor("brown")} className='bg-amber-900 p-6 rounded-xl'></button>
+                    <button onClick={() => handleColor("blue")} className='bg-blue-800 p-6 rounded-xl'></button>
+                    <button onClick={() => handleColor("orange")} className='bg-amber-500 p-6 rounded-xl'></button>
                 </div>
-  )
+            </div>
+        </div>
+    );
 }
 
-export default SelColors
+export default SelColors;

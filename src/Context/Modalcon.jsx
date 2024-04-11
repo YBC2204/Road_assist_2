@@ -25,6 +25,7 @@ export const ModalProvider = ({ children }) => {
   const [selectedtype,setselectedtype]=useState('');
   const[selectedmode,setselectedmode]=useState('');
   const[mailid,setmailid]=useState('');
+  const [detail,setDetails] = useState(false);
   return (
     <ModalContext.Provider value={
       {
@@ -33,6 +34,7 @@ export const ModalProvider = ({ children }) => {
         selcol:[showColorModal,setShowColorModal],
         plate:[showPlateModal, setShowPlateModal],
         setplate:[plateNumber, setPlateNumber],
+        setdet:[detail,setDetails],
         setcol:[selectedColor,setselectedcolor],
         showamt:[showAmtModal, setAmtModal],
         showfuel:[showFuelType, setFuelTypeModal],

@@ -7,15 +7,18 @@ import { useStatusContext } from '../Context/StatusContext';
 import { useModalContext } from '../Context/Modalcon';
 
 const Header = () => {
+
   const { showmod, selcar, selcol, plate, setplate, setdet, setcol, showamt, showfuel, setamt, settype, setmode, setmail,setloc } = useModalContext();
   const curLocation = useLocation().pathname;
   const [loc, setLoc] = setloc
+
   const { stat } = useStatusContext();
   const [status, setStatus] = stat;
   const nav = useNavigate();
 
   const isLoggedIn = status === 'SIGNED_IN';
   const [mailid, setMailId] = setmail;
+
   const [selectedmode, setSelectedMode] = setmode;
   const [username, setUsername] = useState(''); // State to store the username
 
@@ -46,20 +49,30 @@ const Header = () => {
     }
   }, [isLoggedIn, mailid]); // Fetch user data when login status or mailid changes
 
+
   async function signOut() {
     const { error } = await supabase.auth.signOut();
     setMailId(null);
+
     setUsername(''); // Reset username on logout
+
     nav("/");
   }
 
   const handleLog = () => {
     if (isLoggedIn) {
-      signOut();
+
+      signOut(); 
+
     } else {
       nav('/login');
     }
   }
+
+  // Log status when it changes
+  useEffect(() => {
+    console.log(status);
+  }, [status]); // Only run when 'status' changes
 
   return (
     <>
@@ -74,9 +87,13 @@ const Header = () => {
             </div>
           </div>
           <div className="flex items-center">
-            <div className='text-slate-300'><AccountCircleIcon fontSize='large' /></div>
+
+            <div className='text-slate-300' onClick={() => nav('/profile')}>
+              <AccountCircleIcon fontSize='large'/>
+            </div>
             <div className='p-2 '>
-              <button className='border-slate-300 border-2 text-gray-300 bg-black px-3 py-2 rounded-xl font-semibold' onClick={handleLog}>
+              <button className=' border-slate-300 border-2 text-gray-300 bg-black px-3 py-2 rounded-xl font-semibold' onClick={handleLog}>
+
                 {isLoggedIn ? 'Logout' : 'Login'}
               </button>
             </div>

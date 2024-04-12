@@ -6,7 +6,7 @@ import { useModalContext } from '../../Context/Modalcon';
 import { v4 as uuidv4 } from 'uuid';
 
 const FuelType = () => {
-    const { showmod, selcar, selcol, plate, setplate, setdet , setcol, showamt, showfuel, setamt, settype,setmode,setmail } = useModalContext();
+    const { showmod, selcar, selcol, plate, setplate, setdet , setcol, showamt, showfuel, setamt, settype,setmode,setmail,setloc } = useModalContext();
 
     const [showPlateModal, setShowPlateModal] = plate;
     const [showAmtModal, setAmtModal] = showamt;
@@ -17,7 +17,7 @@ const FuelType = () => {
     const [selectedCar, setSelectedCar] = selcar;
     const [plateNumber, setPlateNumber] = setplate;
     const [mailid, setMailId] = setmail;
-
+    const[loc,setloca]=setloc;
     // Function to fetch the ID from logintrial table based on mailid
     const fetchIdFromLoginTrial = async () => {
         try {
@@ -43,10 +43,12 @@ const FuelType = () => {
             console.error('Error fetching data from logintrial:', error.message);
             return null;
         }
+       
     };
 
     const handleConfirmType = async (fuelType) => {
         setselectedtype(fuelType);
+        console.log(loc);
         try {
             // Fetch the ID from logintrial table based on mailid
             const loginTrialId = await fetchIdFromLoginTrial();
@@ -58,7 +60,7 @@ const FuelType = () => {
 
             // Insert data into the 'trialvehicle' table
             const { data, error } = await supabase
-                .from('vehicle')
+                .from('order')
                 .insert([
                     {
                         Vehicle_name: selectedCar,
@@ -66,7 +68,8 @@ const FuelType = () => {
                         car_color: selectedColor,
                         Fuel_type: fuelType,
                         user_id: loginTrialId,
-                        Fuel_amt:selectedamt
+                        Fuel_amt:selectedamt,
+                        Location:loc
                     }
                 ]);
 

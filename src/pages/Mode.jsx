@@ -15,7 +15,7 @@ const Mode = () => {
 
     return (
         <div className="w-full h-full bg-slate-950">
-            <div className='flex flex-col items-center mt-4'>
+            <div className='flex flex-col items-center '>
                 <img className="w-3/5" src={logo} />
                 <div className="text-slate-300 font-bold font-ibm leading-10 text-xl">How do you want to continue?</div>
             </div>

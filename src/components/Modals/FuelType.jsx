@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react';
 import { ArrowBack } from '@mui/icons-material';
 import supabase from '../../helper/SupaClient';
@@ -5,7 +6,7 @@ import { useModalContext } from '../../Context/Modalcon';
 import { v4 as uuidv4 } from 'uuid';
 
 const FuelType = () => {
-    const { showmod, selcar, selcol, plate, setplate, setcol, showamt, showfuel, setamt, settype,setmode,setmail } = useModalContext();
+    const { showmod, selcar, selcol, plate, setplate, setdet , setcol, showamt, showfuel, setamt, settype,setmode,setmail } = useModalContext();
 
     const [showPlateModal, setShowPlateModal] = plate;
     const [showAmtModal, setAmtModal] = showamt;

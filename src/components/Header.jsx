@@ -2,9 +2,6 @@
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-
-import { useStatusContext } from '../Context/StatusContext';
-
 import supabase from '../helper/SupaClient';
 import { useStatusContext } from '../Context/StatusContext';
 import { useModalContext } from '../Context/Modalcon';

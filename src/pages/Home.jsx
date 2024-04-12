@@ -28,14 +28,17 @@ const Test = () => {
         async (position) => {
           const latitude = position.coords.latitude;
           const longitude = position.coords.longitude;
-
+  
           try {
             const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`);
             if (!response.ok) {
               throw new Error('Failed to fetch location data');
             }
             const data = await response.json();
-            const locationName = data.address.suburb;
+            let locationName = data.address.suburb || data.address.city || data.address.town;
+            if (!locationName) {
+              throw new Error('Location data not available');
+            }
             setCurrentLocation(locationName);
           } catch (error) {
             console.error('Error fetching location:', error);
@@ -52,6 +55,7 @@ const Test = () => {
       setCurrentLocation('Geolocation not supported');
     }
   };
+  
 
   // Function to add mailid to loginusertrial table
   const addMailIdToSupabase = async () => {

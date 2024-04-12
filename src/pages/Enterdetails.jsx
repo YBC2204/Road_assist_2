@@ -65,7 +65,6 @@ const EnterDetails = () => {
                         user_type: ownerDetails.usertype,
                         mobile_number: ownerDetails.phoneNumber,
                         logintrial_id: loginTrialId,
-                        aadhar_no: ownerDetails.aadhar
                     },
                 ]);
 
@@ -155,41 +154,41 @@ const EnterDetails = () => {
                     />
                 </div>
                 <div className="mb-4">
-                    <label htmlFor="usertype" className="block text-sm font-bold mb-2 text-slate-300">
-                        User Type
-                    </label>
-                    <div className="relative">
-                        <select
-                            id="usertype"
-                            name="usertype"
-                            required
-                            value={ownerDetails.usertype}
-                            onChange={handleInputChange}
-                            placeholder="Enter User Type"
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
-                        >
-                            <option value="" disabled hidden>
-                                Enter User Type
-                            </option>
-                            <option value="client">Client</option>
-                            <option value="pumpOwner">Pump Owner</option>
-                            <option value="workshopOwner">Workshop Owner</option>
-                        </select>
-                        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-slate-300">
-                            <svg
-                                className="fill-current h-4 w-4"
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 20 20"
-                            >
-                                <path
-                                    fillRule="evenodd"
-                                    d="M10 12a1 1 0 0 1-.707-.293l-4-4a1 1 0 1 1 1.414-1.414L10 9.586l3.293-3.293a1 1 0 1 1 1.414 1.414l-4 4A1 1 0 0 1 10 12z"
-                                />
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-                <div className="m-4 flex items-center justify-between">
+    <label htmlFor="usertype" className="block text-sm font-bold mb-2 text-slate-300">
+        User Type
+    </label>
+    <div className="relative">
+        <select
+            id="usertype"
+            name="usertype"
+            required
+            value={ownerDetails.usertype}
+            onChange={handleInputChange}
+            placeholder="Enter User Type"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-slate-300 leading-tight focus:outline-none focus:shadow-outline"
+        >
+            <option value="" disabled hidden>
+                Enter User Type
+            </option>
+            <option value="client">Client</option>
+            <option value="pumpOwner">Pump Owner</option>
+            <option value="workshopOwner">Workshop Owner</option>
+        </select>
+        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-slate-300">
+            <svg
+                className="fill-current h-4 w-4"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+            >
+                <path
+                    fillRule="evenodd"
+                    d="M10 12a1 1 0 0 1-.707-.293l-4-4a1 1 0 1 1 1.414-1.414L10 9.586l3.293-3.293a1 1 0 1 1 1.414 1.414l-4 4A1 1 0 0 1 10 12z"
+                />
+            </svg>
+        </div>
+    </div>
+</div>
+                <div className="m-4flex items-center justify-between">
                     <button
                         type="submit"
                         className="bg-slate-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"

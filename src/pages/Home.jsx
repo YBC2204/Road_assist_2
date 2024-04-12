@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import PlaceIcon from '@mui/icons-material/Place';
 import LocalGasStationIcon from '@mui/icons-material/LocalGasStation';
@@ -11,32 +12,43 @@ import { v4 as uuidv4 } from 'uuid';
 import supabase from "../helper/SupaClient";
 import FuelAmount from '../components/Modals/FuelAmount.jsx';
 import FuelType from '../components/Modals/FuelType.jsx';
+import { useStatusContext } from '../Context/StatusContext.jsx';
 
-const Test = () => {
+const Test = () => {  
   const [currentLocation, setCurrentLocation] = useState("Current Location");
-  const { showmod, selcol, plate, showamt, showfuel,setmode, setmail } = useModalContext();
+  const { showmod, selcol, plate, showamt, showfuel,setmode, setmail,setloc } = useModalContext();
+  const {stat,logid} = useStatusContext();
+  const [lid,setlid] = logid;
   const [showModal, setShowModal] = showmod;
   const [showColorModal, setShowColorModal] = selcol;
   const [showPlateModal, setShowPlateModal] = plate;
   const [showAmtModal, setAmtModal] = showamt;
   const [showFuelType, setFuelTypeModal] = showfuel;
   const [mailid, setMailId] = setmail;
-  const[selectedmode,setselectedmode]=setmode;
+  const[selectedmode,setselectedmode]=setmode; 
+  const[loc,setloca]=setloc;
+  
   const handleLocationClick = async () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         async (position) => {
           const latitude = position.coords.latitude;
           const longitude = position.coords.longitude;
-
+  
           try {
             const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`);
             if (!response.ok) {
               throw new Error('Failed to fetch location data');
             }
             const data = await response.json();
-            const locationName = data.address.suburb;
+
+            let locationName = data.address.suburb || data.address.city || data.address.town;
+            if (!locationName) {
+              throw new Error('Location data not available');
+            }
+
             setCurrentLocation(locationName);
+            setloca(locationName);
           } catch (error) {
             console.error('Error fetching location:', error);
             setCurrentLocation('Location data not available');
@@ -51,7 +63,9 @@ const Test = () => {
       console.error('Geolocation is not supported by your browser');
       setCurrentLocation('Geolocation not supported');
     }
+  
   };
+  
 
   // Function to add mailid to loginusertrial table
   const addMailIdToSupabase = async () => {
@@ -68,14 +82,47 @@ const Test = () => {
       console.error('Error adding mailid to Supabase:', error.message);
     }
   };
+//    const fetchIdFromLoginTrial = async () => {
+//     try {
+//         // Fetch the ID from the logintrial table based on the mailid
+//         const { data, error } = await supabase
+//             .from('logintrial')
+//             .select('id')
+//             .eq('email_id', mailid)
+//             .single();
 
-  // Call the function to add mailid when the component mounts
+//         if (error) {
+//             console.error('Error fetching data from logintrial:', error.message);
+//             return null;
+//         }
+
+//         if (!data) {
+//             console.error('No data found in logintrial for the provided mailid.');
+//             return null;
+//         }
+
+//         return data.id;
+//     } catch (error) {
+//         console.error('Error fetching data from logintrial:', error.message);
+//         return null;
+//     }
+
+// };
+
+  
   React.useEffect(() => {
     addMailIdToSupabase();
+//     const loginid=fetchIdFromLoginTrial();
+// setlid(loginid);
+// console.log(lid);
   }, []);
 
+  
+
+
+
   return (
-    <div className='w-full pb-5 bg-gradient-to-br from-gray-800 to-gray-300flex flex-col items-center '>
+    <div className=' w-full h-screen pb-5 bg-gradient-to-br from-gray-800  flex flex-col items-center '>
       <div className="flex justify-center pt-12">
         <button className="flex items-center bg-slate-300 px-6 py-4 rounded-xl font-['IBM Plex Sans Thai Looped'] text-black text-sm font-bold" onClick={handleLocationClick}>
           <PlaceIcon sx={{ fontSize: 25 }} />

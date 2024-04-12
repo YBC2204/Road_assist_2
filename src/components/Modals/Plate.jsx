@@ -9,17 +9,18 @@ const Plate = () => {
     const [showPlateModal, setShowPlateModal] = plate;
     const [plateNumber, setPlateNumber] = setplate;
     const [showAmtModal, setAmtModal] = showamt;
-    const [error, setError] = useState(""); // Define error state
 
     const handleConfirmPlate = () => {
-        if (plateNumber.trim() === "") {
-            setError("Please enter a plate number.");
+        // Regular expression for validating Indian car plate numbers
+        const plateRegex = /^[A-Z]{2}[0-9]{1,2}[A-Z]{1,2}[0-9]{4}$/;
+
+        if (!plateRegex.test(plateNumber.trim())) {
+            alert("Invalid plate number. Please enter a valid plate number.");
             return;
         }
 
         setShowPlateModal(false); // Hide the plate modal
         setAmtModal(true); // Show the fuel amount modal
-        setError(""); // Clear error message
         // You can navigate to the fuel amount page directly here if needed
         // Navigate to the fuel amount page
     };
@@ -31,7 +32,7 @@ const Plate = () => {
                     <button className="text-gray-600" onClick={() => { setShowPlateModal(false); setShowColorModal(true); }}>
                         <ArrowBack />
                     </button>
-                    <div className="h-8 text-black text-lg font-bold uppercase pt-1 w-full text-center pr-4">Plate Number:</div>
+                    <div className="h-8 text-black text-lg font-bold  pt-1 w-full text-center pr-4">Plate Number(In capital letter and without space):</div>
                 </div>
                 <div className='mt-10 px-3'>
                     <input
@@ -41,7 +42,6 @@ const Plate = () => {
                         onChange={(e) => setPlateNumber(e.target.value)}
                     />
                 </div>
-                {error && <p className="text-red-500 mt-2">{error}</p>}
                 <div className='mt-8 flex justify-center'>
                     <button className='bg-black text-white rounded-lg p-3 w-28' onClick={handleConfirmPlate}>Confirm</button>
                 </div>

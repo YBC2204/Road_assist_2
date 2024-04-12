@@ -26,6 +26,7 @@ export const ModalProvider = ({ children }) => {
   const[selectedmode,setselectedmode]=useState('');
   const[mailid,setmailid]=useState('');
   const [detail,setDetails] = useState(false);
+  const[loc,setloca]=useState('');
   return (
     <ModalContext.Provider value={
       {
@@ -41,7 +42,8 @@ export const ModalProvider = ({ children }) => {
         setamt:[selectedamt,setselectedamt],
         settype:[selectedtype,setselectedtype],
         setmode:[selectedmode,setselectedmode],
-        setmail:[mailid,setmailid]
+        setmail:[mailid,setmailid],
+        setloc:[loc,setloca]
       }
     }>
       {children}

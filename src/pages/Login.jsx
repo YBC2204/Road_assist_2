@@ -37,12 +37,12 @@ const Login = () => {
 
   return (
 
-    <div className="p-5 bg-slate-950 h-screen flex flex-col justify-center">
+    <div className="p-5 bg-slate-950 h- flex flex-col justify-center">
         <div className="flex justify-center">
            <img className="w-2/4" src={logo} />
            </div>
       <div
-        className="w-3/4 mx-auto bg-slate-200 bg-opacity-15 backdrop-blur-lg rounded-lg overflow-hidden shadow-lg p-8"
+        className="w-[80%] mx-auto bg-slate-200 bg-opacity-15 backdrop-blur-lg rounded-lg overflow-hidden shadow-lg py-6 px-4"
       >
         
 

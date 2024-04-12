@@ -10,14 +10,14 @@ import { useStatusContext } from '../Context/StatusContext';
 const Vehicle = () => {
 
    
-    const { showmod, selcar, selcol, plate, setplate, setdet , setcol, showamt, showfuel, setamt, settype,setmode,setmail } = useModalContext();
+    const { showmod, selcar, selcol, plate, setplate, setdet , setcol, showamt, showfuel, setamt, settype,setmode,setmail,setloc } = useModalContext();
     const {stat,logid} = useStatusContext();
     const [lid,setlid] = logid;
     const[detail,setDetails]=setdet
     const [mailid,setMailId] = setmail
     const[vehicles,setVehicles] = useState(null);
     const[fetcherr,setfetcherr] = useState(null);
-  
+    
   useEffect(()=> {
     const fetchIdFromLoginTrial = async () => {
       try {

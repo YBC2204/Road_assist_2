@@ -16,7 +16,7 @@ import { useStatusContext } from '../Context/StatusContext.jsx';
 
 const Test = () => {  
   const [currentLocation, setCurrentLocation] = useState("Current Location");
-  const { showmod, selcol, plate, showamt, showfuel,setmode, setmail } = useModalContext();
+  const { showmod, selcol, plate, showamt, showfuel,setmode, setmail,setloc } = useModalContext();
   const {stat,logid} = useStatusContext();
   const [lid,setlid] = logid;
   const [showModal, setShowModal] = showmod;
@@ -26,6 +26,7 @@ const Test = () => {
   const [showFuelType, setFuelTypeModal] = showfuel;
   const [mailid, setMailId] = setmail;
   const[selectedmode,setselectedmode]=setmode; 
+  const[loc,setloca]=setloc;
   
   const handleLocationClick = async () => {
     if (navigator.geolocation) {
@@ -47,6 +48,7 @@ const Test = () => {
             }
 
             setCurrentLocation(locationName);
+            setloca(locationName);
           } catch (error) {
             console.error('Error fetching location:', error);
             setCurrentLocation('Location data not available');
@@ -61,6 +63,7 @@ const Test = () => {
       console.error('Geolocation is not supported by your browser');
       setCurrentLocation('Geolocation not supported');
     }
+  
   };
   
 
@@ -119,7 +122,7 @@ const Test = () => {
 
 
   return (
-    <div className='w-full pb-5 bg-gradient-to-br from-gray-800  flex flex-col items-center '>
+    <div className=' w-full h-screen pb-5 bg-gradient-to-br from-gray-800  flex flex-col items-center '>
       <div className="flex justify-center pt-12">
         <button className="flex items-center bg-slate-300 px-6 py-4 rounded-xl font-['IBM Plex Sans Thai Looped'] text-black text-sm font-bold" onClick={handleLocationClick}>
           <PlaceIcon sx={{ fontSize: 25 }} />

@@ -1,14 +1,14 @@
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import supabase from '../helper/SupaClient';
 import { useStatusContext } from '../Context/StatusContext';
 import { useModalContext } from '../Context/Modalcon';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const Header = () => {
   const { showmod, selcar, selcol, plate, setplate, setdet, setcol, showamt, showfuel, setamt, settype, setmode, setmail, setloc, setusername } = useModalContext();
   const curLocation = useLocation().pathname;
-  const [loc, setLoc] = setloc
+  const [loc, setLoc] = setloc;
   const { stat } = useStatusContext();
   const [status, setStatus] = stat;
   const nav = useNavigate();
@@ -42,7 +42,8 @@ const Header = () => {
     }
 
     if (isLoggedIn) {
-      fetchUserData(); // Fetch user data if logged in
+      fetchUserData();
+      fetchUserData();  // Fetch user data if logged in
     } else {
       setUsername(''); // Reset username if logged out
       setName(''); // Reset name if logged out
@@ -71,6 +72,12 @@ const Header = () => {
     setRefreshCount(refreshCount + 1);
   };
 
+  // Refresh the header four times
+  useEffect(() => {
+    refreshHeaderTwice();
+    
+  }, []);
+
   return (
     <>
       {curLocation !== '/' && curLocation !== '/login' && (
@@ -84,12 +91,11 @@ const Header = () => {
             </div>
           </div>
           <div className="flex items-center">
-            <div className='text-slate-300'><AccountCircleIcon fontSize='large' /></div>
+            <div className='text-slate-300' onClick={() => nav('/editdet')}><AccountCircleIcon fontSize='large' /></div>
             <div className='p-2 '>
               <button className='border-slate-300 border-2 text-gray-300 bg-black px-3 py-2 rounded-xl font-semibold' onClick={handleLog}>
                 {isLoggedIn ? 'Logout' : 'Login'}
               </button>
-              
             </div>
           </div>
         </div>

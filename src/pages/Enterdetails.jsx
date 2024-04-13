@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import supabase from '../helper/SupaClient';
 import { useModalContext } from '../Context/Modalcon';
+import { useLocation, useNavigate } from 'react-router-dom';
 const isAadharValid = (aadharNumber) => {
     // Regular expression to match Aadhar number format
     const aadharRegex = /^\d{12}$/;
@@ -10,6 +11,7 @@ const isAadharValid = (aadharNumber) => {
 const EnterDetails = () => {
     const { showmod, selcar, selcol, plate, setplate, setdet, setcol, showamt, showfuel, setamt, settype, setmode, setmail,setloc,setusername } = useModalContext();
     const[name1,setname]=setusername;
+    const nav = useNavigate();
     const [ownerDetails, setOwnerDetails] = useState({
         name: '',
         phoneNumber: '',
@@ -89,6 +91,7 @@ const EnterDetails = () => {
                     id: '',
                     aadhar: ''
                 });
+                nav('/home');
             }
         } catch (error) {
             console.error('Error adding ownerDetails to Supabase:', error.message);

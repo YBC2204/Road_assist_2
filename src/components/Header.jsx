@@ -1,9 +1,9 @@
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import supabase from '../helper/SupaClient';
 import { useStatusContext } from '../Context/StatusContext';
 import { useModalContext } from '../Context/Modalcon';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const Header = () => {
 
@@ -12,8 +12,7 @@ const Header = () => {
 
 
   const curLocation = useLocation().pathname;
-  const [loc, setLoc] = setloc
-
+  const [loc, setLoc] = setloc;
   const { stat } = useStatusContext();
   const [status, setStatus] = stat;
   const nav = useNavigate();
@@ -48,7 +47,8 @@ const Header = () => {
     }
 
     if (isLoggedIn) {
-      fetchUserData(); // Fetch user data if logged in
+      fetchUserData();
+      fetchUserData();  // Fetch user data if logged in
     } else {
       setUsername(''); // Reset username if logged out
       setName(''); // Reset name if logged out
@@ -83,12 +83,6 @@ const Header = () => {
     setRefreshCount(refreshCount + 1);
   };
 
-  // Log status when it changes
-  useEffect(() => {
-    console.log(status);
-  }, [status]); // Only run when 'status' changes
-
-
   return (
     <>
       {curLocation !== '/' && curLocation !== '/login' && (
@@ -102,16 +96,12 @@ const Header = () => {
             </div>
           </div>
           <div className="flex items-center">
-
-            <div className='text-slate-300' onClick={() => nav('/profile')}>
-              <AccountCircleIcon fontSize='large'/>
-            </div>
+            <div className='text-slate-300' onClick={() => nav('/editdet')}><AccountCircleIcon fontSize='large' /></div>
             <div className='p-2 '>
               <button className=' border-slate-300 border-2 text-gray-300 bg-black px-3 py-2 rounded-xl font-semibold' onClick={handleLog}>
 
                 {isLoggedIn ? 'Logout' : 'Login'}
               </button>
-              
             </div>
           </div>
         </div>

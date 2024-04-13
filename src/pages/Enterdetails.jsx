@@ -8,8 +8,8 @@ const isAadharValid = (aadharNumber) => {
 };
 
 const EnterDetails = () => {
-    const { showmod, selcar, selcol, plate, setplate, setdet , setcol, showamt, showfuel, setamt, settype,setmode,setmail} = useModalContext();
-  
+    const { showmod, selcar, selcol, plate, setplate, setdet, setcol, showamt, showfuel, setamt, settype, setmode, setmail,setloc,setusername } = useModalContext();
+    const[name1,setname]=setusername;
     const [ownerDetails, setOwnerDetails] = useState({
         name: '',
         phoneNumber: '',
@@ -30,7 +30,8 @@ const EnterDetails = () => {
     };
 
     const handleSubmit = async (e) => {
-   
+      setname(ownerDetails.name);
+      console.log(name1);
         e.preventDefault();
         try {
             const isValidAadhar = isAadharValid(ownerDetails.aadhar);

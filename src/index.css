@@ -1,3 +1,41 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/*.vehicle-card {
+  width: 90%;
+
+  perspective: 1000px;
+
+
+  position: relative;
+}
+
+.vehicle-card.is-flipped .front {
+  transform: rotateY(180deg);
+}
+
+.vehicle-card.is-flipped .back {
+  transform: rotateY(0deg);
+}
+
+.vehicle-card .front,
+.vehicle-card .back {
+  width: 100%;
+  
+  position: absolute;
+  top: 0;
+  left: 0;
+  backface-visibility: hidden;
+  transition: transform 0.6s;
+}
+
+.vehicle-card .front {
+  z-index: 2;
+}
+
+.vehicle-card .back {
+  transform: rotateY(-180deg); 
+  z-index: 1;
+   
+*/

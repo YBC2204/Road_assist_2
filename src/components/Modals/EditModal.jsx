@@ -1,27 +1,27 @@
+/* eslint-disable react/prop-types */
+// EditModal.js
+
 import { Button, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { styled } from '@mui/material/styles';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import CloseIcon from '@mui/icons-material/Close';
-import { useModalContext } from '../../Context/Modalcon';
-import { useEffect, useState } from 'react';
+
+import { useState } from 'react';
 import supabase from '../../helper/SupaClient';
 import { useStatusContext } from '../../Context/StatusContext';
 
-const DetailModal = () => {
-  const { setdet, setmail } = useModalContext();
+const EditModal = ({ vehicleData, onClose }) => {
   const { logid } = useStatusContext();
   const [lid, setLid] = logid;
-  const [detail, setDetails] = setdet;
-  
 
-  const [vehicle, setVehicle] = useState('');
-  const [platenum, setPlate] = useState('');
-  const [color, setColor] = useState('');
-  const [type, setType] = useState('');
+  const [vehicle, setVehicle] = useState(vehicleData.name);
+  const [platenum, setPlate] = useState(vehicleData.plate);
+  const [color, setColor] = useState(vehicleData.color);
+  const [type, setType] = useState(vehicleData.type);
   const [formerror, setFormerror] = useState(null);
 
-  const handledone = async (e) => {
+  const handleEdit = async (e) => {
     e.preventDefault();
 
     if (!vehicle || !platenum || !type || !color) {
@@ -30,30 +30,26 @@ const DetailModal = () => {
     }
 
     try {
-      const { data, error } = await supabase.from('Vehicle_det').insert([
-        {
-          user_id: lid,
-          vehicle_name :vehicle,
-          plate_num: platenum,
-          color: color,
-          fuel_type:type,
-          // Assuming lid holds the user_id
-        },
-      ]).select();
+      const { data, error } = await supabase.from('Vehicle_det').update({
+        vehicle_name: vehicle,
+        plate_num: platenum,
+        color: color,
+        fuel_type: type,
+      }).eq('user_id', lid).select().eq('plate_num', platenum);
 
       if (error) {
         console.error(error);
-        setFormerror('Please fill in fields correctly');
+        setFormerror('Error updating entry');
       }
 
       if (data) {
         console.log(data);
         setFormerror(null);
-        setDetails(false);
+        onClose();
       }
     } catch (error) {
-      console.error('Error inserting data:', error.message);
-      setFormerror('Error inserting data');
+      console.error('Error updating data:', error.message);
+      setFormerror('Error updating data');
     }
   };
 
@@ -70,9 +66,9 @@ const DetailModal = () => {
   });
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center">
-      <div className='pt-5 bg-neutral-300 w-[85%] rounded-lg relative px-4'>
-        <div className='absolute top-2 left-1 text-black' onClick={() => setDetails(false)}>
+    <div className="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-10">
+      <div className='pt-5 bg-neutral-300 w-[85%] rounded-lg relative px-4 '>
+        <div className='absolute top-2 left-1 text-black' onClick={onClose}>
           <CloseIcon />
         </div>
         <div className='flex flex-col px-3 py-5 gap-4 mt-2 '>
@@ -111,8 +107,8 @@ const DetailModal = () => {
           </Button>
           <div className='flex justify-center w-full mt-2'>
             <button className='text-black flex items-center px-3 py-2 text-lg rounded-xl border border-black active:bg-white font-semibold '
-              onClick={handledone}>
-              DONE
+              onClick={handleEdit}>
+              SAVE CHANGES
               <ThumbUpIcon className='ml-2' />
             </button>
           </div>
@@ -126,4 +122,4 @@ const DetailModal = () => {
   );
 }
 
-export default DetailModal;
+export default EditModal;

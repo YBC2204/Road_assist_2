@@ -6,7 +6,11 @@ import { useModalContext } from '../Context/Modalcon';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const Header = () => {
+
   const { showmod, selcar, selcol, plate, setplate, setdet, setcol, showamt, showfuel, setamt, settype, setmode, setmail, setloc, setusername } = useModalContext();
+
+
+
   const curLocation = useLocation().pathname;
   const [loc, setLoc] = setloc;
   const { stat } = useStatusContext();
@@ -15,6 +19,7 @@ const Header = () => {
 
   const isLoggedIn = status === 'SIGNED_IN';
   const [mailid, setMailId] = setmail;
+
   const [selectedmode, setSelectedMode] = setmode;
   const [username, setUsername] = useState(''); // State to store the username
   const [name, setName] = setusername;
@@ -50,17 +55,23 @@ const Header = () => {
     }
   }, [isLoggedIn, mailid, refreshCount]); // Fetch user data when login status, mailid, or refreshCount changes
 
+
   async function signOut() {
     const { error } = await supabase.auth.signOut();
     setMailId(null);
+
     setUsername(''); // Reset username on logout
+
     setName(''); // Reset name on logout
+
     nav("/");
   }
 
   const handleLog = () => {
     if (isLoggedIn) {
-      signOut();
+
+      signOut(); 
+
     } else {
       nav('/login');
     }
@@ -71,12 +82,6 @@ const Header = () => {
     setRefreshCount(refreshCount + 1);
     setRefreshCount(refreshCount + 1);
   };
-
-  // Refresh the header four times
-  useEffect(() => {
-    refreshHeaderTwice();
-    
-  }, []);
 
   return (
     <>
@@ -93,7 +98,8 @@ const Header = () => {
           <div className="flex items-center">
             <div className='text-slate-300' onClick={() => nav('/editdet')}><AccountCircleIcon fontSize='large' /></div>
             <div className='p-2 '>
-              <button className='border-slate-300 border-2 text-gray-300 bg-black px-3 py-2 rounded-xl font-semibold' onClick={handleLog}>
+              <button className=' border-slate-300 border-2 text-gray-300 bg-black px-3 py-2 rounded-xl font-semibold' onClick={handleLog}>
+
                 {isLoggedIn ? 'Logout' : 'Login'}
               </button>
             </div>

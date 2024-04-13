@@ -43,7 +43,7 @@ const Test = () => {
               throw new Error('Failed to fetch location data');
             }
             const data = await response.json();
-
+console.log(data);
             let locationName = data.address.suburb || data.address.city || data.address.town;
             if (!locationName) {
               throw new Error('Location data not available');

@@ -93,13 +93,13 @@ const FuelType = () => {
     };
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-            <div className="w-3/4 pb-16 bg-white rounded-[20px] flex flex-col items-center">
+        <div className="fixed inset-x-0 bottom-0 bg-black bg-opacity-50 flex justify-center items-end pb-10">
+          <div className="w-[90%] h-[300px] bg-white rounded-t-[20px] rounded-b-none flex flex-col items-center">
                 <div className='flex mt-5 mb-2 px-2 w-full'>
                     <button className="text-gray-600" onClick={() => { setFuelTypeModal(false); setAmtModal(true); }}>
                         <ArrowBack />
                     </button>
-                    <div className="h-8 text-black text-md font-bold uppercase pt-1 w-full text-center pr-4">Select Fuel Type :</div>
+                    <div className="h-8 text-black text-md font-bold  pt-1 w-full text-center pr-4">Select Fuel Type :</div>
                 </div>
                 <div className='mt-10 px-3 flex flex-col gap-4 text-lg'>
                     <button onClick={() => handleConfirmType("Petrol")} className='bg-neutral-300 px-10 py-3 rounded-xl font-semibold '>Petrol</button>

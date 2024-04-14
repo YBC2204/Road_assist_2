@@ -13,10 +13,10 @@ const Header = () => {
 
   const curLocation = useLocation().pathname;
   const [loc, setLoc] = setloc;
-  const { stat } = useStatusContext();
+  const { stat,logid,user } = useStatusContext();
   const [status, setStatus] = stat;
   const nav = useNavigate();
-
+  const[name1,setname]=user;
   const isLoggedIn = status === 'SIGNED_IN';
   const [mailid, setMailId] = setmail;
 
@@ -26,7 +26,7 @@ const Header = () => {
   const [refreshCount, setRefreshCount] = useState(0);
 
   useEffect(() => {
-    console.log(loc);
+    console.log(name1);
     async function fetchUserData() {
       try {
         const { data, error } = await supabase
@@ -89,7 +89,7 @@ const Header = () => {
         <div className='flex bg-black justify-between'>
           <div className='flex flex-col p-3'>
           <div className="text-gray-300 font-bold text-md" onClick={() =>nav('/profile')}>
-    <p>{isLoggedIn && username ? `Hello, ${username}` : name ? `Hello, ${name}` : 'Add Your Profile'}</p>
+    <p>{isLoggedIn? `Hello, ${name1.split(' ')[0]}` :  'Add Your Profile'}</p>
 </div>
 
             <div className="text-gray-500 text-sm font-semibold">

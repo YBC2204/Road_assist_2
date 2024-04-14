@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import car from '../assets/car_def.png';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import supabase from '../helper/SupaClient';
 import EditModal from './Modals/EditModal';
 import LocalGasStationIcon from '@mui/icons-material/LocalGasStation';
@@ -12,8 +12,8 @@ const Vehiclecard = ({ id, name, plate, color, type }) => {
   console.log(id);
   const [editModalOpen, setEditModalOpen] = useState(false);
   
-
-
+ 
+ 
   const deleteEntry = async () => {
     try {
       const { error } = await supabase.from('Vehicle_det').delete().eq('user_id', id).eq('plate_num', plate); 
@@ -86,4 +86,4 @@ export default Vehiclecard;
 //         <button className='bg-[#E3FEF7] rounded-xl py-3 mx-5 font-semibold '>
 //         <BuildIcon />
 //     <p className='px-5'>Workshop Service</p>
-//         </button>
+//         </button>    

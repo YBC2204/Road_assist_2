@@ -23,7 +23,7 @@ const EnterDetails = () => {
     });
 
     const handleInputChange = (e) => {
-        
+      
         const { name, value } = e.target;
         setOwnerDetails((prevDetails) => ({
             ...prevDetails,
@@ -32,8 +32,7 @@ const EnterDetails = () => {
     };
 
     const handleSubmit = async (e) => {
-      setname(ownerDetails.name);
-      console.log(name1);
+    
         e.preventDefault();
         try {
             const isValidAadhar = isAadharValid(ownerDetails.aadhar);
@@ -78,6 +77,7 @@ const EnterDetails = () => {
             if (userError) {
                 console.error('Error adding ownerDetails to Supabase:', userError.message);
             } else {
+               
                 console.log('OwnerDetails added to Supabase:', userData);
                 // Show popup saying "Form submitted"
                 alert('Form submitted');

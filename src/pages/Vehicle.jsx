@@ -76,11 +76,14 @@ const Vehicle = () => {
 
 
 
-    <div className='bg-gradient-to-br from-gray-800'>
+    <div className='relative bg-gradient-to-br from-gray-800'>
 
 
     <div className='flex flex-col h-[85vh] gap-2 items-center overflow-y-scroll'>
-        <button className='bg-slate-300  mt-4 flex gap-2 items-center text-black font-semibold text-xl border-2 border-[#E3FEF7] rounded-xl px-3 py-2  active:bg-gray-500 active:text-white ' onClick={()=>setDetails(true)}>ADD A VEHICLE <AddCircleIcon/></button>
+    <button className='absolute bottom-10 right-8 mt-4 bg-slate-900 flex gap-2 items-center border-2 text-slate-200 border-[#000403] rounded-xl px-2 py-3' onClick={()=>setDetails(true)}>
+  <AddCircleIcon style={{ fontSize: '2.5rem' }} /> {/* Adjust fontSize to increase the size */}
+</button>
+
        {detail && <DetailModal/>}
        
        {

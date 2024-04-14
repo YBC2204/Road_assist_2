@@ -1,23 +1,29 @@
-/* eslint-disable no-unused-vars */
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import supabase from '../helper/SupaClient';
 import { useStatusContext } from '../Context/StatusContext';
 import { useModalContext } from '../Context/Modalcon';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const Header = () => {
-  const { showmod, selcar, selcol, plate, setplate, setdet, setcol, showamt, showfuel, setamt, settype, setmode, setmail,setloc } = useModalContext();
+
+  const { showmod, selcar, selcol, plate, setplate, setdet, setcol, showamt, showfuel, setamt, settype, setmode, setmail, setloc, setusername } = useModalContext();
+
+
+
   const curLocation = useLocation().pathname;
-  const [loc, setLoc] = setloc
+  const [loc, setLoc] = setloc;
   const { stat } = useStatusContext();
   const [status, setStatus] = stat;
   const nav = useNavigate();
 
   const isLoggedIn = status === 'SIGNED_IN';
   const [mailid, setMailId] = setmail;
+
   const [selectedmode, setSelectedMode] = setmode;
   const [username, setUsername] = useState(''); // State to store the username
+  const [name, setName] = setusername;
+  const [refreshCount, setRefreshCount] = useState(0);
 
   useEffect(() => {
     console.log(loc);
@@ -33,33 +39,49 @@ const Header = () => {
         }
         if (data) {
           setUsername(data.username); // Set the username if found
+          setName(data.username); // Also set the username to update the UI
         }
       } catch (error) {
         console.error('Error fetching user data:', error.message);
       }
     }
 
-    if (loc==1||0) {
-      fetchUserData(); // Fetch user data if logged in
+    if (isLoggedIn) {
+      fetchUserData();
+      fetchUserData();  // Fetch user data if logged in
     } else {
       setUsername(''); // Reset username if logged out
+      setName(''); // Reset name if logged out
     }
-  }, [isLoggedIn, mailid]); // Fetch user data when login status or mailid changes
+  }, [isLoggedIn, mailid, refreshCount]); // Fetch user data when login status, mailid, or refreshCount changes
+
 
   async function signOut() {
     const { error } = await supabase.auth.signOut();
     setMailId(null);
+
     setUsername(''); // Reset username on logout
+
+    setName(''); // Reset name on logout
+
     nav("/");
   }
 
   const handleLog = () => {
     if (isLoggedIn) {
-      signOut();
+
+      signOut(); 
+
     } else {
       nav('/login');
     }
   }
+
+  // Function to refresh the header twice
+  const refreshHeaderTwice = () => {
+    setRefreshCount(refreshCount + 1);
+    setRefreshCount(refreshCount + 1);
+  };
 
   return (
     <>
@@ -67,16 +89,17 @@ const Header = () => {
         <div className='flex bg-black justify-between'>
           <div className='flex flex-col p-3'>
             <div className="text-gray-300 font-bold text-md" onClick={() => nav('/profile')}>
-              <p>{isLoggedIn && username ? `Hello, ${username}` : 'Add Your Profile'}</p>
+              <p>{isLoggedIn && username ? `Hello, ${username}` : name ? `Hello, ${name}` : 'Add Your Profile'}</p>
             </div>
             <div className="text-gray-500 text-sm font-semibold">
               <p>{selectedmode}</p>
             </div>
           </div>
           <div className="flex items-center">
-            <div className='text-slate-300'><AccountCircleIcon fontSize='large' /></div>
+            <div className='text-slate-300' onClick={() => nav('/editdet')}><AccountCircleIcon fontSize='large' /></div>
             <div className='p-2 '>
-              <button className='border-slate-300 border-2 text-gray-300 bg-black px-3 py-2 rounded-xl font-semibold' onClick={handleLog}>
+              <button className=' border-slate-300 border-2 text-gray-300 bg-black px-3 py-2 rounded-xl font-semibold' onClick={handleLog}>
+
                 {isLoggedIn ? 'Logout' : 'Login'}
               </button>
             </div>

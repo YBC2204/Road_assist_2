@@ -16,11 +16,13 @@ export const StatusProvider = ({children}) =>{
 
     const[status,setStatus]=useState('SIGNED_OUT');
     const[lid,setlid] =useState(null);
+    const[name1,setname]=useState(null);
     return(
         <StatusContext.Provider value={
             {
                 stat:[status,setStatus],
-                logid:[lid,setlid]
+                logid:[lid,setlid],
+                user:[name1,setname]
             }
         }>
             {children}

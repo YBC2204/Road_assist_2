@@ -88,9 +88,10 @@ const Header = () => {
       {curLocation !== '/' && curLocation !== '/login' && (
         <div className='flex bg-black justify-between'>
           <div className='flex flex-col p-3'>
-            <div className="text-gray-300 font-bold text-md" onClick={() => nav('/profile')}>
-              <p>{isLoggedIn && username ? `Hello, ${username}` : name ? `Hello, ${name}` : 'Add Your Profile'}</p>
-            </div>
+          <div className="text-gray-300 font-bold text-md" onClick={() =>nav('/profile')}>
+    <p>{isLoggedIn && username ? `Hello, ${username}` : name ? `Hello, ${name}` : 'Add Your Profile'}</p>
+</div>
+
             <div className="text-gray-500 text-sm font-semibold">
               <p>{selectedmode}</p>
             </div>

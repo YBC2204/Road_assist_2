@@ -40,7 +40,7 @@ const Vehiclecard = ({ id, name, plate, color, type }) => {
   };
 
   return (
-     <div className='text-black w-[90%] bg-slate-300 flex flex-col py-4 px-5 gap-3 rounded-[22px] my-3' >
+     <div className='text-black w-[90%] bg-slate-200 flex flex-col py-4 px-5 gap-3 rounded-[22px] my-3' >
    
       
      <div className='flex flex-row gap-2'>

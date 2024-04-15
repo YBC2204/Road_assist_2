@@ -27,7 +27,7 @@ const Test = () => {
   const [mailid, setMailId] = setmail;
   const[selectedmode,setselectedmode]=setmode; 
   const[loc,setloca]=setloc;
-  
+  const [locationClicked, setLocationClicked] = useState(false); 
   const [status, setStatus] = stat;
   const isLoggedIn = status === 'SIGNED_IN';
   const handleLocationClick = async () => {
@@ -47,6 +47,7 @@ console.log(data);
             let locationName = data.address.suburb || data.address.city || data.address.town;
             if (!locationName) {
               throw new Error('Location data not available');
+              
             }
 
             setCurrentLocation(locationName);
@@ -54,18 +55,21 @@ console.log(data);
           } catch (error) {
             console.error('Error fetching location:', error);
             setCurrentLocation('Location data not available');
+            setLocationClicked(false);
           }
         },
         (error) => {
           console.error('Error getting location:', error);
           setCurrentLocation('Location access denied');
+          setLocationClicked(false);
         }
       );
     } else {
       console.error('Geolocation is not supported by your browser');
       setCurrentLocation('Geolocation not supported');
+      setLocationClicked(false);
     }
-  
+    setLocationClicked(true);
   };
   
 
@@ -111,8 +115,14 @@ console.log(data);
 
 // };
 const handleClick=()=>{
-  if(isLoggedIn)
+  if(isLoggedIn && locationClicked)
   setShowModal(true);
+ else{
+  if(!isLoggedIn)
+   alert('Login to continue');
+  else
+  alert('Click Current Location to continue');
+ }
 }
   
   React.useEffect(() => {

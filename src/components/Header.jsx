@@ -13,10 +13,10 @@ const Header = () => {
 
   const curLocation = useLocation().pathname;
   const [loc, setLoc] = setloc;
-  const { stat } = useStatusContext();
+  const { stat,logid,user } = useStatusContext();
   const [status, setStatus] = stat;
   const nav = useNavigate();
-
+  const[name1,setname]=user;
   const isLoggedIn = status === 'SIGNED_IN';
   const [mailid, setMailId] = setmail;
 
@@ -63,7 +63,7 @@ const Header = () => {
     setUsername(''); // Reset username on logout
 
     setName(''); // Reset name on logout
-
+    setname(null);
     nav("/");
   }
 
@@ -88,9 +88,10 @@ const Header = () => {
       {curLocation !== '/' && curLocation !== '/login' && (
         <div className='flex bg-black justify-between'>
           <div className='flex flex-col p-3'>
-            <div className="text-gray-300 font-bold text-md" onClick={() => nav('/profile')}>
-              <p>{isLoggedIn && username ? `Hello, ${username}` : name ? `Hello, ${name}` : 'Add Your Profile'}</p>
-            </div>
+          <div className="text-gray-300 font-bold text-md" onClick={() =>nav('/profile')}>
+          <p>{isLoggedIn && name1 ? `Hello, ${name1.split(' ')[0]}` : username ? `Hello, ${username.split(' ')[0]}` : 'Add Your Profile'}</p>
+</div>
+
             <div className="text-gray-500 text-sm font-semibold">
               <p>{selectedmode}</p>
             </div>

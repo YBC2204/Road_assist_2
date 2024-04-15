@@ -71,8 +71,10 @@ const DetailModal = () => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center">
-      <div className='pt-5 bg-neutral-300 w-[85%] rounded-lg relative px-4'>
-        <div className='absolute top-2 left-1 text-black' onClick={() => setDetails(false)}>
+     
+      <div className='pt-5 bg-slate-300 w-[85%] rounded-lg relative px-4'>
+      <p class="text-center font-bold text-lg uppercase">Vehicle Details</p>
+        <div className='absolute top-3 right-6 text-black' onClick={() => setDetails(false)}>
           <CloseIcon />
         </div>
         <div className='flex flex-col px-3 py-5 gap-4 mt-2 '>

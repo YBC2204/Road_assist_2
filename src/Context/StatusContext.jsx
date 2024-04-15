@@ -18,13 +18,15 @@ export const StatusProvider = ({children}) =>{
     const[lid,setlid] =useState(null);
     const[name1,setname]=useState(null);
     const [submitStatus, setSubmitStatus] =useState(null);
+    const[name2,setname2]=useState(null);
     return(
         <StatusContext.Provider value={
             {
                 stat:[status,setStatus],
                 logid:[lid,setlid],
                 user:[name1,setname],
-                submit:[submitStatus, setSubmitStatus]
+                submit:[submitStatus, setSubmitStatus],
+                user2:[name2,setname2]
             }
         }>
             {children}

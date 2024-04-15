@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import supabase from '../helper/SupaClient';
-import { useModalContext } from '../Context/Modalcon';
+import { useModalContext} from '../Context/Modalcon';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useStatusContext } from '../Context/StatusContext';
+
 const isAadharValid = (aadharNumber) => {
     // Regular expression to match Aadhar number format
     const aadharRegex = /^\d{12}$/;
@@ -10,7 +12,10 @@ const isAadharValid = (aadharNumber) => {
 
 const EnterDetails = () => {
     const { showmod, selcar, selcol, plate, setplate, setdet, setcol, showamt, showfuel, setamt, settype, setmode, setmail,setloc,setusername } = useModalContext();
-    const[name1,setname]=setusername;
+    const[name2,setuser]=setusername;
+    const{stat,logid,user}=useStatusContext();
+    const[name1,setname]=user;
+    const [submitStatus, setSubmitStatus] = useState(null);
     const nav = useNavigate();
     const [ownerDetails, setOwnerDetails] = useState({
         name: '',
@@ -21,7 +26,18 @@ const EnterDetails = () => {
         id: '',
         aadhar: ''
     });
-
+    useEffect(() => {
+        console.log(submitStatus)
+        if (submitStatus === null) {
+            setname(ownerDetails.name);
+        }
+        if (submitStatus === false) {
+            nav('/home');
+            
+            setname('');
+            setSubmitStatus(null);
+        }
+    }, [submitStatus, ownerDetails.name]);
     const handleInputChange = (e) => {
       
         const { name, value } = e.target;
@@ -38,6 +54,7 @@ const EnterDetails = () => {
             const isValidAadhar = isAadharValid(ownerDetails.aadhar);
             if (!isValidAadhar) {
                 console.error('Invalid Aadhar number');
+                setSubmitStatus(false);
                 alert("Aadhar is not valid");
                 return;
             }
@@ -52,11 +69,13 @@ const EnterDetails = () => {
             if (loginTrialError) {
                 console.error('Error fetching login trial data:', loginTrialError.message);
                 return;
+               
             }
 
             if (!loginTrialData) {
                 console.error('No login trial data found for the provided email.');
                 return;
+               
             }
 
             const loginTrialId = loginTrialData.id;
@@ -76,6 +95,8 @@ const EnterDetails = () => {
 
             if (userError) {
                 console.error('Error adding ownerDetails to Supabase:', userError.message);
+                alert('Form not submitted');
+                setSubmitStatus(false);
             } else {
                
                 console.log('OwnerDetails added to Supabase:', userData);
@@ -95,6 +116,7 @@ const EnterDetails = () => {
             }
         } catch (error) {
             console.error('Error adding ownerDetails to Supabase:', error.message);
+            setSubmitStatus(false);
         }
     };
 

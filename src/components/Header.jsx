@@ -9,8 +9,6 @@ const Header = () => {
 
   const { showmod, selcar, selcol, plate, setplate, setdet, setcol, showamt, showfuel, setamt, settype, setmode, setmail, setloc, setusername } = useModalContext();
 
-
-
   const curLocation = useLocation().pathname;
   const [loc, setLoc] = setloc;
   const { stat,logid,user } = useStatusContext();
@@ -24,7 +22,7 @@ const Header = () => {
   const [username, setUsername] = useState(''); // State to store the username
   const [name, setName] = setusername;
   const [refreshCount, setRefreshCount] = useState(0);
-
+  
   useEffect(() => {
     console.log(loc);
     async function fetchUserData() {
@@ -43,6 +41,7 @@ const Header = () => {
         }
       } catch (error) {
         console.error('Error fetching user data:', error.message);
+
       }
     }
 
@@ -55,6 +54,10 @@ const Header = () => {
     }
   }, [isLoggedIn, mailid, refreshCount]); // Fetch user data when login status, mailid, or refreshCount changes
 
+  useEffect(() => {
+    // Call the refreshHeaderTwice function when the component mounts
+    refreshHeaderTwice();
+  }, []); // Empty dependency array to run once when component mounts
 
   async function signOut() {
     const { error } = await supabase.auth.signOut();
@@ -76,7 +79,7 @@ const Header = () => {
       nav('/login');
     }
   }
-
+  
   // Function to refresh the header twice
   const refreshHeaderTwice = () => {
     setRefreshCount(refreshCount + 1);
@@ -88,9 +91,9 @@ const Header = () => {
       {curLocation !== '/' && curLocation !== '/login' && (
         <div className='flex bg-black justify-between'>
           <div className='flex flex-col p-3'>
-          <div className="text-gray-300 font-bold text-md" onClick={() =>nav('/profile')}>
-          <p>{isLoggedIn && name1 ? `Hello, ${name1.split(' ')[0]}` : username ? `Hello, ${username.split(' ')[0]}` : 'Add Your Profile'}</p>
-</div>
+            <div className="text-gray-300 font-bold text-md" onClick={() =>nav('/profile')}>
+              <p>{isLoggedIn && name1 ? `Hello, ${name1.split(' ')[0]}` : username ? `Hello, ${username.split(' ')[0]}` : 'Add Your Profile'}</p>
+            </div>
 
             <div className="text-gray-500 text-sm font-semibold">
               <p>{selectedmode}</p>

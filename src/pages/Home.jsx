@@ -28,6 +28,8 @@ const Test = () => {
   const[selectedmode,setselectedmode]=setmode; 
   const[loc,setloca]=setloc;
   
+  const [status, setStatus] = stat;
+  const isLoggedIn = status === 'SIGNED_IN';
   const handleLocationClick = async () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -108,7 +110,10 @@ console.log(data);
 //     }
 
 // };
-
+const handleClick=()=>{
+  if(isLoggedIn)
+  setShowModal(true);
+}
   
   React.useEffect(() => {
     addMailIdToSupabase();
@@ -141,11 +146,11 @@ console.log(data);
         </div>
       </div>
       <div className='flex flex-col items-center  text-black text-lg font-bold mt-8 gap-6 pb-5'>
-  <button onClick={() => setShowModal(true)} className='flex bg-slate-300 p-4 rounded-2xl w-64 text-center'>
+  <button onClick={handleClick} className='flex bg-slate-300 p-4 rounded-2xl w-64 text-center'>
     <LocalGasStationIcon />
     <p className='px-8'>Fuel Delivery</p>
   </button>
-  <button onClick={() => setShowModal(true)} className='flex bg-slate-300 p-4 rounded-2xl w-64 text-center'>
+  <button onClick={handleClick} className='flex bg-slate-300 p-4 rounded-2xl w-64 text-center'>
     <BuildIcon />
     <p className='px-5'>Workshop Service</p>
   </button>

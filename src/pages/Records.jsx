@@ -24,7 +24,9 @@ function Records() {
         {showService && <Service onCancel={handleCancelService} />}
       </div> */}
     </div>
+   
   );
+  
 }
 
 export default Records;

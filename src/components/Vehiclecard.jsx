@@ -5,6 +5,7 @@ import supabase from '../helper/SupaClient';
 import EditModal from './Modals/EditModal';
 import LocalGasStationIcon from '@mui/icons-material/LocalGasStation';
 import BuildIcon from '@mui/icons-material/Build';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const Vehiclecard = ({ id, name, plate, color, type }) => {
@@ -12,7 +13,7 @@ const Vehiclecard = ({ id, name, plate, color, type }) => {
   console.log(id);
   const [editModalOpen, setEditModalOpen] = useState(false);
   
-
+const nav = useNavigate();
 
   const deleteEntry = async () => {
     try {
@@ -31,13 +32,9 @@ const Vehiclecard = ({ id, name, plate, color, type }) => {
     }
   };
 
-  const openEditModal = () => {
-    setEditModalOpen(true);
-  };
+  
 
-  const closeEditModal = () => {
-    setEditModalOpen(false);
-  };
+  
 
   return (
      <div className='text-black w-[90%] bg-slate-300 flex flex-col py-4 px-5 gap-3 rounded-[22px] my-3' >
@@ -58,8 +55,8 @@ const Vehiclecard = ({ id, name, plate, color, type }) => {
       </div>
       <div className='h-[1px] bg-black'></div>
       <div className='flex w-full font-semibold'>
-        <button className='uppercase w-1/2 bg-gray-700 text-blue-400 rounded-s-lg p-[6px] border-r border-black' onClick={openEditModal}>edit entry</button>
-        <button className='uppercase w-1/2 bg-gray-700 text-red-600 rounded-e-lg p-[6px]' onClick={deleteEntry}>delete entry</button>
+     <Link className=' w-1/2 bg-gray-700 text-blue-400 rounded-s-lg p-[6px] border-r border-black text-center'> EDIT ENTRY</Link> 
+      <Link className='uppercase w-1/2 bg-gray-700 text-red-600 rounded-e-lg p-[6px]' >delete entry</Link>
       </div>
 
     {deleteError && (
@@ -69,7 +66,7 @@ const Vehiclecard = ({ id, name, plate, color, type }) => {
       {editModalOpen && (
         <EditModal
           vehicleData={{ name, plate, color, type }} // Pass the current vehicle's data
-          onClose={closeEditModal}
+          onClose={()=>nav('/vehicle')}
         />
       )}
     </div>

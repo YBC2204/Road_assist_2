@@ -26,7 +26,7 @@ const Footer = () => {
   }
 
   return (
-    <div className='fixed bottom-0 left-0 right-0 bg-black'>
+    <div className='bg-black'>
       <div className='flex w-full text-gray-500 justify-around font-semibold py-2 text-center'>
         <div className={curLocation === '/home' ? style : ''}>
           <button onClick={() => handleNavigate('/home')}>

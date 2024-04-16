@@ -12,7 +12,7 @@ function Records() {
   return (
 
 
-    <div className=' bg-gradient-to-br from-gray-800 flex flex-col'>
+    <div className=' bg-gradient-to-br from-gray-800 flex flex-col h-[85vh]'>
       
       <div className='flex bg-black mt-6 mx-8 py-1 rounded-lg border border-black border-opacity-50 font-semibold text-gray-500'>
         <button className='w-1/2 border-r-2 border-r-gray-500 focus:text-white' onClick={()=>{setState('upcoming')}}>UPCOMING</button>
@@ -20,9 +20,9 @@ function Records() {
       </div>
       
 
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '10vh' }}>
+      {/* <div className="flex justify-center items-center">
         {showService && <Service onCancel={handleCancelService} />}
-      </div>
+      </div> */}
     </div>
    
   );

@@ -11,11 +11,16 @@ import FuelAmount from "./components/Modals/FuelAmount";
 import Vehicle from "./pages/Vehicle";
 
 import Enterdetails from "./pages/Enterdetails";
+
+import EditModal from "./components/Modals/EditModal";
+
+
 import EditDetails from "./pages/Editdetails";
+
 
 function App() {
   return (
-    <div className="min-h-screen w-fullflex flex-col bg-black font-source">
+    <div className="min-h-screen w-full flex flex-col bg-black font-source">
       <BrowserRouter>
         <Header/>
         <Routes>
@@ -27,7 +32,11 @@ function App() {
           <Route path='/records' element={<Records />} />
           <Route path='/nearpumps' element={<Nearby />} />
           <Route path='/profile' element={<Enterdetails />} />
+
+          <Route path='/vehicles/edit' element={<EditModal/>}/>
+
           <Route path='/editdet' element={<EditDetails />} />
+
         </Routes>
        <Footer/>
       </BrowserRouter>

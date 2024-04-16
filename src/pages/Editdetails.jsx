@@ -79,6 +79,7 @@ const EditDetails = () => {
             if (!isValidAadhar) {
                 console.error('Invalid Aadhar number');
                 alert("Aadhar is not valid");
+                setSubmitStatus(false);
                 return;
             }
 

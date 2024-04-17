@@ -15,8 +15,9 @@ const Vehicle = () => {
     const [lid,setlid] = logid;
     const[detail,setDetails]=setdet
     const [mailid,setMailId] = setmail
-    const[vehicles,setVehicles] = useState(null);
+    const[vehicles,setVehicles] = useState([]);
     const[fetcherr,setfetcherr] = useState(null);
+    
     
   useEffect(()=> {
     const fetchIdFromLoginTrial = async () => {
@@ -68,6 +69,7 @@ const Vehicle = () => {
       }
     }
   fetchVehicles()
+  
   },[])
   
 
@@ -89,8 +91,9 @@ const Vehicle = () => {
        {
         fetcherr && (<p>{fetcherr}</p>)
        }
+       
        {
-        vehicles && (
+        vehicles && vehicles.length>0 ? (
           <div className='w-full flex flex-col items-center'>
           {vehicles.map(vehicle =>(
             <Vehiclecard key={vehicle.user_id} id={vehicle.user_id} name={vehicle.vehicle_name}
@@ -99,7 +102,8 @@ const Vehicle = () => {
           ))
           }
           </div>
-       )}
+       ):<p className='text-slate-300 mt-10 text-2xl'>No Entries Present</p>
+       }
     </div>
     
     </div>

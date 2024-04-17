@@ -17,7 +17,7 @@ import { useStatusContext } from '../Context/StatusContext.jsx';
 const Test = () => {  
   const [currentLocation, setCurrentLocation] = useState("Current Location");
   const { showmod, selcol, plate, showamt, showfuel,setmode, setmail,setloc } = useModalContext();
-  const {stat,logid} = useStatusContext();
+  const {stat,logid , locclick} = useStatusContext();
   const [lid,setlid] = logid;
   const [showModal, setShowModal] = showmod;
   const [showColorModal, setShowColorModal] = selcol;
@@ -27,7 +27,7 @@ const Test = () => {
   const [mailid, setMailId] = setmail;
   const[selectedmode,setselectedmode]=setmode; 
   const[loc,setloca]=setloc;
-  const [locationClicked, setLocationClicked] = useState(false); 
+  const [locationClicked, setLocationClicked] = locclick; 
   const [status, setStatus] = stat;
   const isLoggedIn = status === 'SIGNED_IN';
   const handleLocationClick = async () => {

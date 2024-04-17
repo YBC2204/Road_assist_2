@@ -2,6 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+/* 
+.flip {
+  transition: transform 1s;
+}
+
+.flip.rotate {
+  transform: rotateY(180deg);
+}
+
+.slide-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1.5s, transform 1.5s;
+}
+
+.slide-in.show {
+  opacity: 1;
+  transform: translateY(0);
+} */
+
 /*.vehicle-card {
   width: 90%;
 

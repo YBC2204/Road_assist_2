@@ -7,9 +7,15 @@ import LocalGasStationIcon from '@mui/icons-material/LocalGasStation';
 import BuildIcon from '@mui/icons-material/Build';
 import { ArrowBack } from '@mui/icons-material';
 import { useModalContext } from '../Context/Modalcon';
+import { useStatusContext } from '../Context/StatusContext';
+import { useNavigate } from 'react-router-dom';
 
 const Vehiclecard = ({ id, name, plate, color, type }) => {
-   
+  const {long,lat} = useStatusContext();
+  const nav = useNavigate();
+ 
+  const [longitud,setlong]=long;
+  const [latitud,setlat]=lat;
   const [deleteError, setDeleteError] = useState(null);
   console.log(id);
   const [editModalOpen, setEditModalOpen] = useState(false);
@@ -17,7 +23,7 @@ const Vehiclecard = ({ id, name, plate, color, type }) => {
   const [fuelmodal,setfuelModal] = useState(false);
   const [selectedamt,setSelectedamt] = useState('');
   const [error,setError] = useState('');
-
+ setLocationClicked(true);
   const {setloc} = useModalContext();
 
   const[loc,setloca] = setloc;
@@ -48,7 +54,17 @@ const Vehiclecard = ({ id, name, plate, color, type }) => {
   };
 console.log(service);
 console.log(loc);
+const handleService = async () => {
+  if(loc!=1)
+ setService(true);
+else
+{
+  alert("Choose current location");
+  nav('/home');
+}
 
+ 
+};
 
 const handleConfirmAmt = async () => {
   if (selectedamt.trim() === "") {
@@ -66,7 +82,9 @@ const handleConfirmAmt = async () => {
       Fuel_type: type,
       user_id: id,
       Fuel_amt:selectedamt,
-      Location:loc
+      Location:loc,
+      Latitude:latitud,
+                        Longitude:longitud
     }
   ]);
 
@@ -110,7 +128,7 @@ const handleConfirmAmt = async () => {
         <div className='flex justify-center -mb-2'>
           <button
             className={`bg-black text-white font-semibold px-3 py-2 rounded-md `}
-            onClick={() => setService(true)}
+            onClick={handleService}
           >
             SERVICE
           </button>

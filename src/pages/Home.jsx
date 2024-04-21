@@ -32,6 +32,7 @@ const Test = () => {
   const [locationClicked, setLocationClicked] = locclick; 
   const [status, setStatus] = stat;
   const isLoggedIn = status === 'SIGNED_IN';
+  
   const handleLocationClick = async () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -78,6 +79,10 @@ console.log(data);
     console.log(locationClicked)
   };
   
+  // const handleChooseLocation = () => {
+  //   const googleMapsUrl = 'https://www.google.com/maps/search/';
+  //   window.open(googleMapsUrl, '_blank');
+  // };
 
   // Function to add mailid to loginusertrial table
   const addMailIdToSupabase = async () => {

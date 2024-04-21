@@ -31,7 +31,7 @@ const Footer = () => {
   };
 
 
-  if (curLocation === '/login' || curLocation === '/mode' || curLocation === '/petrol_home' ) {
+  if (curLocation === '/login' || curLocation === '/mode' || curLocation === '/petrol_home'|| curLocation === '/pump_req' || curLocation === '/pumpsetup') {
 
     return null; // Return null to hide the footer on the '/login' and '/' pages
   }

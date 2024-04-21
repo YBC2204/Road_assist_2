@@ -54,7 +54,7 @@ const Petrolhome = () => {
            <LocalGasStationIcon />
            <p className=''>Pump Setup</p>
        </button>
-       <button  className='flex bg-slate-300 p-4 rounded-2xl w-64 gap-5' onClick={()=> nav('/pumpsetup')}>
+       <button  className='flex bg-slate-300 p-4 rounded-2xl w-64 gap-5' onClick={()=> nav('/pump_req')}>
           <img src={fuel} className='h-[1.5rem]'/>
           <p className=''>Fuel Requests</p>
        </button>

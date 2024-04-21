@@ -23,7 +23,7 @@ const Vehiclecard = ({ id, name, plate, color, type }) => {
   const [fuelmodal,setfuelModal] = useState(false);
   const [selectedamt,setSelectedamt] = useState('');
   const [error,setError] = useState('');
- setLocationClicked(true);
+
   const {setloc} = useModalContext();
 
   const[loc,setloca] = setloc;

@@ -14,7 +14,7 @@ const Login = () => {
   const { setmode, setmail, setloc } = useModalContext();
   const [status, setStatus] = stat;
   const [loc, setLoc] = setloc; // State to store the signed in status
-  const [selectedmode, setselectedmode] = setmode;
+  
   const [mailid, setmailid] = setmail; // State to store email ID
   const [userMode, setUserMode] = useState(null); // State to store the mode fetched from logintrial
   
@@ -50,14 +50,14 @@ const Login = () => {
         //   }
         // }
 
-        nav("/home");
+        nav("/mode");
       } else {
         setLoc(0); // Set loc to 0 when signed out
         nav("/login");
       }
     });
     console.log(loc);
-  }, [mailid, nav, selectedmode, setmailid, setStatus, setselectedmode, setLoc]);
+  }, [mailid, nav, setmailid, setStatus,  setLoc]);
 
   return (
 

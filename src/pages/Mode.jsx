@@ -1,16 +1,44 @@
 import logo from '../assets/ASSIST2.png';
 import { useNavigate } from "react-router-dom";
 import { useModalContext } from '../Context/Modalcon';
-
+import { useStatusContext } from "../Context/StatusContext";
+import supabase from '../helper/SupaClient';
 const Mode = () => {
     const nav = useNavigate();
-    const { showmod, selcar, selcol, plate, setplate, setcol, showamt, showfuel, setamt, settype, setmode } = useModalContext();
+    const { showmod, selcar, selcol, plate, setplate, setcol, showamt, showfuel, setamt, settype, setmode,setmail } = useModalContext();
     const [selectedmode, setselectedmode] = setmode;
-
-    const handleModeSelect = (mode) => {
+    const [mailid, setmailid] = setmail; 
+    
+    const handleModeSelect = async (mode) => {
         setselectedmode(mode); // Update selected mode
         console.log("Selected Mode:", mode); // Log selected mode
+
         mode === 'Client'? nav('/home'): nav('/petrol_home'); // Navigate to the appropriate page
+
+          
+        const { data: loginData, error: loginError } = await supabase
+          .from("logintrial")
+          .select("mode")
+          .eq("email_id", mailid)
+          .single();
+
+        if (loginError) {
+          console.error("Error fetching mode:", loginError.message);
+          nav('/home');
+        }
+
+        if (loginData) {
+        //   setUserMode(loginData.mode); // Set the mode fetched from logintrial
+          console.log("User mode:", loginData.mode);
+          console.log("Selected mode:", mode);
+          if (loginData.mode !== mode) {
+            alert(`You are not the ${mode} user.`)
+            nav("/mode"); // Navigate to login if the modes are not the same
+            return;
+          }
+          nav('/home');
+        }
+
     };
 
     return (

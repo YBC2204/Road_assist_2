@@ -85,7 +85,9 @@ const Header = () => {
     setRefreshCount(refreshCount + 1);
     setRefreshCount(refreshCount + 1);
   };
-
+  if (curLocation === '/login' || curLocation === '/mode') {
+    return null; // Return null to hide the footer on the '/login' and '/' pages
+  }
   return (
     <>
       {curLocation !== '/' && curLocation !== '/login' && (

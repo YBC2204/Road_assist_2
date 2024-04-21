@@ -26,8 +26,8 @@ function App() {
       <BrowserRouter>
         <Header/>
         <Routes>
-
-        <Route path='/' element={<Mode />} />
+        <Route path='/mode' element={<Mode />} />
+        <Route path='/' element={<Login />} />
           <Route path='/login' element={<Login />} />
           <Route path="/home" element={<Home />} />
           <Route path="/vehicles" element={<Vehicle />} />

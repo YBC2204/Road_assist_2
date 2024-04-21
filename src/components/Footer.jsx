@@ -30,8 +30,9 @@ const Footer = () => {
     }
   };
 
-  // Check if the current location is '/login' or '/'
+
   if (curLocation === '/login' || curLocation === '/' || curLocation === '/petrol_home' ) {
+
     return null; // Return null to hide the footer on the '/login' and '/' pages
   }
 

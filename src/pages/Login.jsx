@@ -26,57 +26,25 @@ const Login = () => {
         // Store the user's email ID in state
         setmailid(session.user.email);
         setLoc(1); // Set loc to 1 when signed in
-       
-        
-        // const { data: loginData, error: loginError } = await supabase
-        //   .from("logintrial")
-        //   .select("mode")
-        //   .eq("email_id", session.user.email)
-        //   .single();
-
-        // if (loginError) {
-        //   console.error("Error fetching mode:", loginError.message);
-        //   return;
-        // }
-
-        // if (loginData) {
-        //   setUserMode(loginData.mode); // Set the mode fetched from logintrial
-        //   console.log("User mode:", loginData.mode);
-        //   console.log("Selected mode:", selectedmode);
-        //   if (loginData.mode !== selectedmode) {
-        //     alert(`You are not the ${selectedmode} user.`)
-        //     nav("/login"); // Navigate to login if the modes are not the same
-        //     return;
-        //   }
-        // }
-
         nav("/mode");
       } else {
         setLoc(0); // Set loc to 0 when signed out
         nav("/login");
       }
     });
-    console.log(loc);
-  }, [mailid, nav, setmailid, setStatus,  setLoc]);
+  }, [mailid, nav, setmailid, setStatus, setLoc]);
 
   return (
-
-
     <div className="p-5 bg-slate-950 h- flex flex-col justify-center">
-        <div className="flex justify-center">
-           <img className="w-2/4" src={logo} />
-           </div>
-      <div
-        className="w-[80%] mx-auto bg-slate-200 bg-opacity-15 backdrop-blur-lg rounded-lg overflow-hidden shadow-lg py-6 px-4"
-      >
-        
-
-
+      <div className="flex justify-center">
+        <img className="w-2/4" src={logo} />
+      </div>
+      <div className="w-[80%] mx-auto bg-slate-200 bg-opacity-15 backdrop-blur-lg rounded-lg overflow-hidden shadow-lg py-6 px-4">
         <Auth
           supabaseClient={supabase}
           appearance={{ theme: ThemeSupa }}
           theme="dark"
-          providers={["google"]}
+          providers={[]} // Exclude all providers
           className="p-4"
         />
       </div>

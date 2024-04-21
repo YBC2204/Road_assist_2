@@ -29,22 +29,26 @@ const Vehiclecard = ({ id, name, plate, color, type }) => {
   const[loc,setloca] = setloc;
 
   const deleteEntry = async () => {
-    try {
-      const { error } = await supabase.from('Vehicle_det').delete().eq('user_id', id).eq('plate_num', plate); 
-
-      if (error) {
+    // Show confirmation dialog before deleting the entry
+    const confirmDelete = window.confirm('Are you sure you want to delete this entry?');
+  
+    if (confirmDelete) {
+      try {
+        const { error } = await supabase.from('Vehicle_det').delete().eq('user_id', id).eq('plate_num', plate); 
+  
+        if (error) {
+          console.error('Delete error:', error.message);
+          setDeleteError('Error deleting entry');
+        } else {
+          console.log('Entry deleted successfully');
+        }
+      } catch (error) {
         console.error('Delete error:', error.message);
         setDeleteError('Error deleting entry');
-      } else {
-        
-        console.log('Entry deleted successfully');
       }
-    } catch (error) {
-      console.error('Delete error:', error.message);
-      setDeleteError('Error deleting entry');
     }
   };
-
+  
   const openEditModal = () => {
     setEditModalOpen(true);
   };
@@ -127,10 +131,10 @@ const handleConfirmAmt = async () => {
       {!service ? (
         <div className='flex justify-center -mb-2'>
           <button
-            className={`bg-black text-white font-semibold px-3 py-2 rounded-md `}
+            className={`bg-slate-900 text-white font-semibold px-3 py-2 rounded-md `}
             onClick={handleService}
           >
-            SERVICE
+            BOOK A SERVICE
           </button>
         </div>
       ) : (

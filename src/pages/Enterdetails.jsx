@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState,useEffect } from 'react';
 import supabase from '../helper/SupaClient';
 import { useModalContext} from '../Context/Modalcon';
@@ -11,7 +12,7 @@ const isAadharValid = (aadharNumber) => {
 };
 
 const EnterDetails = () => {
-    const { showmod, selcar, selcol, plate, setplate, setdet, setcol, showamt, showfuel, setamt, settype, setmode, setmail,setloc,setusername } = useModalContext();
+    const { setusername } = useModalContext();
     const[name2,setuser]=setusername;
     const{stat,logid,user}=useStatusContext();
     const[name1,setname]=user;

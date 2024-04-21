@@ -10,7 +10,7 @@ const Mode = () => {
     const handleModeSelect = (mode) => {
         setselectedmode(mode); // Update selected mode
         console.log("Selected Mode:", mode); // Log selected mode
-        nav('/home'); // Navigate to the appropriate page
+        mode === 'Client'? nav('/home'): nav('/petrol_home'); // Navigate to the appropriate page
     };
 
     return (

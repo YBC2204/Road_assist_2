@@ -16,6 +16,8 @@ import EditModal from "./components/Modals/EditModal";
 
 
 import EditDetails from "./pages/Editdetails";
+import Petrolhome from "./pages/Petrol/Petrolhome";
+import PumpSetup from "./pages/Petrol/PumpSetup";
 
 
 function App() {
@@ -36,6 +38,8 @@ function App() {
           <Route path='/vehicles/edit' element={<EditModal/>}/>
 
           <Route path='/editdet' element={<EditDetails />} />
+          <Route path="/petrol_home" element={<Petrolhome/>}/>
+          <Route path="/pumpsetup" element={<PumpSetup/>}/>
 
         </Routes>
        <Footer/>

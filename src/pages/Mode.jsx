@@ -12,6 +12,9 @@ const Mode = () => {
     const handleModeSelect = async (mode) => {
         setselectedmode(mode); // Update selected mode
         console.log("Selected Mode:", mode); // Log selected mode
+
+        mode === 'Client'? nav('/home'): nav('/petrol_home'); // Navigate to the appropriate page
+
           
         const { data: loginData, error: loginError } = await supabase
           .from("logintrial")
@@ -35,7 +38,7 @@ const Mode = () => {
           }
           nav('/home');
         }
-        // Navigate to the appropriate page
+
     };
 
     return (

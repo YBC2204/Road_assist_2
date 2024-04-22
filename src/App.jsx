@@ -16,7 +16,10 @@ import EditModal from "./components/Modals/EditModal";
 
 
 import EditDetails from "./pages/Editdetails";
-
+import Petrolhome from "./pages/Petrol/Petrolhome";
+import PumpSetup from "./pages/Petrol/PumpSetup";
+import Loc from "./pages/loc";
+import Req from "./pages/Petrol/Pumprequests";
 
 function App() {
   return (
@@ -36,7 +39,10 @@ function App() {
           <Route path='/vehicles/edit' element={<EditModal/>}/>
 
           <Route path='/editdet' element={<EditDetails />} />
-
+          <Route path="/petrol_home" element={<Petrolhome/>}/>
+          <Route path="/pumpsetup" element={<PumpSetup/>}/>
+          <Route path="/loc" element={<Loc/>}/>
+          <Route path="/pump_req" element={<Req/>}/>
         </Routes>
        <Footer/>
       </BrowserRouter>

@@ -3,11 +3,14 @@ import React, { useEffect } from 'react';
 import { ArrowBack } from '@mui/icons-material';
 import supabase from '../../helper/SupaClient';
 import { useModalContext } from '../../Context/Modalcon';
+import { useStatusContext } from '../../Context/StatusContext';
 import { v4 as uuidv4 } from 'uuid';
 
 const FuelType = () => {
     const { showmod, selcar, selcol, plate, setplate, setdet , setcol, showamt, showfuel, setamt, settype,setmode,setmail,setloc } = useModalContext();
-
+    const {long,lat} = useStatusContext();
+    const [longitud,setlong]=long;
+    const [latitud,setlat]=lat;
     const [showPlateModal, setShowPlateModal] = plate;
     const [showAmtModal, setAmtModal] = showamt;
     const [showFuelType, setFuelTypeModal] = showfuel;
@@ -69,7 +72,10 @@ const FuelType = () => {
                         Fuel_type: fuelType,
                         user_id: loginTrialId,
                         Fuel_amt:selectedamt,
-                        Location:loc
+                        Location:loc,
+                        Latitude:latitud,
+                        Longitude:longitud
+
                     }
                 ]);
 

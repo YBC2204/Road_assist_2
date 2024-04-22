@@ -17,8 +17,10 @@ import { useStatusContext } from '../Context/StatusContext.jsx';
 const Test = () => {  
   const [currentLocation, setCurrentLocation] = useState("Current Location");
   const { showmod, selcol, plate, showamt, showfuel,setmode, setmail,setloc } = useModalContext();
-  const {stat,logid , locclick} = useStatusContext();
+  const {stat,logid , locclick,long,lat} = useStatusContext();
   const [lid,setlid] = logid;
+  const [latitud,setlat]=lat;
+  const [longitud,setlong]=long;
   const [showModal, setShowModal] = showmod;
   const [showColorModal, setShowColorModal] = selcol;
   const [showPlateModal, setShowPlateModal] = plate;
@@ -30,13 +32,14 @@ const Test = () => {
   const [locationClicked, setLocationClicked] = locclick; 
   const [status, setStatus] = stat;
   const isLoggedIn = status === 'SIGNED_IN';
+  
   const handleLocationClick = async () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         async (position) => {
           const latitude = position.coords.latitude;
           const longitude = position.coords.longitude;
-  
+         
           try {
             const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`);
             if (!response.ok) {
@@ -52,6 +55,9 @@ console.log(data);
 
             setCurrentLocation(locationName);
             setloca(locationName);
+            setlat(latitude);
+         
+         setlong(longitude);
           } catch (error) {
             console.error('Error fetching location:', error);
             setCurrentLocation('Location data not available');
@@ -70,8 +76,13 @@ console.log(data);
       setLocationClicked(false);
     }
     setLocationClicked(true);
+    console.log(locationClicked)
   };
   
+  // const handleChooseLocation = () => {
+  //   const googleMapsUrl = 'https://www.google.com/maps/search/';
+  //   window.open(googleMapsUrl, '_blank');
+  // };
 
   // Function to add mailid to loginusertrial table
   const addMailIdToSupabase = async () => {

@@ -1,7 +1,7 @@
 import logo from '../assets/ASSIST2.png';
 import { useNavigate } from "react-router-dom";
 import { useModalContext } from '../Context/Modalcon';
-import { useStatusContext } from "../Context/StatusContext";
+
 import supabase from '../helper/SupaClient';
 const Mode = () => {
     const nav = useNavigate();
@@ -12,6 +12,9 @@ const Mode = () => {
     const handleModeSelect = async (mode) => {
         setselectedmode(mode); // Update selected mode
         console.log("Selected Mode:", mode); // Log selected mode
+
+        // mode === 'Client'? nav('/home'): nav('/petrol_home'); // Navigate to the appropriate page
+
           
         const { data: loginData, error: loginError } = await supabase
           .from("logintrial")
@@ -21,6 +24,9 @@ const Mode = () => {
 
         if (loginError) {
           console.error("Error fetching mode:", loginError.message);
+          if(mode=="Petrol Pump")
+          nav('/petrol_home')
+        else
           nav('/home');
         }
 
@@ -29,13 +35,17 @@ const Mode = () => {
           console.log("User mode:", loginData.mode);
           console.log("Selected mode:", mode);
           if (loginData.mode !== mode) {
+            nav("/mode"); 
             alert(`You are not the ${mode} user.`)
-            nav("/mode"); // Navigate to login if the modes are not the same
+            // Navigate to login if the modes are not the same
             return;
           }
+          if(mode=="Petrol Pump" && loginData)
+          nav('/petrol_home')
+        else
           nav('/home');
         }
-        // Navigate to the appropriate page
+
     };
 
     return (

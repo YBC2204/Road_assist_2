@@ -1,8 +1,10 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import supabase from '../helper/SupaClient';
 import { useModalContext } from '../Context/Modalcon';
 import { useNavigate } from 'react-router-dom';
 import { useStatusContext } from '../Context/StatusContext';
+
 const EditDetails = () => {
     const { setmail} = useModalContext();
     const{stat,logid,user}=useStatusContext();
@@ -126,7 +128,7 @@ const EditDetails = () => {
     }, [submitStatus]);
 
     return (
-        <div className="w-full max-w-lg mx-auto bg-gradient-to-br from-gray-800 ">
+        <div className="w-full max-w-lg mx-auto bg-gradient-to-br from-gray-800 h-[85vh]">
             <form className="shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleEdit}>
                 <div className="mb-4">
                     <label htmlFor="name" className="block text-sm font-bold mb-2 text-slate-300">

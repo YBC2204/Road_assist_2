@@ -7,9 +7,15 @@ import LocalGasStationIcon from '@mui/icons-material/LocalGasStation';
 import BuildIcon from '@mui/icons-material/Build';
 import { ArrowBack } from '@mui/icons-material';
 import { useModalContext } from '../Context/Modalcon';
+import { useStatusContext } from '../Context/StatusContext';
+import { useNavigate } from 'react-router-dom';
 
 const Vehiclecard = ({ id, name, plate, color, type }) => {
-   
+  const {long,lat} = useStatusContext();
+  const nav = useNavigate();
+ 
+  const [longitud,setlong]=long;
+  const [latitud,setlat]=lat;
   const [deleteError, setDeleteError] = useState(null);
   console.log(id);
   const [editModalOpen, setEditModalOpen] = useState(false);
@@ -23,22 +29,26 @@ const Vehiclecard = ({ id, name, plate, color, type }) => {
   const[loc,setloca] = setloc;
 
   const deleteEntry = async () => {
-    try {
-      const { error } = await supabase.from('Vehicle_det').delete().eq('user_id', id).eq('plate_num', plate); 
-
-      if (error) {
+    // Show confirmation dialog before deleting the entry
+    const confirmDelete = window.confirm('Are you sure you want to delete this entry?');
+  
+    if (confirmDelete) {
+      try {
+        const { error } = await supabase.from('Vehicle_det').delete().eq('user_id', id).eq('plate_num', plate); 
+  
+        if (error) {
+          console.error('Delete error:', error.message);
+          setDeleteError('Error deleting entry');
+        } else {
+          console.log('Entry deleted successfully');
+        }
+      } catch (error) {
         console.error('Delete error:', error.message);
         setDeleteError('Error deleting entry');
-      } else {
-        
-        console.log('Entry deleted successfully');
       }
-    } catch (error) {
-      console.error('Delete error:', error.message);
-      setDeleteError('Error deleting entry');
     }
   };
-
+  
   const openEditModal = () => {
     setEditModalOpen(true);
   };
@@ -48,7 +58,17 @@ const Vehiclecard = ({ id, name, plate, color, type }) => {
   };
 console.log(service);
 console.log(loc);
+const handleService = async () => {
+  if(loc!=1)
+ setService(true);
+else
+{
+  alert("Choose current location");
+  nav('/home');
+}
 
+ 
+};
 
 const handleConfirmAmt = async () => {
   if (selectedamt.trim() === "") {
@@ -66,7 +86,9 @@ const handleConfirmAmt = async () => {
       Fuel_type: type,
       user_id: id,
       Fuel_amt:selectedamt,
-      Location:loc
+      Location:loc,
+      Latitude:latitud,
+                        Longitude:longitud
     }
   ]);
 
@@ -109,10 +131,10 @@ const handleConfirmAmt = async () => {
       {!service ? (
         <div className='flex justify-center -mb-2'>
           <button
-            className={`bg-black text-white font-semibold px-3 py-2 rounded-md `}
-            onClick={() => setService(true)}
+            className={`bg-slate-900 text-white font-semibold px-3 py-2 rounded-md `}
+            onClick={handleService}
           >
-            SERVICE
+            BOOK A SERVICE
           </button>
         </div>
       ) : (

@@ -46,13 +46,13 @@ const Petrolhome = () => {
               console.error('Error fetching data from Pump_availability:', fetchError.message);
               
           }
-  
+    const valueToUpdate = enabled ? false :true;
           // If the user's availability does not exist, insert a new row
           if (!existingData) {
             console.log("hi")
               const { insertError } = await supabase
                   .from('Pump_avail')
-                  .insert([{ id: userId, Availability: enabled }]);
+                  .insert([{ id: userId, Availability:valueToUpdate}]);
    
               if (insertError) {
                   console.error('Error inserting data into Pump_availability:', insertError.message);
@@ -64,7 +64,7 @@ const Petrolhome = () => {
               // If the user's availability exists, update the existing row
               const { updateError } = await supabase
                   .from('Pump_avail')
-                  .update({ Availability: enabled })
+                  .update({ Availability: valueToUpdate })
                   .eq('id', userId);
   
               if (updateError) {

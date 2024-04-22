@@ -4,13 +4,86 @@ import DescriptionIcon from '@mui/icons-material/Description';
 import homepic from '../../assets/home.png';
 import fuel from "../../assets/fuel.png"
 import { useNavigate } from 'react-router-dom';
-
-import { useState } from 'react';
+import { useModalContext } from '../../Context/Modalcon';
+import { useEffect, useState } from 'react';
 import { Switch } from '@headlessui/react';
+import supabase from '../../helper/SupaClient';
 const Petrolhome = () => {
-
+  const {setmail} = useModalContext();
+  const [mailid, setMailId] = setmail;
     const nav = useNavigate();
     const [enabled, setEnabled] = useState(false)
+    const fetchIdFromLoginTrial = async () => {
+      try {
+          // Fetch the ID from the logintrial table based on the mailid
+          const { data, error } = await supabase
+              .from('logintrial')
+              .select('id')
+              .eq('email_id', mailid)
+              .single();
+    console.log(enabled);
+          if (error) {
+              console.error('Error fetching data from logintrial:', error.message);
+              return null;
+          }
+  
+          if (!data) {
+              console.error('No data found in logintrial for the provided mailid.');
+              return null;
+          }
+          console.log(data.id)
+  
+          const userId = data.id;
+  
+          // Check if the user's availability already exists in Pump_availability table
+          const { data: existingData, error: fetchError } = await supabase
+              .from('Pump_avail')
+              .select('*')
+              .eq('id', userId)
+              .single();
+  
+          if (fetchError) {
+              console.error('Error fetching data from Pump_availability:', fetchError.message);
+              
+          }
+  
+          // If the user's availability does not exist, insert a new row
+          if (!existingData) {
+            console.log("hi")
+              const { insertError } = await supabase
+                  .from('Pump_avail')
+                  .insert([{ id: userId, Availability: enabled }]);
+   
+              if (insertError) {
+                  console.error('Error inserting data into Pump_availability:', insertError.message);
+                  return null;
+              }
+  
+              console.log('New row inserted into Pump_availability.');
+          } else {
+              // If the user's availability exists, update the existing row
+              const { updateError } = await supabase
+                  .from('Pump_avail')
+                  .update({ Availability: enabled })
+                  .eq('id', userId);
+  
+              if (updateError) {
+                  console.error('Error updating data in Pump_availability:', updateError.message);
+                  return null;
+              }
+  
+              console.log('Pump availability updated successfully.');
+          }
+  
+          return userId;
+      } catch (error) {
+          console.error('Error fetching data from logintrial:', error.message);
+          return null;
+      }
+  };
+  
+ 
+
 
 
   return (
@@ -19,13 +92,16 @@ const Petrolhome = () => {
        <div className='flex justify-end w-full items-center mt-4 mr-2'>
        <div className='flex border px-3 py-2 items-center rounded-[25px] gap-2'>
       <p className='font-semibold text-[15px] uppercase text-slate-300'>Availability</p> <Switch
-      checked={enabled}
-      onChange={setEnabled}
-      className={`${
+    checked={enabled}
+    onChange={async (isChecked) => {
+        setEnabled(isChecked);
+        await fetchIdFromLoginTrial();
+    }}
+    className={`${
         enabled ? 'bg-green-600' : 'bg-gray-300 '
-      } relative inline-flex h-6 w-11 items-center rounded-full`}
-      
-    >
+    } relative inline-flex h-6 w-11 items-center rounded-full`}
+>
+
       
       <span
         className={`${

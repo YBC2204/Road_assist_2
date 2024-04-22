@@ -33,12 +33,21 @@ const Header = () => {
           .eq('email', mailid)
           .single();
         if (error) {
+          setUsername(''); // Set the username if found
+          setName(''); 
           throw error;
+          
         }
         if (data) {
           setUsername(data.username); // Set the username if found
           setName(data.username); // Also set the username to update the UI
         }
+        else
+        {
+          setUsername(''); // Set the username if found
+          setName(''); 
+        }
+         
       } catch (error) {
         console.error('Error fetching user data:', error.message);
 

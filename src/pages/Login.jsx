@@ -21,18 +21,23 @@ const Login = () => {
   useEffect(() => {
     supabase.auth.onAuthStateChange(async (event, session) => {
       setStatus(event);
-
+  
       if (event === "SIGNED_IN" && session?.user?.email) {
         // Store the user's email ID in state
         setmailid(session.user.email);
         setLoc(1); // Set loc to 1 when signed in
-        nav("/mode");
+  
+        // Check if the current location is not already /mode
+        if (window.location.pathname == "/login" ) {
+          nav("/mode"); // Navigate to /mode only if not already there
+        }
       } else {
         setLoc(0); // Set loc to 0 when signed out
         nav("/login");
       }
     });
-  }, [mailid, nav, setmailid, setStatus, setLoc]);
+  }, [nav, setmailid, setStatus, setLoc]);
+  
 
   return (
     <div className="p-5 bg-slate-950 h- flex flex-col justify-center">

@@ -14,7 +14,9 @@ import FuelAmount from '../components/Modals/FuelAmount.jsx';
 import FuelType from '../components/Modals/FuelType.jsx';
 import { useStatusContext } from '../Context/StatusContext.jsx';
 
+
 const Test = () => {  
+  
   const [currentLocation, setCurrentLocation] = useState("Current Location");
   const { showmod, selcol, plate, showamt, showfuel,setmode, setmail,setloc } = useModalContext();
   const {stat,logid , locclick,long,lat} = useStatusContext();

@@ -17,10 +17,11 @@ const Footer = () => {
   const handleNavigate = (path) => {
     if (isLoggedIn ) {
       console.log(locationClicked);
-      if(locationClicked  || path != '/home' || path !='/records')
+      if(locationClicked){
+      if( path != '/home' || path !='/records' || path!='/vehicles')
       {
         nav(path);
-      }
+      }}
       else{
         alert('Click Current Location to continue');
       }
@@ -31,7 +32,7 @@ const Footer = () => {
   };
 
 
-  if (curLocation === '/login' || curLocation === '/mode' || curLocation === '/petrol_home'|| curLocation === '/pump_req' || curLocation === '/pumpsetup') {
+  if (curLocation === '/login' || curLocation === '/mode' || curLocation === '/petrol_home'|| curLocation === '/pump_req' || curLocation === '/pumpsetup'|| curLocation==='/pump_rec') {
 
     return null; // Return null to hide the footer on the '/login' and '/' pages
   }

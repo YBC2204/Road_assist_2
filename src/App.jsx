@@ -20,7 +20,7 @@ import Petrolhome from "./pages/Petrol/Petrolhome";
 import PumpSetup from "./pages/Petrol/PumpSetup";
 import Loc from "./pages/loc";
 import Req from "./pages/Petrol/Pumprequests";
-
+import Record from "./pages/Petrol/Record";
 function App() {
   return (
     <div className="min-h-screen w-full flex flex-col bg-black font-source">
@@ -43,6 +43,7 @@ function App() {
           <Route path="/pumpsetup" element={<PumpSetup/>}/>
           <Route path="/loc" element={<Loc/>}/>
           <Route path="/pump_req" element={<Req/>}/>
+          <Route path="/pump_rec" element={<Record/>}/>
         </Routes>
        <Footer/>
       </BrowserRouter>

@@ -10,49 +10,14 @@ import { useModalContext } from '../Context/Modalcon';
 import { useStatusContext } from '../Context/StatusContext';
 import { useNavigate } from 'react-router-dom';
 
-const Requestcard = () => {
+const Recordpump = () => {
     const [confirmationOpen, setConfirmationOpen] = useState(false); // State to manage confirmation dialog
     const { openEditModal } = useModalContext(); // Assuming you have a function to open the edit modal
     const { deleteRequest } = useStatusContext(); // Assuming you have a function to delete the request
     const navigate = useNavigate(); // React Router's hook for navigation
   
     // Function to handle denial confirmation
-    const handleDenyConfirmation = () => {
-      setConfirmationOpen(true);
-    };
-  
-    // Function to handle denial of request
-    const handleDenyRequest = () => {
-      // Perform deletion of request (you should have the implementation for this)
-      // For now, I'm assuming a function deleteRequest is available in useStatusContext
-      deleteRequest(); // You should implement this function
-  
-      // Close confirmation dialog
-      setConfirmationOpen(false);
-    };
-  
-    // Function to handle cancellation of denial
-    const handleCancelDeny = () => {
-      setConfirmationOpen(false);
-    };
 
-  
- 
- 
-
- 
-
- 
-
-
-
-
-
-
-  
-
-
-  // Clear error message
 return (
      <div className='text-black w-[90%] bg-slate-300 flex flex-col py-4 px-5 gap-3 rounded-[22px] mb-8 mt-5' >
    
@@ -79,11 +44,8 @@ return (
           <img src={car} className='w-full h-full object-cover rounded-lg' alt='Car' />
         </div> */}
       </div>
-      <div className='h-[1px] bg-black'></div>
-      <div className='flex w-full font-semibold'>
-      <button className='uppercase w-1/2 bg-gray-700 text-blue-400 rounded-s-lg p-[6px] border-r border-black' onClick={openEditModal}>Accept</button>
-        <button className='uppercase w-1/2 bg-gray-700 text-red-600 rounded-e-lg p-[6px]' onClick={handleDenyConfirmation}>Deny</button>
-      </div>
+ 
+     
      
     
 
@@ -97,22 +59,12 @@ return (
           onClose={closeEditModal}
         />
       )} */}
-          {confirmationOpen && (
-        <div className='absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 z-10'>
-          <div className='bg-white p-4 rounded-lg'>
-            <p className='text-lg font-semibold'>Are you sure you want to deny the request?</p>
-            <div className='flex justify-end mt-4'>
-              <button className='bg-red-600 text-white px-4 py-2 rounded mr-2' onClick={handleDenyRequest}>Yes</button>
-              <button className='bg-gray-400 text-black px-4 py-2 rounded' onClick={handleCancelDeny}>No</button>
-            </div>
-          </div>
-        </div>
-      )}
+       
     </div>
   );
 };
 
-export default Requestcard;
+export default Recordpump;
 
 
 // <button className='bg-[#E3FEF7] rounded-xl py-3 mx-5 font-semibold '>

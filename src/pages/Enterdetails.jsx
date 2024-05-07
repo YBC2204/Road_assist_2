@@ -6,7 +6,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useStatusContext } from '../Context/StatusContext';
 
 const isAadharValid = (aadharNumber) => {
-    // Regular expression to match Aadhar number format
     const aadharRegex = /^\d{12}$/;
     return aadharRegex.test(aadharNumber);
 };
@@ -60,7 +59,6 @@ const EnterDetails = () => {
                 return;
             }
 
-            // Fetch the ID from the logintrial table based on the email_id
             const { data: loginTrialData, error: loginTrialError } = await supabase
                 .from('logintrial')
                 .select('id')
@@ -81,7 +79,6 @@ const EnterDetails = () => {
 
             const loginTrialId = loginTrialData.id;
 
-            // Insert data into the user1 table along with the retrieved logintrial_id
             const { data: userData, error: userError } = await supabase
                 .from('user')
                 .insert([

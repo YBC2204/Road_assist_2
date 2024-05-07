@@ -40,7 +40,8 @@ const Service = () => {
       {showModal && (
         <div className="fixed inset-0 flex justify-center items-center top-[-350px] left-[-190px]">
           <div className="fixed inset-0 bg-gray-500 bg-opacity-50"></div>
-          <div className="bg-black p-6 rounded-lg z-10">
+          
+          <div className="bg-black text-white p-6 rounded-lg z-10 justify-content-center">
             <p>Are you sure you want to cancel?</p>
             <div className="flex justify-end mt-4">
               <button className="bg-red-500 text-white px-4 py-2 rounded mr-2" onClick={handleConfirmCancel}>Yes, Cancel</button>

@@ -88,11 +88,11 @@ const handleConfirmAmt = async () => {
       Fuel_amt:selectedamt,
       Location:loc,
       Latitude:latitud,
-                        Longitude:longitud
+      Longitude:longitud
     }
   ]);
 
-  if (error) {
+  if (errors) {
     console.error('Error inserting data into trialvehicle:', errors.message);
     return;
 }

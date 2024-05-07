@@ -3,11 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { useModalContext } from '../Context/Modalcon';
 
 import supabase from '../helper/SupaClient';
+import { useStatusContext } from '../Context/StatusContext';
 const Mode = () => {
     const nav = useNavigate();
-    const { showmod, selcar, selcol, plate, setplate, setcol, showamt, showfuel, setamt, settype, setmode,setmail } = useModalContext();
+    const {setmode,setmail } = useModalContext();
+    const{logid} = useStatusContext();
     const [selectedmode, setselectedmode] = setmode;
-    const [mailid, setmailid] = setmail; 
+    const [mailid, setmailid] = setmail;
+    const [lid,setlid] = logid; 
     
     const handleModeSelect = async (mode) => {
         setselectedmode(mode); // Update selected mode
@@ -18,13 +21,13 @@ const Mode = () => {
           
         const { data: loginData, error: loginError } = await supabase
           .from("logintrial")
-          .select("mode")
+          .select("*")
           .eq("email_id", mailid)
           .single();
 
         if (loginError) {
           console.error("Error fetching mode:", loginError.message);
-          if(mode=="Petrol Pump")
+        if(mode=="Petrol Pump")
           nav('/petrol_home')
         else
           nav('/home');
@@ -32,6 +35,7 @@ const Mode = () => {
 
         if (loginData) {
         //   setUserMode(loginData.mode); // Set the mode fetched from logintrial
+          setlid(loginData.id);
           console.log("User mode:", loginData.mode);
           console.log("Selected mode:", mode);
           if (loginData.mode !== mode) {

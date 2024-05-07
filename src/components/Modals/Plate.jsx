@@ -26,8 +26,8 @@ const Plate = () => {
     };
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-            <div className="w-3/4 h-[290px] bg-white rounded-[20px] flex flex-col items-center">
+        <div className="fixed inset-x-0 bottom-0 bg-black bg-opacity-50 flex justify-center items-end pb-10">
+          <div className="w-[90%] h-[300px] bg-white rounded-t-[20px] rounded-b-none flex flex-col items-center">
                 <div className='flex mt-5 mb-2 px-2 w-full'>
                     <button className="text-gray-600" onClick={() => { setShowPlateModal(false); setShowColorModal(true); }}>
                         <ArrowBack />

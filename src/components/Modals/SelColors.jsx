@@ -19,13 +19,13 @@ const SelColors = () => {
     };
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-            <div className="w-[80%] h-64 bg-white rounded-[22px] flex flex-col gap-5">
-                <div className='flex mt-4'> 
-                    <button className="text-black pl-3 w-min" onClick={() => { setShowModal(true); setShowColorModal(false); }}>
+        <div className="fixed inset-x-0 bottom-0 bg-black bg-opacity-50 flex justify-center items-end pb-10">
+          <div className="w-[90%] h-[300px] bg-white rounded-t-[20px] rounded-b-none flex flex-col items-center">
+          <div className='flex mt-5 mb-2 px-2 w-full'>
+                    <button className="text-black pl-1 w-min" onClick={() => { setShowModal(true); setShowColorModal(false); }}>
                         <ArrowBack />
                     </button>
-                    <div className="flex justify-center w-full pr-4 text-black text-lg font-bold uppercase">Select Colour</div>
+                    <div className="flex justify-center w-full pr-4 text-black text-lg font-bold ">Select Colour:</div>
                 </div> 
                 <div className='grid mt-8 px-5 grid-cols-4 gap-x-4 gap-y-4'>
                     <button onClick={() => handleColor("black")} className='bg-black p-6 rounded-xl'></button>

@@ -155,8 +155,7 @@ const EditDetails = () => {
                         name="phoneNumber"
                         value={phoneNumber}
                         onChange={(e) => setPhoneNumber(e.target.value)}
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
-                    />
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"/>
                 </div>
                 <div className="mb-4">
                     <label htmlFor="email" className="block text-sm font-bold mb-2 text-slate-300">
@@ -183,14 +182,12 @@ const EditDetails = () => {
                         required
                         value={aadhar}
                         onChange={(e) => setAadhar(e.target.value)}
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
-                    />
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"/>
                 </div>
                 <div className="m-4 flex items-center justify-between">
                     <button
                         type="submit"
-                        className="bg-slate-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                    >
+                        className="bg-slate-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                         Edit
                     </button>
                 </div>

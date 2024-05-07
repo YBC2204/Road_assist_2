@@ -13,6 +13,7 @@ import supabase from "../helper/SupaClient";
 import FuelAmount from '../components/Modals/FuelAmount.jsx';
 import FuelType from '../components/Modals/FuelType.jsx';
 import { useStatusContext } from '../Context/StatusContext.jsx';
+import EnterDetails from './Enterdetails.jsx';
 
 
 const Test = () => {  

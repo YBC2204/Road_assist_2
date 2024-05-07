@@ -3,6 +3,7 @@ import logo from '../../assets/ASSIST2.png'
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import supabase from '../../helper/SupaClient';
+import { useStatusContext } from '../../Context/StatusContext';
 
 const PumpSetup = () => {
 
@@ -23,11 +24,41 @@ const PumpSetup = () => {
   const [lat,setLat] = useState('');
   const [long,setLong] = useState('');
   const [del,setDel] = useState(true);
+  const { logid } = useStatusContext();
+  const [lid, setLid] = logid;
 
-const handleSubmit = async () =>
-{
- const {data,error} = await supabase
-}
+ 
+  const handleSubmit = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('Pump_det')
+        .insert([
+          {
+            id: lid, // Ensure that lid contains the correct value
+            Company: company,
+            Reg_num: reg,
+            Owner: owner,
+            email: email,
+            phno: num,
+            Address: addr,
+            latitude: lat,
+            long: long,
+            pump_name: name,
+          },
+        ]);
+        
+      if (error) {
+        console.error('Error inserting data into Pump_det:', error.message);
+        return;
+      }
+  
+      console.log('Data inserted into Pump_det successfully:', data);
+      nav('/petrol_home'); // Navigate after successful insertion
+    } catch (error) {
+      console.error('Error handling submit:', error.message);
+    }
+  };
+  
 
 
   return (
@@ -39,10 +70,10 @@ const handleSubmit = async () =>
         <p className='text-2xl font-bold mt-4 text-white'>PUMP SETUP</p>
        </div>
        
-       <form className="w-3/4 mt-4">
-       
+      
+   <div className='mt-4'>    
     <div className={divclass}>
-        <input type="text" name="floating_first_name" id="floating_first_name" className={inputclass} placeholder=" " required value={name} onChange={(e)=>setName(e.target.value)}/>
+        <input type="text"   className={inputclass} placeholder="" required value={name} onChange={(e)=>setName(e.target.value)}/>
         <label htmlFor="floating_first_name" className={labelclass}>Pump Name</label>
     </div>
    
@@ -90,17 +121,17 @@ const handleSubmit = async () =>
  Will You Provide Delivery partner<Checkbox  defaultChecked onClick={()=>setDel(!del)}/>
  </div>
 
-  <div>
+  {/* <div>
      
      <input className="block w-full text-sm text-gray-900 border border-black rounded-lg cursor-pointer bg-gray-300 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="user_avatar_help" id="user_avatar" type="file"/>
      <div className="mt-2 mb-4 text-sm text-gray-500 dark:text-gray-300" id="user_avatar_help"> Please upload a copy of your petrol pump license for verification  </div>
-</div>
+</div> */}
 
   
-  <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mb-8" onClick={handleSubmit}>Submit</button>
-</form>
+  <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mb-8" onClick={handleSubmit}>Submit</button>
+
          
-        
+  </div>      
        
     </div>
   )

@@ -4,7 +4,7 @@ import { ArrowBack } from '@mui/icons-material';
 import supabase from '../../helper/SupaClient';
 import { useModalContext } from '../../Context/Modalcon';
 import { useStatusContext } from '../../Context/StatusContext';
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
 import { useNavigate } from 'react-router-dom';
 
 const FuelType = () => {

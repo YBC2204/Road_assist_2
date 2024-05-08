@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PastService from '../components/PastService';
-
+import IncomingService from '../components/incoming';
 function Records() {
   const [state, setState] = useState('upcoming');
   const [showService, setShowService] = useState(true);
@@ -21,7 +21,7 @@ function Records() {
       </div>
       
       {state === 'past' && <PastService />}
-    
+      {state === 'upcoming' && <IncomingService/>}
       {/* <div className="flex justify-center items-center">
         {showService && <Service onCancel={handleCancelService} />}
       </div> */}

@@ -11,7 +11,7 @@ const Req = () => {
   };
 
   return (
-    <div className='relative bg-gradient-to-br from-gray-800'>
+    <div className='relative bg-gradient-to-br from-gray-800 h-[100vh]'>
       <div className='flex flex-col h-[85vh] gap-2 items-center overflow-y-scroll'>
         <div className='absolute left-4 top-3 text-white' onClick={handleBackButtonClick}>
           <ArrowBackIcon sx={{ fontSize: 35 }} />

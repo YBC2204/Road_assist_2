@@ -10,7 +10,7 @@ const Record = () => {
       navigate('/petrol_home');
     };
   return (
-    <div className='relative bg-gradient-to-br from-gray-800'>
+    <div className='relative bg-gradient-to-br from-gray-800 h-[100vh]'>
     <div className='flex flex-col h-[85vh] gap-2 items-center overflow-y-scroll'>
     <p className='text-[28px] ml-4 mt-2 font-bold  text-white'>PUMP RECORDS</p>
     <div className='h-[4px] w-full bg-white'></div>

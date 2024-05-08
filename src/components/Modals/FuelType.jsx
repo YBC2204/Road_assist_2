@@ -5,8 +5,10 @@ import supabase from '../../helper/SupaClient';
 import { useModalContext } from '../../Context/Modalcon';
 import { useStatusContext } from '../../Context/StatusContext';
 import { v4 as uuidv4 } from 'uuid';
+import { useNavigate } from 'react-router-dom';
 
 const FuelType = () => {
+    const nav = useNavigate();
     const { showmod, selcar, selcol, plate, setplate, setdet , setcol, showamt, showfuel, setamt, settype,setmode,setmail,setloc } = useModalContext();
     const {long,lat} = useStatusContext();
     const [longitud,setlong]=long;
@@ -101,7 +103,7 @@ const FuelType = () => {
     };
 
     return (
-        <div className="fixed inset-x-0 bottom-0 bg-black bg-opacity-50 flex justify-center items-end pb-10">
+        <div className="fixed inset-x-0 bottom-0 bg-black bg-opacity-50 flex justify-center items-end ">
           <div className="w-[90%] h-[300px] bg-white rounded-t-[20px] rounded-b-none flex flex-col items-center">
                 <div className='flex mt-5 mb-2 px-2 w-full'>
                     <button className="text-gray-600" onClick={() => { setFuelTypeModal(false); setAmtModal(true); }}>

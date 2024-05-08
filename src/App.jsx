@@ -21,6 +21,7 @@ import PumpSetup from "./pages/Petrol/PumpSetup";
 import Loc from "./pages/loc";
 import Req from "./pages/Petrol/Pumprequests";
 import Record from "./pages/Petrol/Record";
+import OrderConfirmationPage from "./pages/Order";
 function App() {
   return (
     <div className="min-h-screen w-full flex flex-col bg-black font-source">
@@ -37,6 +38,7 @@ function App() {
           <Route path='/profile' element={<Enterdetails />} />
 
           <Route path='/vehicles/edit' element={<EditModal/>}/>
+          <Route path='/order' element={<OrderConfirmationPage />} />
 
           <Route path='/editdet' element={<EditDetails />} />
           <Route path="/petrol_home" element={<Petrolhome/>}/>

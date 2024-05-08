@@ -88,7 +88,36 @@ const Header = () => {
       nav('/login');
     }
   }
-  
+  const handlenav = () => {
+    fetchUserFound()
+    async function fetchUserFound() {
+      try {
+        const { data, error } = await supabase
+          .from('user')
+          .select('username')
+          .eq('email', mailid)
+          .single();
+        if (error) {
+          nav('/profile')
+          throw error;
+          
+        }
+        if (data) {
+          nav('/editdet')
+          // Also set the username to update the UI
+        }
+        // else
+        // {
+        //   setUsername(''); // Set the username if found
+        //   setName(''); 
+        // }
+         
+      } catch (error) {
+        console.error('Error fetching user data:', error.message);
+
+      }
+    }
+  }
   // Function to refresh the header twice
   const refreshHeaderTwice = () => {
     setRefreshCount(refreshCount + 1);
@@ -102,7 +131,7 @@ const Header = () => {
       {curLocation !== '/' && curLocation !== '/login' && curLocation !=='/pump_rec' && curLocation !=='/pump_req' && curLocation !=='/pumpsetup' && (
         <div className='flex bg-black justify-between'>
           <div className='flex flex-col p-3'>
-            <div className="text-gray-300 font-bold text-md" onClick={() => nav('/profile')}>
+            <div className="text-gray-300 font-bold text-md" onClick={handlenav}>
               <p>{isLoggedIn && name1 ? `Hello, ${name1.split(' ')[0]}` : username ? `Hello, ${username.split(' ')[0]}` : 'Add Your Profile'}</p>
             </div>
 
@@ -111,7 +140,7 @@ const Header = () => {
             </div>
           </div>
           <div className="flex items-center">
-            <div className='text-slate-300' onClick={() => nav('/editdet')}><AccountCircleIcon fontSize='large' /></div>
+            <div className='text-slate-300' onClick={handlenav}><AccountCircleIcon fontSize='large' /></div>
             <div className='p-2 '>
               <button className=' border-slate-300 border-2 text-gray-300 bg-black px-3 py-2 rounded-xl font-semibold' onClick={handleLog}>
 

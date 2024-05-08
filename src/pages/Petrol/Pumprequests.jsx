@@ -16,7 +16,7 @@ const Req = () => {
         <div className='absolute left-4 top-3 text-white' onClick={handleBackButtonClick}>
           <ArrowBackIcon sx={{ fontSize: 35 }} />
         </div>
-        <p className='text-[28px] ml-4 mt-2 font-bold  text-white'>PUMP RECORDS</p>
+        <p className='text-[28px] ml-4 mt-2 font-bold  text-white'>FUEL REQUESTS</p>
     <div className='h-[4px] w-full bg-white'></div>
         <Requestcard />
       </div>

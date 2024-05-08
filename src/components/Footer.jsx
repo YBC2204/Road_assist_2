@@ -17,14 +17,16 @@ const Footer = () => {
   const handleNavigate = (path) => {
     if (isLoggedIn ) {
       console.log(locationClicked);
-      if(locationClicked){
-      if( path != '/home' || path !='/records' || path!='/vehicles')
+      if(!locationClicked){
+      if(path ==='/home')
       {
         nav(path);
-      }}
+      }
       else{
         alert('Click Current Location to continue');
-      }
+      }}
+      if(locationClicked)
+        nav(path);
     } 
     else {
       nav('/login');

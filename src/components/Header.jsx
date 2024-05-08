@@ -65,7 +65,7 @@ const Header = () => {
 
   useEffect(() => {
     // Call the refreshHeaderTwice function when the component mounts
-    refreshHeaderTwice();
+    // refreshHeaderTwice();
   }, []); // Empty dependency array to run once when component mounts
 
   async function signOut() {
@@ -119,10 +119,10 @@ const Header = () => {
     }
   }
   // Function to refresh the header twice
-  const refreshHeaderTwice = () => {
-    setRefreshCount(refreshCount + 1);
-    setRefreshCount(refreshCount + 1);
-  };
+  // const refreshHeaderTwice = () => {
+  //   setRefreshCount(refreshCount + 1);
+  //   setRefreshCount(refreshCount + 1);
+  // };
   if (curLocation === '/login' || curLocation === '/mode') {
     return null; // Return null to hide the footer on the '/login' and '/' pages
   }

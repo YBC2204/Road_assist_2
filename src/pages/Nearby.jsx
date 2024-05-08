@@ -9,29 +9,64 @@ const Nearby = () => {
   useEffect(() => {
     const fetchPetrolPumps = async () => {
       try {
-        const dummyPetrolPumps = [
-          {
-            id: 1,
-            name: 'ABC Petrol Pump',
-            address: '123 Street, City',
-            company: 'ABC Fuel Inc.',
-          },
-          {
-            id: 2,
-            name: 'XYZ Petrol Pump',
-            address: '456 Road, Town',
-            company: 'XYZ Oil Ltd.',
-          },
-        ];
-        setPetrolPumps(dummyPetrolPumps);
+        const { data: pumpData, error: pumpError } = await supabase
+          .from('Pump_det')
+          .select('*');
+
+        const { data: orderData, error: orderError } = await supabase
+          .from('order')
+          .select('*');
+
+        if (pumpError || orderError) {
+          throw pumpError || orderError;
+        }
+
+        // Calculate distance for each petrol pump
+        const pumpsWithDistance = pumpData.map(pump => {
+          // Find the user's coordinates from the order data
+          const userLat = orderData.find(order => order.user_id === 474)?.Latitude;
+          const userLong = orderData.find(order => order.user_id === 474)?.Longitude;
+        // Function to calculate distance using Haversine formula
+        const calculateDistance = (lat1, lon1, lat2, lon2) => {
+          const R = 6371; // Radius of the earth in km
+          const dLat = deg2rad(lat2 - lat1);  // deg2rad below
+          const dLon = deg2rad(lon2 - lon1);
+          const a =
+            Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+            Math.sin(dLon / 2) * Math.sin(dLon / 2);
+          const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+          const distance = (R * c)+ 0.75; // Distance in km
+          return distance;
+        }
+      
+        const deg2rad = (deg) => {
+          return deg * (Math.PI / 180);
+        }
+          // Calculate distance using Haversine formula
+          const distance = calculateDistance(
+            pump.latitude,
+            pump.long,
+            userLat,
+            userLong
+          );
+
+          return { ...pump, distance };
+        });
+
+  
+
+
+        setPetrolPumps(pumpsWithDistance);
+        console.log(pumpsWithDistance);
       } catch (error) {
-        console.error('Error fetching petrol pumps:', error);
-        setFetchErr('Failed to fetch petrol pumps');
+        console.error('Error fetching data:', error.message);
       }
     };
 
     fetchPetrolPumps();
   }, []);
+
 
   return (
     <div className="relative bg-gradient-to-br from-gray-800">
@@ -41,10 +76,11 @@ const Nearby = () => {
             {petrolPumps.map(pump => (
               <PetrolPumpCard
                 key={pump.id}
-                name={pump.name}
-                availability={pump.availability}
-                address={pump.address}
-                company={pump.company}
+                name={pump.pump_name}
+                availability={true}
+                address={pump.Address}
+                company={pump.Company}
+                distance={pump.distance}
               />
             ))}
           </div>
@@ -56,4 +92,4 @@ const Nearby = () => {
   );
 };
 
-export default Nearby
+export default Nearby;

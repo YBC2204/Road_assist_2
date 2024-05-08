@@ -17,6 +17,7 @@ const Footer = () => {
   const isLoggedIn = status === 'SIGNED_IN';
 
   const handleNavigate = (path) => {
+    console.log(loc);
     if (isLoggedIn ) {
       console.log(locationClicked);
       if(!locationClicked || loc===1){

@@ -8,6 +8,7 @@ const Nearby = () => {
   const [petrolPumps, setPetrolPumps] = useState([]);
   const {logid} =  useStatusContext();
   const [lid,setlid] =  logid;
+  const[maxValue,setmaxValue] = useState(0);
 
   useEffect(() => {
     console.log(lid);
@@ -19,17 +20,22 @@ const Nearby = () => {
 
         const { data: orderData, error: orderError } = await supabase
           .from('order')
-          .select('*');
+          .select('*').eq('user_id',lid);
 
         if (pumpError || orderError) {
           throw pumpError || orderError;
         }
 
+       
+        const maxValue = orderData.reduce((max, current) => {
+          return current.order_no > max ? current.order_no : max;
+        }, -Infinity);
+        setmaxValue(maxValue);
         // Calculate distance for each petrol pump
         const pumpsWithDistance = pumpData.map(pump => {
           // Find the user's coordinates from the order data
-          const userLat = orderData.find(order => order.user_id === lid)?.Latitude;
-          const userLong = orderData.find(order => order.user_id === lid)?.Longitude;
+          const userLat = orderData.find(order => order.order_no === maxValue)?.Latitude;
+          const userLong = orderData.find(order => order.order_no === maxValue)?.Longitude;
         // Function to calculate distance using Haversine formula
         const calculateDistance = (lat1, lon1, lat2, lon2) => {
           const R = 6371; // Radius of the earth in km
@@ -78,15 +84,18 @@ const Nearby = () => {
       <div className="flex flex-col h-[85vh] gap-2 items-center overflow-y-scroll">
         {petrolPumps && petrolPumps.length > 0 ? (
           <div className="w-full flex flex-col items-center pb-5">
-            {petrolPumps.map(pump => (
+            {petrolPumps.map((pump,i) => (
               <PetrolPumpCard
-                key={pump.id}
+                key={i}
+                pid={pump.id}
                 name={pump.pump_name}
                 availability={true}
                 address={pump.Address}
                 company={pump.Company}
-                distance={pump.distance}
+                distance={pump.distance.toFixed(2)}
                 phone={pump.phno}
+                orderno={maxValue}
+                uid= {lid}
               />
             ))}
           </div>

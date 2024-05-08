@@ -7,13 +7,15 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const Header = () => {
 
-  const { showmod, selcar, selcol, plate, setplate, setdet, setcol, showamt, showfuel, setamt, settype, setmode, setmail, setloc, setusername } = useModalContext();
+  const {  setmode, setmail, setloc, setusername } = useModalContext();
 
   const curLocation = useLocation().pathname;
   const [loc, setLoc] = setloc;
   const { stat,logid,user } = useStatusContext();
   const [status, setStatus] = stat;
+  
   const nav = useNavigate();
+  
   const[name1,setname]=user;
   const isLoggedIn = status === 'SIGNED_IN';
   const [mailid, setMailId] = setmail;
@@ -21,10 +23,10 @@ const Header = () => {
   const [selectedmode, setSelectedMode] = setmode;
   const [username, setUsername] = useState(''); // State to store the username
   const [name, setName] = setusername;
-  const [refreshCount, setRefreshCount] = useState(0);
+   const [refreshCount, setRefreshCount] = useState(0);
   
   useEffect(() => {
-    console.log(loc);
+    
     async function fetchUserData() {
       try {
         const { data, error } = await supabase
@@ -56,7 +58,7 @@ const Header = () => {
 
     if (isLoggedIn) {
       fetchUserData();
-      fetchUserData();  // Fetch user data if logged in
+       // Fetch user data if logged in
     } else {
       setUsername(''); // Reset username if logged out
       setName(''); // Reset name if logged out
@@ -65,7 +67,7 @@ const Header = () => {
 
   useEffect(() => {
     // Call the refreshHeaderTwice function when the component mounts
-    refreshHeaderTwice();
+    // refreshHeaderTwice();
   }, []); // Empty dependency array to run once when component mounts
 
   async function signOut() {
@@ -89,7 +91,7 @@ const Header = () => {
     }
   }
   const handlenav = () => {
-    fetchUserFound()
+    
     async function fetchUserFound() {
       try {
         const { data, error } = await supabase
@@ -117,18 +119,19 @@ const Header = () => {
 
       }
     }
+    fetchUserFound();
   }
   // Function to refresh the header twice
-  const refreshHeaderTwice = () => {
-    setRefreshCount(refreshCount + 1);
-    setRefreshCount(refreshCount + 1);
-  };
+  // const refreshHeaderTwice = () => {
+  //   setRefreshCount(refreshCount + 1);
+  //   setRefreshCount(refreshCount + 1);
+  // };
   if (curLocation === '/login' || curLocation === '/mode') {
     return null; // Return null to hide the footer on the '/login' and '/' pages
   }
   return (
     <>
-      {curLocation !== '/' && curLocation !== '/login' && curLocation !=='/pump_rec' && curLocation !=='/pump_req' && curLocation !=='/pumpsetup' && curLocation !=='/order' && (
+      {curLocation !== '/' && curLocation !== '/login' && curLocation !=='/pump_rec' && curLocation !=='/pump_re' && curLocation !=='/pumpsetup' && curLocation !=='/order' && (
         <div className='flex bg-black justify-between'>
           <div className='flex flex-col p-3'>
             <div className="text-gray-300 font-bold text-md" onClick={handlenav}>

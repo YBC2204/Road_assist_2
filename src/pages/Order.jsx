@@ -1,7 +1,11 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import tickMark from '../assets/tick_mark.png'; 
 
+
 const OrderConfirmationPage = () => {
+  const nav = useNavigate();
   return (
     <div className="w-full h-screen bg-cover bg-center flex flex-col items-center justify-center">
       <div className="flex flex-col items-center">
@@ -23,7 +27,7 @@ const OrderConfirmationPage = () => {
             Track My Order
           </button>
 
-          <button className="bg-gray-500 hover:bg-gray-700 text-white font py-2 px-8 rounded">
+          <button  className="bg-gray-500 hover:bg-gray-700 text-white font py-2 px-8 rounded" onClick={()=>nav('/home')}>
             Return Home
           </button>
         </div>

@@ -1,12 +1,14 @@
 import React from 'react';
 
-const PetrolPumpCard = ({ name, address, company, phone }) => {
+const PetrolPumpCard = ({key, name, address, company, phone ,distance}) => {
   return (
-    <div className="w-[90%] h-[130px] bg-gray-400 rounded-t-[20px] rounded-b-[20px] flex flex-col items-center mb-4 shadow-md aspect-w-3 aspect-h-4 mt-4 relative">
-      <h2 className="text-black text-xl font-semibold mt-1">{name}</h2> 
-      <p className="text-black-300 mt-2">Address: {address}</p>
-      <p className="text-black-300">Company: {company}</p>
-      <p className="text-black-300">Phone: {phone}</p>
+    <div className="w-[85%] bg-slate-300 rounded-[20px] flex flex-col items-center my-4 shadow-md aspect-w-3 aspect-h-4  relative py-3 px-[10px]">
+    <div className='font-bold uppercase text-[17px]  text-center'>{name}</div>
+    <div className='font-semibold text-[17px] underline'>{company}</div>
+    <div className='mt-2 font-semibold'>{phone}</div>
+    <div className='font-semibold text-center'>{address}</div>
+    <div className='font-semibold'>Approx.Dist -->{distance}</div>
+    <button className='border-[5px] px-2 py-1 font-[500] uppercase mt-3 border-gray-800 rounded-xl bg-gray-700 text-slate-200'>Select</button>
     </div>
   );
 };

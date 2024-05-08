@@ -10,6 +10,8 @@ import { useNavigate } from 'react-router-dom';
 const FuelType = () => {
     const nav = useNavigate();
     const { showmod, selcar, selcol, plate, setplate, setdet , setcol, showamt, showfuel, setamt, settype,setmode,setmail,setloc } = useModalContext();
+    const { logid } = useStatusContext();
+    const [lid,setlid] = logid;
     const {long,lat} = useStatusContext();
     const [longitud,setlong]=long;
     const [latitud,setlat]=lat;
@@ -58,7 +60,7 @@ const FuelType = () => {
         try {
             // Fetch the ID from logintrial table based on mailid
             const loginTrialId = await fetchIdFromLoginTrial();
-           
+            setlid(loginTrialId);
             if (!loginTrialId) {
                 console.error('Unable to fetch login trial ID.');
                 return;

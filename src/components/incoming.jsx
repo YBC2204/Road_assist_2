@@ -16,69 +16,68 @@ const IncomingService = () => {
 
   useEffect(() => {
     const fetchOrderAssign = async () => {
-        try {
-          const { data: orderAssignData, error } = await supabase
-            .from('Order_assign')
-            .select('*')
-            .eq('user_id', lid);
-      
-          if (error) {
-            throw error;
-          }
-      
-          // Filter orderAssignData based on Completed === true
-          const completedOrders = orderAssignData.filter(order => !order.Completed);
-      
-          if (completedOrders.length > 0) {
-            setOrderCompleted(true);
-          }
-      
-          // Extracting order IDs from completedOrders
-          const ids = completedOrders.map(order => order.order_id);
-          setOrderIds(ids);
-      
-          // Extracting pump IDs from completedOrders
-          const pumpIds = completedOrders.map(order => order.pump_id);
-          // Fetching pump data for each pump ID
-          const promises = pumpIds.map(async pumpId => {
-            const { data: pumpData, error: pumpError } = await supabase
-              .from('Pump_det')
-              .select('*')
-              .eq('id', pumpId)
-              .single();
-      
-            if (pumpError) {
-              throw pumpError;
-            }
-      
-            return pumpData;
-          });
-      
-          const pumpDataArray = await Promise.all(promises);
-          setPumpData(pumpDataArray);
-      
-          // Fetching order data for each order ID
-          const orderPromises = ids.map(async orderId => {
-            const { data: orderData, error: orderError } = await supabase
-              .from('order')
-              .select('*')
-              .eq('order_no', orderId)
-              .single();
-      
-            if (orderError) {
-              throw orderError;
-            }
-      
-            return orderData;
-          });
-      
-          const orderDataArray = await Promise.all(orderPromises);
-          setOrderData(orderDataArray);
-        } catch (error) {
-          console.error('Error fetching data:', error.message);
+      try {
+        const { data: orderAssignData, error } = await supabase
+          .from('Order_assign')
+          .select('*')
+          .eq('user_id', lid);
+
+        if (error) {
+          throw error;
         }
-      };
-      
+
+        // Filter orderAssignData based on Completed === false
+        const completedOrders = orderAssignData.filter(order => !order.Completed);
+
+        if (completedOrders.length > 0) {
+          setOrderCompleted(true);
+        }
+
+        // Extracting order IDs from completedOrders
+        const ids = completedOrders.map(order => order.order_id);
+        setOrderIds(ids);
+
+        // Extracting pump IDs from completedOrders
+        const pumpIds = completedOrders.map(order => order.pump_id);
+        // Fetching pump data for each pump ID
+        const promises = pumpIds.map(async pumpId => {
+          const { data: pumpData, error: pumpError } = await supabase
+            .from('Pump_det')
+            .select('*')
+            .eq('id', pumpId)
+            .single();
+
+          if (pumpError) {
+            throw pumpError;
+          }
+
+          return pumpData;
+        });
+
+        const pumpDataArray = await Promise.all(promises);
+        setPumpData(pumpDataArray);
+
+        // Fetching order data for each order ID
+        const orderPromises = ids.map(async orderId => {
+          const { data: orderData, error: orderError } = await supabase
+            .from('order')
+            .select('*')
+            .eq('order_no', orderId)
+            .single();
+
+          if (orderError) {
+            throw orderError;
+          }
+
+          return orderData;
+        });
+
+        const orderDataArray = await Promise.all(orderPromises);
+        setOrderData(orderDataArray);
+      } catch (error) {
+        console.error('Error fetching data:', error.message);
+      }
+    };
 
     fetchOrderAssign();
   }, [lid]);
@@ -90,6 +89,11 @@ const IncomingService = () => {
   };
 
   // Function to handle navigation
+
+  console.log("orderIds length:", orderIds.length);
+  console.log("pumpData length:", pumpData.length);
+  console.log("orderIds:", orderIds);
+  console.log("pumpData:", pumpData);
 
   return (
     <>

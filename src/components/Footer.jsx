@@ -21,7 +21,7 @@ const Footer = () => {
     if (isLoggedIn ) {
       console.log(locationClicked);
       if(!locationClicked || loc===1){
-      if(path ==='/home')
+      if(path ==='/home' ||path ==='/records')
       {
         nav(path);
       }

@@ -128,7 +128,7 @@ const Header = () => {
   }
   return (
     <>
-      {curLocation !== '/' && curLocation !== '/login' && curLocation !=='/pump_rec' && curLocation !=='/pump_req' && curLocation !=='/pumpsetup' && (
+      {curLocation !== '/' && curLocation !== '/login' && curLocation !=='/pump_rec' && curLocation !=='/pump_req' && curLocation !=='/pumpsetup' && curLocation !=='/order' && (
         <div className='flex bg-black justify-between'>
           <div className='flex flex-col p-3'>
             <div className="text-gray-300 font-bold text-md" onClick={handlenav}>

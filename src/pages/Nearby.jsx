@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import PetrolPumpCard from '../components/pumps'; 
 import supabase from '../helper/SupaClient';
+import { useStatusContext } from '../Context/StatusContext';
 
 const Nearby = () => {
   const [fetcherr, setFetchErr] = useState(null);
   const [petrolPumps, setPetrolPumps] = useState([]);
+  const {logid} =  useStatusContext();
+  const [lid,setlid] =  logid;
 
   useEffect(() => {
+    console.log(lid);
     const fetchPetrolPumps = async () => {
       try {
         const { data: pumpData, error: pumpError } = await supabase
@@ -24,8 +28,8 @@ const Nearby = () => {
         // Calculate distance for each petrol pump
         const pumpsWithDistance = pumpData.map(pump => {
           // Find the user's coordinates from the order data
-          const userLat = orderData.find(order => order.user_id === 474)?.Latitude;
-          const userLong = orderData.find(order => order.user_id === 474)?.Longitude;
+          const userLat = orderData.find(order => order.user_id === lid)?.Latitude;
+          const userLong = orderData.find(order => order.user_id === lid)?.Longitude;
         // Function to calculate distance using Haversine formula
         const calculateDistance = (lat1, lon1, lat2, lon2) => {
           const R = 6371; // Radius of the earth in km
@@ -70,9 +74,10 @@ const Nearby = () => {
 
   return (
     <div className="relative bg-gradient-to-br from-gray-800">
+    <div className='text-white text-center my-6 text-2xl font-bold'>NEARBY PUMPS</div>
       <div className="flex flex-col h-[85vh] gap-2 items-center overflow-y-scroll">
         {petrolPumps && petrolPumps.length > 0 ? (
-          <div className="w-full flex flex-col items-center">
+          <div className="w-full flex flex-col items-center pb-5">
             {petrolPumps.map(pump => (
               <PetrolPumpCard
                 key={pump.id}
@@ -81,6 +86,7 @@ const Nearby = () => {
                 address={pump.Address}
                 company={pump.Company}
                 distance={pump.distance}
+                phone={pump.phno}
               />
             ))}
           </div>

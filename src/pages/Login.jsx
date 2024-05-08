@@ -40,7 +40,7 @@ const Login = () => {
   
 
   return (
-    <div className="p-5 bg-slate-950 h- flex flex-col justify-center">
+    <div className="p-5 bg-slate-950 h- flex flex-col justify-center h-[100vh]">
       <div className="flex justify-center">
         <img className="w-2/4" src={logo} />
       </div>

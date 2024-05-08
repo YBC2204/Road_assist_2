@@ -4,8 +4,10 @@ import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import DescriptionIcon from '@mui/icons-material/Description';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useStatusContext } from '../Context/StatusContext';
-
+import { useModalContext } from '../Context/Modalcon';
 const Footer = () => {
+  const {setloc } = useModalContext();
+  const[loc,setloca]=setloc;
   const curLocation = useLocation().pathname;
   const nav = useNavigate();
   const style = 'text-gray-300';
@@ -15,16 +17,19 @@ const Footer = () => {
   const isLoggedIn = status === 'SIGNED_IN';
 
   const handleNavigate = (path) => {
+    console.log(loc);
     if (isLoggedIn ) {
       console.log(locationClicked);
-      if(!locationClicked){
+      if(!locationClicked || loc===1){
       if(path ==='/home')
       {
         nav(path);
       }
       else{
         alert('Click Current Location to continue');
-      }}
+        return;
+      }
+    }
       if(locationClicked)
         nav(path);
     } 

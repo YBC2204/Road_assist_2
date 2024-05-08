@@ -119,7 +119,7 @@ const EnterDetails = () => {
     };
 
     return (
-        <div className="w-full max-w-lg mx-auto bg-gradient-to-br from-gray-800 ">
+        <div className="w-full max-w-lg mx-auto bg-gradient-to-br from-gray-800 h-[85vh]">
             <form className="shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
                 <div className="mb-4">
                     <label htmlFor="name" className="block text-sm font-bold mb-2 text-slate-300">

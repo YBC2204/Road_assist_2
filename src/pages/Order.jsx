@@ -23,9 +23,9 @@ const OrderConfirmationPage = () => {
         </p>
 
         <div className="flex flex-col items-center gap-6">
-          <button className="bg-green-500 hover:bg-green-700 text-white font py-2 px-6 rounded">
+          {/* <button className="bg-green-500 hover:bg-green-700 text-white font py-2 px-6 rounded">
             Track My Order
-          </button>
+          </button> */}
 
           <button  className="bg-gray-500 hover:bg-gray-700 text-white font py-2 px-8 rounded" onClick={()=>nav('/home')}>
             Return Home

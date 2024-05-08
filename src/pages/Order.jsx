@@ -16,7 +16,7 @@ const OrderConfirmationPage = () => {
           style={{ width: '130px', height: '130px' }} 
         />
 
-        <h1 className="text-white text-3xl font-semibold mb-3">Your order is on the way!</h1>
+        <h1 className="text-white text-3xl font-semibold mb-2 text-center">Your order is on the way!</h1>
 
         <p className="text-white text-lg mb-8">
           Estimated delivery time: <strong>10 minutes</strong>

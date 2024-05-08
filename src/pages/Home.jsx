@@ -129,6 +129,11 @@ console.log(data);
 
 // };
 const handleClick=()=>{
+  if(loc===1)
+    {
+      alert('Click location to continue')
+      nav('/home')
+    }
   if(isLoggedIn && locationClicked)
   setShowModal(true);
  else{

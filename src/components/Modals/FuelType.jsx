@@ -50,6 +50,7 @@ const FuelType = () => {
     };
 
     const handleConfirmType = async (fuelType) => {
+        setFuelTypeModal(false);
         setselectedtype(fuelType);
         console.log(loc);
         try {
@@ -85,7 +86,7 @@ const FuelType = () => {
             }
 
             // Close the fuel type modal
-            setFuelTypeModal(false);
+           
 
             // Log the selected values
             console.log(selectedCar);
@@ -96,6 +97,7 @@ const FuelType = () => {
         } catch (error) {
             console.error('Error handling fuel type confirmation:', error.message);
         }
+        nav('/nearby')
     };
 
     return (

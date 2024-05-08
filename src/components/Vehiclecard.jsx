@@ -101,7 +101,7 @@ const handleConfirmAmt = async () => {
   setfuelModal(false);
  
   setError(""); // Clear error message
-
+  nav('/nearby')
  
 };
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PetrolPumpCard from '../components/pumps'; 
 import supabase from '../helper/SupaClient';
+import { useStatusContext } from '../Context/StatusContext';
 
 const Nearby = () => {
   const [fetcherr, setFetchErr] = useState(null);
@@ -9,6 +10,7 @@ const Nearby = () => {
   const [filteredPumps, setFilteredPumps] = useState([]);
 
   useEffect(() => {
+    console.log(lid);
     const fetchPetrolPumps = async () => {
       try {
         const { data: pumpData, error: pumpError } = await supabase
@@ -80,6 +82,7 @@ const Nearby = () => {
 
   return (
     <div className="relative bg-gradient-to-br from-gray-800">
+    <div className='text-white text-center my-6 text-2xl font-bold'>NEARBY PUMPS</div>
       <div className="flex flex-col h-[85vh] gap-2 items-center overflow-y-scroll">
       <input
   type="text"

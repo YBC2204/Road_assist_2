@@ -65,7 +65,7 @@ const Header = () => {
 
   useEffect(() => {
     // Call the refreshHeaderTwice function when the component mounts
-    refreshHeaderTwice();
+    // refreshHeaderTwice();
   }, []); // Empty dependency array to run once when component mounts
 
   async function signOut() {
@@ -119,10 +119,10 @@ const Header = () => {
     }
   }
   // Function to refresh the header twice
-  const refreshHeaderTwice = () => {
-    setRefreshCount(refreshCount + 1);
-    setRefreshCount(refreshCount + 1);
-  };
+  // const refreshHeaderTwice = () => {
+  //   setRefreshCount(refreshCount + 1);
+  //   setRefreshCount(refreshCount + 1);
+  // };
   if (curLocation === '/login' || curLocation === '/mode') {
     return null; // Return null to hide the footer on the '/login' and '/' pages
   }
@@ -143,7 +143,6 @@ const Header = () => {
             <div className='text-slate-300' onClick={handlenav}><AccountCircleIcon fontSize='large' /></div>
             <div className='p-2 '>
               <button className=' border-slate-300 border-2 text-gray-300 bg-black px-3 py-2 rounded-xl font-semibold' onClick={handleLog}>
-
                 {isLoggedIn ? 'Logout' : 'Login'}
               </button>
             </div>

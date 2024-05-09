@@ -27,7 +27,7 @@ const IncomingService = () => {
         }
   
         // Filter orderAssignData based on Confirmed === false
-        const unconfirmedOrders = orderAssignData.filter(order => !order.Completed);
+        const unconfirmedOrders = orderAssignData.filter(order => !order.Completed && order.Ongoing);
   
         if (unconfirmedOrders.length > 0) {
           setOrderCompleted(true);

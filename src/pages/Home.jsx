@@ -156,7 +156,7 @@ const handleClick=()=>{
 
 
   return (
-    <div className=' w-full h-[95vh]  pb-5 bg-gradient-to-br from-gray-800  flex flex-col items-center '>
+    <div className=' w-full h-[95vh]  pb-5 bg-gradient-to-br from-gray-800  flex flex-col items-center overflow-y-scroll'>
       <div className="flex justify-center pt-12">
         <button className="flex items-center bg-slate-300 px-6 py-4 rounded-xl font-['IBM Plex Sans Thai Looped'] text-black text-sm font-bold" onClick={handleLocationClick}>
           <PlaceIcon sx={{ fontSize: 25 }} />

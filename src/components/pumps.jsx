@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import supabase from '../helper/SupaClient';
-import { useNavigate } from 'react-router-dom';
+
 import { useStatusContext } from '../Context/StatusContext';
 
 const PetrolPumpCard = ({ key, name, address, company, phone, distance, orderno, uid, pid }) => {

@@ -6,7 +6,7 @@ import { useStatusContext } from '../Context/StatusContext';
 
 const PetrolPumpCard = ({ key, name, address, company, phone, distance, orderno, uid, pid }) => {
   const [availability, setAvailability] = useState(true); // State to track availability
-  const navigate = useNavigate();
+  
 
 
   const {oid} = useStatusContext();

@@ -23,7 +23,7 @@ const CarType = () => {
     };
 
     return (
-        <div className="fixed inset-x-0 bottom-0 bg-black bg-opacity-50 flex justify-center items-end ">
+        <div className="fixed inset-x-0 bottom-0 bg-black bg-opacity-40 flex justify-center items-end h-[100vh]">
           <div className="w-[90%] h-[300px] bg-white rounded-t-[20px] rounded-b-none flex flex-col items-center">
               <div className='flex mt-5 mb-2 px-2 w-full'>
                   <button className="text-gray-600" onClick={() => { setShowModal(false); }}>

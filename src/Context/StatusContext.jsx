@@ -22,6 +22,7 @@ export const StatusProvider = ({children}) =>{
     const [locationClicked, setLocationClicked] = useState(false);
     const [longitud,setlong]=useState('');
     const [latitud,setlat]=useState('');
+    const [orderid,setOrderid] = useState('');
     return(
         <StatusContext.Provider value={
             {
@@ -32,7 +33,8 @@ export const StatusProvider = ({children}) =>{
                 user2:[name2,setname2],
                 locclick:[locationClicked, setLocationClicked],
                 long:[longitud,setlong],
-                lat:[latitud,setlat]
+                lat:[latitud,setlat],
+                oid:[orderid,setOrderid]
             }
         }>
             {children}

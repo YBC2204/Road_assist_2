@@ -1,8 +1,13 @@
 import React from 'react';
 import supabase from '../helper/SupaClient';
+import { useNavigate } from 'react-router-dom';
+import { useStatusContext } from '../Context/StatusContext';
 
 const PetrolPumpCard = ({key, name, address, company, phone ,distance ,orderno ,uid,pid}) => {
 
+  const {oid} = useStatusContext();
+  const[orderid,setOrderid] = oid;
+  const nav = useNavigate();
 
   const  handleConfirm = async() =>{
     const {data , error } = await supabase
@@ -22,7 +27,9 @@ const PetrolPumpCard = ({key, name, address, company, phone ,distance ,orderno ,
   }
   if(data)
     {
+      setOrderid(orderno);
       console.log('success');
+      nav('/load')
     }
   } 
   

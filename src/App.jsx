@@ -22,6 +22,7 @@ import Loc from "./pages/loc";
 import Req from "./pages/Petrol/Pumprequests";
 import Record from "./pages/Petrol/Record";
 import OrderConfirmationPage from "./pages/Order";
+import Loader from "./components/Loader";
 function App() {
   return (
     <div className="min-h-screen w-full flex flex-col bg-black font-source">
@@ -46,6 +47,7 @@ function App() {
           <Route path="/loc" element={<Loc/>}/>
           <Route path="/pump_req" element={<Req/>}/>
           <Route path="/pump_rec" element={<Record/>}/>
+          <Route path="/load" element={<Loader/>}/>
         </Routes>
        <Footer/>
       </BrowserRouter>

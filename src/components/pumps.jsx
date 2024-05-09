@@ -2,9 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import supabase from '../helper/SupaClient';
 
+import { useStatusContext } from '../Context/StatusContext';
+
 const PetrolPumpCard = ({ key, name, address, company, phone, distance, orderno, uid, pid }) => {
   const [availability, setAvailability] = useState(true); // State to track availability
-  const navigate = useNavigate();
+  
+
+
+  const {oid} = useStatusContext();
+  const[orderid,setOrderid] = oid;
+  const nav = useNavigate();
 
   useEffect(() => {
     const fetchAvailability = async () => {
@@ -14,6 +21,7 @@ const PetrolPumpCard = ({ key, name, address, company, phone, distance, orderno,
           .select('Availability')
           .eq('id', pid)
           .single();
+
 
         if (error) {
           throw error;
@@ -35,6 +43,14 @@ const PetrolPumpCard = ({ key, name, address, company, phone, distance, orderno,
     if (!availability) {
       alert('This pump is currently unavailable.');
       return;
+
+  }
+  if(data)
+    {
+      setOrderid(orderno);
+      console.log('success');
+      nav('/load')
+
     }
 
     // Show confirmation dialog before proceeding

@@ -40,7 +40,7 @@ const Footer = () => {
   };
 
 
-  if (curLocation === '/login' || curLocation === '/mode' || curLocation === '/petrol_home'|| curLocation === '/pump_req' || curLocation === '/pumpsetup'|| curLocation==='/pump_rec'|| curLocation==='/order') {
+  if (curLocation === '/login' || curLocation === '/mode' || curLocation === '/petrol_home'|| curLocation === '/pump_req' || curLocation === '/pumpsetup'|| curLocation==='/pump_rec'|| curLocation==='/order' || curLocation ==='/load') {
 
     return null; // Return null to hide the footer on the '/login' and '/' pages
   }

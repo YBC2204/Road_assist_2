@@ -19,7 +19,7 @@ const SelColors = () => {
     };
 
     return (
-        <div className="fixed inset-x-0 bottom-0 bg-black bg-opacity-50 flex justify-center items-end ">
+        <div className="fixed inset-x-0 bottom-0 bg-black bg-opacity-50 h-[100vh] flex justify-center items-end ">
           <div className="w-[90%] h-[300px] bg-white rounded-t-[20px] rounded-b-none flex flex-col items-center">
           <div className='flex mt-5 mb-2 px-2 w-full'>
                     <button className="text-black pl-1 w-min" onClick={() => { setShowModal(true); setShowColorModal(false); }}>

@@ -1,14 +1,18 @@
+import { useState, useEffect } from 'react';
+import supabase from '../../helper/SupaClient';
+import { useNavigate } from 'react-router-dom';
+import { useModalContext } from '../../Context/Modalcon';
+import { useStatusContext } from '../../Context/StatusContext';
+import { Switch } from '@headlessui/react';
 import LocalGasStationIcon from '@mui/icons-material/LocalGasStation';
 import DescriptionIcon from '@mui/icons-material/Description';
 import homepic from '../../assets/home.png';
-import fuel from "../../assets/fuel.png"
-import { useNavigate } from 'react-router-dom';
-import { useModalContext } from '../../Context/Modalcon';
-import { useEffect, useState } from 'react';
-import { Switch } from '@headlessui/react';
-import supabase from '../../helper/SupaClient';
-
+import fuel from "../../assets/fuel.png";
+import CircleNotificationsIcon from '@mui/icons-material/CircleNotifications';
+import MarkChatUnreadIcon from '@mui/icons-material/MarkChatUnread';
 const Petrolhome = () => {
+  const { logid } = useStatusContext();
+  const [lid] = logid;
   const { setmail } = useModalContext();
   const [mailid, setMailId] = setmail;
   const nav = useNavigate();
@@ -25,10 +29,6 @@ const Petrolhome = () => {
   const toggleAvailability = async (isChecked) => {
     setEnabled(isChecked);
     await fetchIdFromLoginTrial(isChecked);
-    async (isChecked) => {
-      setEnabled(isChecked);
-      await fetchIdFromLoginTrial();
-  }
   };
 
   const fetchIdFromLoginTrial = async (isChecked) => {
@@ -79,7 +79,6 @@ const Petrolhome = () => {
 
     // If the user's availability does not exist, insert a new row
     if (!existingData) {
-      console.log("hi");
       const { insertError } = await supabase
         .from('Pump_avail')
         .insert([{ id: userId, Availability: valueToUpdate }]);
@@ -106,29 +105,51 @@ const Petrolhome = () => {
     }
   };
 
-  return (
-    <div className=' w-full  pb-5 bg-gradient-to-br from-gray-800  flex flex-col items-center '>
+  const [showNotification, setShowNotification] = useState(false);
 
+  useEffect(() => {
+    const checkNotifications = async () => {
+      try {
+        const { data: ordersData, error } = await supabase
+          .from('Order_assign')
+          .select('Completed')
+          .eq('pump_id', lid);
+
+        if (error) {
+          console.error('Error fetching notification data:', error.message);
+          return;
+        }
+
+        const hasUncompletedOrder = ordersData && ordersData.some(order => !order.Completed);
+        setShowNotification(hasUncompletedOrder);
+      } catch (error) {
+        console.error('Error checking notifications:', error.message);
+      }
+    };
+
+    checkNotifications();
+  }, [lid]);
+
+  return (
+    <div className='w-full pb-5 bg-gradient-to-br from-gray-800 flex flex-col items-center'>
       <div className='flex justify-end w-full items-center mt-4 mr-2'>
         <div className='flex border px-3 py-2 items-center rounded-[25px] gap-2'>
-          <p className='font-semibold text-[15px] uppercase text-slate-300'>Availability</p> 
+          <p className='font-semibold text-[15px] uppercase text-slate-300'>Availability</p>
           <Switch
             checked={enabled}
             onChange={toggleAvailability}
-            
             className={`${
               enabled ? 'bg-green-600' : 'bg-gray-300 '
-              } relative inline-flex h-6 w-11 items-center rounded-full`}
+            } relative inline-flex h-6 w-11 items-center rounded-full`}
           >
             <span
               className={`${
                 enabled ? 'translate-x-6 bg-gray-300' : 'translate-x-1 bg-green-600'
-                } inline-block h-4 w-4 transform rounded-full transition`}
+              } inline-block h-4 w-4 transform rounded-full transition`}
             />
           </Switch>
         </div>
       </div>
-
 
       <div className='flex flex-col mt-8 w-full px-4 relative items-center'>
         <div className="relative w-[99%] rounded-[20px] overflow-hidden">
@@ -147,11 +168,11 @@ const Petrolhome = () => {
           <LocalGasStationIcon />
           <p className=''>Pump Setup</p>
         </button>
-        <button className='flex bg-slate-300 p-4 rounded-2xl w-64 gap-5' onClick={() => nav('/pump_req')}>
+        <button className='flex relative bg-slate-300 p-4 rounded-2xl w-64 gap-5' onClick={() => nav('/pump_req')}>
           <img src={fuel} className='h-[1.5rem]' />
           <p className=''>Fuel Requests</p>
+          {showNotification && <MarkChatUnreadIcon  sx={{ fontSize: 25 }} className='absolute right-4 text-red-700 ' />}
         </button>
-
         <button className='flex bg-slate-300 p-4 rounded-2xl w-64 text-center gap-5' onClick={() => nav('/pump_rec')}>
           <DescriptionIcon />
           <p className=''>Records</p>

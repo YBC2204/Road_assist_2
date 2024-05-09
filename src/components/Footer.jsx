@@ -27,6 +27,7 @@ const Footer = () => {
       }
       else{
         alert('Click Current Location to continue');
+        nav('/home')
         return;
       }
     }

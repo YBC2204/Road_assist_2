@@ -21,24 +21,24 @@ const IncomingService = () => {
           .from('Order_assign')
           .select('*')
           .eq('user_id', lid);
-
+  
         if (error) {
           throw error;
         }
-
-        // Filter orderAssignData based on Completed === false
-        const completedOrders = orderAssignData.filter(order => !order.Completed);
-
-        if (completedOrders.length > 0) {
+  
+        // Filter orderAssignData based on Confirmed === false
+        const unconfirmedOrders = orderAssignData.filter(order => !order.Completed);
+  
+        if (unconfirmedOrders.length > 0) {
           setOrderCompleted(true);
         }
-
-        // Extracting order IDs from completedOrders
-        const ids = completedOrders.map(order => order.order_id);
+  
+        // Extracting order IDs from unconfirmedOrders
+        const ids = unconfirmedOrders.map(order => order.order_id);
         setOrderIds(ids);
-
-        // Extracting pump IDs from completedOrders
-        const pumpIds = completedOrders.map(order => order.pump_id);
+        //  console.log(orderIds)
+        // Extracting pump IDs from unconfirmedOrders
+        const pumpIds = unconfirmedOrders.map(order => order.pump_id);
         // Fetching pump data for each pump ID
         const promises = pumpIds.map(async pumpId => {
           const { data: pumpData, error: pumpError } = await supabase
@@ -46,17 +46,17 @@ const IncomingService = () => {
             .select('*')
             .eq('id', pumpId)
             .single();
-
+  
           if (pumpError) {
             throw pumpError;
           }
-
+  
           return pumpData;
         });
-
+  
         const pumpDataArray = await Promise.all(promises);
         setPumpData(pumpDataArray);
-
+  
         // Fetching order data for each order ID
         const orderPromises = ids.map(async orderId => {
           const { data: orderData, error: orderError } = await supabase
@@ -64,36 +64,46 @@ const IncomingService = () => {
             .select('*')
             .eq('order_no', orderId)
             .single();
-
+  
           if (orderError) {
             throw orderError;
           }
-
+  
           return orderData;
         });
-
+  
         const orderDataArray = await Promise.all(orderPromises);
         setOrderData(orderDataArray);
       } catch (error) {
         console.error('Error fetching data:', error.message);
       }
     };
-
+  
     fetchOrderAssign();
   }, [lid]);
+  
 
   // Function to handle opening edit modal
   const handleOpenEditModal = () => {
     // Call the function to open the edit modal (openEditModal should be implemented in useModalContext)
     openEditModal();
   };
-
+  const handleOrderReceived = async (orderId) => {
+    try {
+      // Update the 'Completed' status to true for the corresponding order ID
+      await supabase
+        .from('Order_assign')
+        .update({ Completed: true })
+        .eq('order_id', orderId);
+      
+      // After updating, refresh the data
+      fetchOrderAssign();
+    } catch (error) {
+      console.error('Error updating data:', error.message);
+    }
+  };
+  
   // Function to handle navigation
-
-  console.log("orderIds length:", orderIds.length);
-  console.log("pumpData length:", pumpData.length);
-  console.log("orderIds:", orderIds);
-  console.log("pumpData:", pumpData);
 
   return (
     <>
@@ -115,6 +125,8 @@ const IncomingService = () => {
                 <p className='absolute right-8'>Fuel type:{orderData[index]?.Fuel_type}</p>
               </div>
               <p className='font-medium  '>{pumpData[index]?.phno}</p>
+              <button className='bg-blue-500 rounded-md w-1/2 flex justify-center' onClick={() => handleOrderReceived(orderId)}>Order Received</button>
+
             </div>
           </div>
         </div>

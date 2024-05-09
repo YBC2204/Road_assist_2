@@ -112,7 +112,7 @@ const Petrolhome = () => {
       try {
         const { data: ordersData, error } = await supabase
           .from('Order_assign')
-          .select('Completed')
+          .select('*')
           .eq('pump_id', lid);
 
         if (error) {
@@ -120,7 +120,7 @@ const Petrolhome = () => {
           return;
         }
 
-        const hasUncompletedOrder = ordersData && ordersData.some(order => !order.Completed);
+        const hasUncompletedOrder = ordersData && ordersData.some(order => !order.Ongoing);
         setShowNotification(hasUncompletedOrder);
       } catch (error) {
         console.error('Error checking notifications:', error.message);

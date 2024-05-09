@@ -81,7 +81,7 @@ const Nearby = () => {
   return (
     <div className="relative bg-gradient-to-br from-gray-800">
     <div className='text-white text-center my-6 text-2xl font-bold'>NEARBY PUMPS</div>
-      <div className="flex flex-col h-[85vh] gap-2 items-center overflow-y-scroll">
+      <button className="flex flex-col h-[85vh] gap-2 items-center overflow-y-scroll">
         {petrolPumps && petrolPumps.length > 0 ? (
           <div className="w-full flex flex-col items-center pb-5">
             {petrolPumps.map((pump,i) => (
@@ -102,7 +102,7 @@ const Nearby = () => {
         ) : (
           <p className="text-slate-300 mt-10 text-2xl">No Petrol pumps present</p>
         )}
-      </div>
+      </button>
     </div>
   );
 };

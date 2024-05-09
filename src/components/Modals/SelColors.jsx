@@ -28,14 +28,14 @@ const SelColors = () => {
                     <div className="flex justify-center w-full pr-4 text-black text-lg font-bold ">Select Colour:</div>
                 </div> 
                 <div className='grid mt-8 px-5 grid-cols-4 gap-x-4 gap-y-4'>
-                    <button onClick={() => handleColor("black")} className='bg-black p-6 rounded-xl'></button>
-                    <button onClick={() => handleColor("silver")} className='bg-zinc-500 p-6 rounded-xl'></button>
-                    <button onClick={() => handleColor("white")} className='bg-slate-300 p-6 rounded-xl'></button>
-                    <button onClick={() => handleColor("green")} className='bg-green-800 p-6 rounded-xl'></button>
-                    <button onClick={() => handleColor("red")} className='bg-red-800 p-6 rounded-xl'></button>
-                    <button onClick={() => handleColor("brown")} className='bg-amber-900 p-6 rounded-xl'></button>
-                    <button onClick={() => handleColor("blue")} className='bg-blue-800 p-6 rounded-xl'></button>
-                    <button onClick={() => handleColor("orange")} className='bg-amber-500 p-6 rounded-xl'></button>
+                    <button onClick={() => handleColor("Black")} className='bg-black p-6 rounded-xl'></button>
+                    <button onClick={() => handleColor("Silver")} className='bg-zinc-500 p-6 rounded-xl'></button>
+                    <button onClick={() => handleColor("White")} className='bg-slate-300 p-6 rounded-xl'></button>
+                    <button onClick={() => handleColor("Green")} className='bg-green-800 p-6 rounded-xl'></button>
+                    <button onClick={() => handleColor("Red")} className='bg-red-800 p-6 rounded-xl'></button>
+                    <button onClick={() => handleColor("Brown")} className='bg-amber-900 p-6 rounded-xl'></button>
+                    <button onClick={() => handleColor("Blue")} className='bg-blue-800 p-6 rounded-xl'></button>
+                    <button onClick={() => handleColor("Orange")} className='bg-amber-500 p-6 rounded-xl'></button>
                 </div>
             </div>
         </div>

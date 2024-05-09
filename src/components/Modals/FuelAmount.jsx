@@ -34,7 +34,7 @@ const FuelAmount = () => {
                     <button className="text-gray-600" onClick={() => { setAmtModal(false); setShowPlateModal(true); }}>
                         <ArrowBack />
                     </button>
-                    <div className="h-8 text-black text-md font-bold  pt-1 w-full text-center pr-4">Enter Fuel Amount(in ₹):</div>
+                    <div className="h-8 text-black text-md font-bold  pt-1 w-full text-center pr-4">Enter Fuel Amount(Minimum Amount:₹300)(in ₹):</div>
                 </div>
                 <div className='mt-10 px-3'>
                     <input

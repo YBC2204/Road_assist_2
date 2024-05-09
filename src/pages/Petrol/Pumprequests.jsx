@@ -49,7 +49,7 @@ const Req = () => {
         </div>
         <p className='text-[28px] ml-4 mt-2 font-bold  text-white'>FUEL REQUESTS</p>
     <div className='h-[4px] w-full bg-slate-400'></div>
-       {request ? (request.map((req,i) =>
+       {/* {request ? (request.map((req,i) =>
         (
           <Requestcard 
           key={i}
@@ -63,7 +63,8 @@ const Req = () => {
           <img src={datapic}></img>
           </div>
           
-          }
+          } */}
+          <Requestcard></Requestcard>
       </div>
     </div>
   );

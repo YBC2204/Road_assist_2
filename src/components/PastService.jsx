@@ -97,7 +97,7 @@ const PastService = () => {
         <div key={index} className='text-black w-[90%]  bg-slate-300 flex flex-col py-3 px-5 gap-3 rounded-[22px] mb-8 mt-5 ml-4'>
           <div className='flex flex-row gap-2 relative'>
             <div className='flex flex-col '>
-              <p className='font-bold uppercase text-xs absolute right-0 text-blue-500'>{orderId}</p>
+              <p className='font-bold uppercase text-xs absolute right-0 text-blue-500'>Order Id:{orderId}</p>
 
               <p className='font-bold uppercase text-center text-xl '>{pumpData[index]?.pump_name}</p> {/* Displaying the retrieved pump name */}
               <p className='font-medium  '>{pumpData[index]?.Company}</p>
@@ -113,6 +113,7 @@ const PastService = () => {
               <p className='font-medium  '>{pumpData[index]?.phno}</p>
             </div>
           </div>
+
         </div>
       ))}
     </>

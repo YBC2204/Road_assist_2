@@ -45,13 +45,7 @@ const PetrolPumpCard = ({ key, name, address, company, phone, distance, orderno,
       return;
 
   }
-  if(data)
-    {
-      setOrderid(orderno);
-      console.log('success');
-      nav('/load')
-
-    }
+  
 
     // Show confirmation dialog before proceeding
     const confirmSelect = window.confirm('Are you sure you want to select this pump?');
@@ -65,7 +59,7 @@ const PetrolPumpCard = ({ key, name, address, company, phone, distance, orderno,
             user_id: uid,
             pump_id: pid
           }
-        ]);
+        ]).select();
 
         if (error) {
           throw error;
@@ -73,7 +67,10 @@ const PetrolPumpCard = ({ key, name, address, company, phone, distance, orderno,
 
         if (data) {
           console.log('Order assigned successfully:', data);
-          navigate('/order');
+          setOrderid(orderno);
+      
+      nav('/load')
+         
         }
       } catch (error) {
         console.error('Error assigning order:', error.message);

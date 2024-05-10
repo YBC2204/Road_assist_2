@@ -27,8 +27,8 @@ const OrderConfirmationPage = () => {
             Track My Order
           </button> */}
 
-          <button  className="bg-gray-500 hover:bg-gray-700 text-white font py-2 px-8 rounded" onClick={()=>nav('/home')}>
-            Return Home
+          <button  className="bg-gray-500 hover:bg-gray-700 text-white font py-2 px-8 rounded" onClick={()=>nav('/records')}>
+            Show Records
           </button>
         </div>
       </div>

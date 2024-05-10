@@ -82,9 +82,7 @@ const Vehicle = () => {
 
 
     <div className='flex flex-col h-[85vh] gap-2 items-center overflow-y-scroll'>
-    <button className='absolute bottom-10 right-8 mt-4  flex gap-2 items-center border-2 text-slate-200 border-[#000403] rounded-xl px-2 py-3' onClick={()=>setDetails(true)}>
-  <AddCircleIcon style={{ fontSize: '2.5rem' }} /> {/* Adjust fontSize to increase the size */}
-</button>
+    
 
        {detail && <DetailModal/>}
        
@@ -99,13 +97,16 @@ const Vehicle = () => {
             <Vehiclecard key={vehicle.user_id} id={vehicle.user_id} name={vehicle.vehicle_name}
               plate={vehicle.plate_num} color={vehicle.color} type={vehicle.fuel_type}
             />
+            
           ))
           }
           </div>
        ):<p className='text-slate-300 mt-10 text-2xl'>No Entries Present</p>
        }
     </div>
-    
+    <button className='absolute bottom-1 bg-slate-800 text-slate-200 right-8 mt-4  flex gap-2 items-center border-2  border-[#000403] rounded-xl p-2' onClick={()=>setDetails(true)}>
+  <AddCircleIcon style={{ fontSize: '2.5rem' }} /> {/* Adjust fontSize to increase the size */}
+</button>
     </div>
   )
 }

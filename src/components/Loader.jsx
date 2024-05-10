@@ -25,6 +25,11 @@ const Loader = () => {
         } 
       }
 fetchorder();
+
+const interval = setInterval(fetchorder, 15000);
+
+        // Cleanup function
+        return () => clearInterval(interval);
      
     },[nav,orderid] );
   

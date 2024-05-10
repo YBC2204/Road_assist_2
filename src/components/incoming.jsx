@@ -119,7 +119,7 @@ const IncomingService = () => {
               
               <p className='font-semibold  text-lg '>{pumpData[index]?.Company}</p>
               <p className='font-semibold '>{pumpData[index]?.Address}</p>
-              
+              {/* <p className='font-medium'>{orderData[index]?.Plate_num}</p> */}
               <div className='flex justify-between pr-3 mt-2'>
                 <p className='font-medium'>{orderData[index]?.Vehicle_name}</p>
                 <p className='font-medium capitalize'>{orderData[index]?.car_color}</p>

@@ -40,11 +40,11 @@ const Login = () => {
   
 
   return (
-    <div className="p-5 bg-slate-950 h- flex flex-col justify-center h-[100vh]">
+    <div className="p-5 bg-slate-950 h- flex flex-col justify-center h-[100vh] overflow-y-scroll">
       <div className="flex justify-center">
         <img className="w-2/4" src={logo} />
       </div>
-      <div className="w-[80%] mx-auto bg-slate-200 bg-opacity-15 backdrop-blur-lg rounded-lg overflow-hidden shadow-lg py-6 px-4">
+      <div className="w-[80%] mx-auto bg-slate-200 bg-opacity-15 backdrop-blur-lg rounded-lg  shadow-lg py-6 px-4">
         <Auth
           supabaseClient={supabase}
           appearance={{ theme: ThemeSupa }}

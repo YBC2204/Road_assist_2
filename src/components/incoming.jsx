@@ -3,6 +3,7 @@ import supabase from '../helper/SupaClient';
 import { useStatusContext } from '../Context/StatusContext';
 import { useModalContext } from '../Context/Modalcon';
 import { useNavigate } from 'react-router-dom';
+import CheckIcon from '@mui/icons-material/Check';
 
 const IncomingService = () => {
   const { logid } = useStatusContext();
@@ -108,28 +109,34 @@ const IncomingService = () => {
   return (
     <>
       {orderCompleted && orderIds.map((orderId, index) => (
-        <div key={index} className='text-black w-[90%]  bg-slate-300 flex flex-col py-3 px-5 gap-3 rounded-[22px] mb-8 mt-5 ml-4'>
-          <div className='flex flex-row gap-2 relative'>
-            <div className='flex flex-col '>
-              <p className='font-bold uppercase text-xs absolute right-0 text-blue-500'>{orderId}</p>
-
-              <p className='font-bold uppercase text-center text-xl '>{pumpData[index]?.pump_name}</p> {/* Displaying the retrieved pump name */}
-              <p className='font-medium  '>{pumpData[index]?.Company}</p>
+        <div key={index} className='text-black w-[90%]  bg-slate-300 flex flex-col py-4 px-5 gap-3 rounded-[22px] mb-8 mt-5 ml-4'>
+          <div className='flex flex-row  gap-2  justify-between items-center'>
+           <p className='font-bold uppercase  text-xl '>{pumpData[index]?.pump_name}</p> 
+           <p className='font-bold uppercase text-xs  text-blue-500'>{orderId}</p>
+          </div>
+          
+          <div className='flex flex-col '>
+              
+              <p className='font-semibold  text-lg '>{pumpData[index]?.Company}</p>
               <p className='font-semibold '>{pumpData[index]?.Address}</p>
-              <div className='flex justify-between  pr-2 pt-1'>
-                <p>{orderData[index]?.Vehicle_name}</p>
-                <p className='absolute right-8'>{orderData[index]?.car_color}</p>
+              
+              <div className='flex justify-between pr-3 mt-2'>
+                <p className='font-medium'>{orderData[index]?.Vehicle_name}</p>
+                <p className='font-medium capitalize'>{orderData[index]?.car_color}</p>
               </div>
-              <div className='flex justify-between   pr-2 pt-1'>
-                <p>Fuel Amount:{orderData[index]?.Fuel_amt}</p>
-                <p className='absolute right-8'>Fuel type:{orderData[index]?.Fuel_type}</p>
+              
+              <div className='flex justify-between pr-1 mt-2'>
+                <p className='font-bold text-gray-800 '>Fuel Amount:{orderData[index]?.Fuel_amt}</p>
+                <p className='font-bold text-gray-800'>Fuel Type:{orderData[index]?.Fuel_type}</p>
               </div>
-              <p className='font-medium  '>{pumpData[index]?.phno}</p>
-              <button className='bg-blue-500 rounded-md w-1/2 flex justify-center' onClick={() => handleOrderReceived(orderId)}>Order Received</button>
-
+              <p className='font-semibold  my-2'>{pumpData[index]?.phno}</p>
+              
+              <div className='w-full mt-3 flex justify-center'>
+              <button className='bg-blue-500 rounded-md  p-2  font-semibold text-white ' onClick={() => handleOrderReceived(orderId)}>Order Received<CheckIcon className='ml-2'/></button>
+              </div>
             </div>
           </div>
-        </div>
+       
       ))}
     </>
   );

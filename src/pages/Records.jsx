@@ -15,8 +15,9 @@ function Records() {
     <div className='overflow-y-scroll bg-gradient-to-br from-gray-800 flex flex-col  h-[85vh]'>
       
       <div className='flex bg-black mt-6 mx-8 py-1 rounded-lg border border-black border-opacity-50 font-semibold text-gray-500'>
-        <button className='w-1/2 border-r-2 border-r-gray-500 focus:text-white' onClick={()=>{setState('upcoming')}}>ONGOING</button>
-        <button className='w-1/2 focus:text-white' onClick={()=>{setState('past');}}>PAST</button>
+        <button className={`w-1/2 border-r-2 border-r-gray-500 ${state === 'upcoming' ? 'text-white' : ''}`}
+           onClick={()=>{setState('upcoming')}}>ONGOING</button>
+        <button className={`w-1/2 ${state === 'past' ? 'text-white':''}`} onClick={()=>{setState('past');}}>PAST</button>
     
       </div>
       

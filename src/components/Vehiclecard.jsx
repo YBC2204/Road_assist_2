@@ -112,9 +112,9 @@ const handleConfirmAmt = async () => {
      <div className='flex flex-row gap-2'>
         <div className='flex flex-col w-1/2 '>
           <p className='font-bold uppercase '>{name}</p>
-          <p className='font-semibold '>{plate}</p>
+          <p className='font-semibold uppercase'>{plate}</p>
           <div className='flex justify-between pr-2 pt-1'>
-            <p>{color}</p>
+            <p className='uppercase'>{color}</p>
             <p>{type}</p>
           </div>
         </div>

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import supabase from '../../helper/SupaClient';
 import { useStatusContext } from '../../Context/StatusContext';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const PumpSetup = () => {
 
@@ -62,7 +63,9 @@ const PumpSetup = () => {
 
 
   return (
-    <div className='flex flex-col text-slate-300 bg-gradient-to-br from-gray-800 items-center'>
+    <div className='flex flex-col text-slate-300 bg-gradient-to-br from-gray-800 items-center relative'>
+    <ArrowBackIcon className='absolute left-1 top-3' onClick={()=>nav('/petrol_home')}
+    />
        <div > 
          <img src={logo} className='w-40 mt-5' onClick={()=> nav('/petrol_home')}/>
        </div>
@@ -71,7 +74,7 @@ const PumpSetup = () => {
        </div>
        
       
-   <div className='mt-4'>    
+   <div className='mt-4 px-4'>    
     <div className={divclass}>
         <input type="text"   className={inputclass} placeholder="" required value={name} onChange={(e)=>setName(e.target.value)}/>
         <label htmlFor="floating_first_name" className={labelclass}>Pump Name</label>

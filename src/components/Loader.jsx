@@ -23,6 +23,7 @@ const Loader = () => {
           console.log(data[0].Ongoing);
           nav('/order');
         } 
+        console.log('check');
       }
 fetchorder();
 

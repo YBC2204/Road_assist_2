@@ -27,13 +27,11 @@ const Requestcard = () => {
         if (error) {
           throw error;
         }
-    const handleBackButtonClick = () => {
-    navigate('/petrol_home');
-  };
+   
         // Filter orderAssignData based on Confirmed === false
         const unconfirmedOrders1 = orderAssignData.filter(order => !order.Completed  );
         const unconfirmedOrders = orderAssignData.filter(order => !order.Ongoing );
-  console.log(orderAssignData)
+  console.log(unconfirmedOrders)
         if (unconfirmedOrders.length > 0) {
           setOrderCompleted(true);
         }
@@ -44,6 +42,7 @@ const Requestcard = () => {
         //  console.log(orderIds)
         // Extracting pump IDs from unconfirmedOrders
         const pumpIds = unconfirmedOrders.map(order => order.user_id);
+        console.log(pumpIds);
         // Fetching pump data for each pump ID
         const promises = pumpIds.map(async pumpId => {
           const { data: pumpData, error: pumpError } = await supabase
@@ -80,13 +79,16 @@ const Requestcard = () => {
         const orderDataArray = await Promise.all(orderPromises);
         setOrderData(orderDataArray);
         
-      } catch (error) {
+      } 
+      catch (error) {
         console.error('Error fetching data:', error.message);
       }
     };
   
     fetchOrderAssign();
   }, [lid]);
+
+ 
   
   const handleOrderConfirm = async (orderId) => {
     try {
@@ -97,7 +99,7 @@ const Requestcard = () => {
         .eq('order_id', orderId);
       
       // After updating, refresh the data
-      fetchOrderAssign();
+      //fetchOrderAssign();
     } catch (error) {
       console.error('Error updating data:', error.message);
     }
@@ -116,7 +118,7 @@ const Requestcard = () => {
         .eq('order_id', orderId);
       
       // After updating, refresh the data
-      fetchOrderAssign();
+      //fetchOrderAssign();
     } catch (error) {
       console.error('Error updating data:', error.message);
     }
@@ -135,13 +137,13 @@ const Requestcard = () => {
           </div> 
           <div className='flex flex-col'>
             <div className='flex justify-between pt-1'>
-                <p className='font-medium'>{orderData[index]?.Vehicle_name}</p>
+                <p className='font-medium capitalize'>{orderData[index]?.Vehicle_name}</p>
                 <p className='capitalize font-medium'>{orderData[index]?.car_color}</p>
             </div>
-            <div className='flex justify-between  my-2 '>
-                <p className='font-semibold text-gray-800'>Fuel Amount:{orderData[index]?.Fuel_amt}</p>
-                <p className='font-semibold text-gray-800'>Fuel type:{orderData[index]?.Fuel_type}</p>
-            </div>
+            
+                <p className='font-semibold text-gray-800 mt-2'>Fuel Amount:{orderData[index]?.Fuel_amt}</p>
+                <p className='font-semibold text-gray-800 mb-2'>Fuel type:{orderData[index]?.Fuel_type}</p>
+            
               <p className='font-medium  '>{pumpData[index]?.phno}</p>
               <div className='flex justify-center mt-3'>
                  <button className='bg-blue-500 rounded-md  flex justify-center px-3 py-1 font-semibold text-white' onClick={() => handleOrderConfirm(orderId)}>Confirm <ThumbUpOffAltIcon className='ml-2'/></button>

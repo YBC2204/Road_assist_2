@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import tickMark from '../assets/tick_mark.png'; 
+import tickMark from '../assets/bluetick.png'; 
 
 
 const OrderConfirmationPage = () => {
@@ -16,10 +16,10 @@ const OrderConfirmationPage = () => {
           style={{ width: '130px', height: '130px' }} 
         />
 
-        <h1 className="text-white text-3xl font-semibold mb-3">Your order is on the way!</h1>
+        <h1 className="text-white text-center text-3xl font-semibold mb-3">Your order is on the way!</h1>
 
         <p className="text-white text-lg mb-8">
-          Estimated delivery time: <strong>10 minutes</strong>
+          Estimated delivery time: <strong>15 minutes</strong>
         </p>
 
         <div className="flex flex-col items-center gap-6">

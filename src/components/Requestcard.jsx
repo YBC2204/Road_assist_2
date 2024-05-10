@@ -134,6 +134,7 @@ const Requestcard = () => {
             <p className='font-bold uppercase text-center text-xl '>{pumpData[index]?.username}</p>
           </div> 
           <div className='flex flex-col'>
+          <p className='font-medium'>{orderData[index]?.Plate_num}</p>
             <div className='flex justify-between pt-1'>
                 <p className='font-medium'>{orderData[index]?.Vehicle_name}</p>
                 <p className='capitalize font-medium'>{orderData[index]?.car_color}</p>
@@ -142,7 +143,7 @@ const Requestcard = () => {
                 <p className='font-semibold text-gray-800'>Fuel Amount:{orderData[index]?.Fuel_amt}</p>
                 <p className='font-semibold text-gray-800'>Fuel type:{orderData[index]?.Fuel_type}</p>
             </div>
-              <p className='font-medium  '>{pumpData[index]?.phno}</p>
+              <p className='font-medium  '>{pumpData[index]?.mobile_number}</p>
               <div className='flex justify-center mt-3'>
                  <button className='bg-blue-500 rounded-md  flex justify-center px-3 py-1 font-semibold text-white' onClick={() => handleOrderConfirm(orderId)}>Confirm <ThumbUpOffAltIcon className='ml-2'/></button>
               </div>
